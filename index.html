@@ -147,7 +147,7 @@
               </div>
               <div>
                 <h1 class="view-title">Daily</h1>
-                <p class="view-subtitle">Personal, everyday tasks and habit tracking.</p>
+                <p class="view-subtitle">Personal, everyday to-do lists and task checklists.</p>
               </div>
             </div>
             <span class="badge badge-daily">Active Section</span>
@@ -171,7 +171,7 @@
                 </svg>
               </div>
               <h4>Daily <span>&rarr;</span></h4>
-              <p>Personal tasks, morning checklist, and habits.</p>
+              <p>Personal to-do lists and checklists.</p>
             </button>
 
             <button class="pillar-card" data-target="scholar">
@@ -213,89 +213,100 @@
             </button>
           </div>
 
-          <!-- Daily Task Management Section (Phase 2) -->
-          <section class="daily-task-manager" aria-labelledby="daily-task-heading">
-            <!-- Add Task Form Card -->
-            <div class="task-form-card">
-              <h3 class="task-form-title" id="daily-task-heading">Add a Personal Task</h3>
-              <form id="daily-task-form" autocomplete="off">
-                <div class="task-form-row">
+          <!-- Daily To-Do Lists Management Section -->
+          <section class="daily-lists-section" aria-labelledby="daily-lists-heading">
+            
+            <!-- Toolbar: Header, Counters, Filter tabs & Create List Button -->
+            <div class="lists-toolbar">
+              <div class="lists-toolbar-left">
+                <h3 class="lists-toolbar-heading" id="daily-lists-heading">To-Do Lists</h3>
+                <span class="badge badge-daily" id="daily-lists-count">0 active</span>
+              </div>
+
+              <div class="lists-toolbar-right">
+                <div class="list-filter-group" role="tablist" aria-label="Filter to-do lists">
+                  <button type="button" class="list-filter-btn active" data-filter="all">All</button>
+                  <button type="button" class="list-filter-btn" data-filter="active">Active</button>
+                  <button type="button" class="list-filter-btn" data-filter="completed">Completed</button>
+                </div>
+
+                <button type="button" class="btn btn-primary" id="btn-create-list">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="12" y1="5" x2="12" y2="19"/>
+                    <line x1="5" y1="12" x2="19" y2="12"/>
+                  </svg>
+                  <span>New List</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- List Creation / Editing Interface Card (Hidden by default) -->
+            <div class="daily-list-editor" id="daily-list-editor" style="display: none;" role="dialog" aria-labelledby="editor-heading">
+              <div class="editor-header">
+                <h3 class="editor-title" id="editor-heading">Create To-Do List</h3>
+              </div>
+
+              <div class="editor-form-body">
+                <!-- List Title -->
+                <div class="editor-title-row">
                   <input
                     type="text"
-                    id="task-title-input"
-                    class="input-text"
-                    placeholder="What needs to be done?"
-                    aria-label="Task title"
+                    id="editor-list-title"
+                    class="input-text editor-title-input"
+                    placeholder="List title (e.g. Things to buy, College prep)..."
+                    aria-label="List title"
                     required
                   />
-                  <div class="form-field-group">
-                    <label for="task-date-input" class="form-field-label">Due Date:</label>
-                    <input
-                      type="date"
-                      id="task-date-input"
-                      class="input-date"
-                      aria-label="Due date"
-                      required
-                    />
-                  </div>
-                  <div class="form-field-group">
-                    <label for="task-time-input" class="form-field-label">Time (optional):</label>
-                    <input
-                      type="time"
-                      id="task-time-input"
-                      class="input-time"
-                      aria-label="Due time (optional)"
-                    />
-                  </div>
-                  <button type="submit" class="btn btn-primary" id="btn-add-task">
-                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                      <line x1="12" y1="5" x2="12" y2="19"/>
-                      <line x1="5" y1="12" x2="19" y2="12"/>
-                    </svg>
-                    <span>Add Task</span>
-                  </button>
+                  <div class="editor-error-msg" id="editor-error-msg" role="alert"></div>
                 </div>
-                <div class="task-form-error" id="task-form-error" role="alert" aria-live="polite"></div>
-              </form>
+
+                <!-- Optional Deadline -->
+                <div class="editor-deadline-row">
+                  <span class="deadline-label">Deadline (optional):</span>
+                  <div class="deadline-inputs">
+                    <input type="date" id="editor-list-date" class="input-date" aria-label="Due date (optional)" />
+                    <input type="time" id="editor-list-time" class="input-time" aria-label="Due time (optional)" />
+                    <button type="button" class="btn btn-sm btn-subtle" id="btn-clear-deadline">Clear deadline</button>
+                  </div>
+                </div>
+
+                <!-- Checklist Items Section -->
+                <div class="editor-checklist-section">
+                  <div class="checklist-section-header">
+                    <span class="checklist-section-title">Checklist Items</span>
+                    <span class="checklist-hint">Press Enter to add the next row</span>
+                  </div>
+
+                  <div class="checklist-editor-rows" id="editor-checklist-rows">
+                    <!-- Dynamically populated rows -->
+                  </div>
+
+                  <div>
+                    <button type="button" class="btn btn-sm btn-outline" id="btn-add-checklist-row">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="12" y1="5" x2="12" y2="19"/>
+                        <line x1="5" y1="12" x2="19" y2="12"/>
+                      </svg>
+                      <span>Add Item</span>
+                    </button>
+                  </div>
+                </div>
+
+                <!-- Editor Action Buttons -->
+                <div class="editor-actions-row">
+                  <button type="button" class="btn btn-subtle" id="btn-cancel-list">Cancel</button>
+                  <button type="button" class="btn btn-primary" id="btn-save-list">Save List</button>
+                </div>
+              </div>
             </div>
 
-            <!-- Task Toolbar (Header, Counter & Filters) -->
-            <div class="task-toolbar">
-              <div class="task-toolbar-title-wrap">
-                <h3 class="task-toolbar-heading">My Tasks</h3>
-                <span class="badge badge-daily" id="daily-active-count">0 active</span>
-              </div>
-              <div class="task-filter-group" role="tablist" aria-label="Filter tasks">
-                <button type="button" class="task-filter-btn active" data-filter="all">All</button>
-                <button type="button" class="task-filter-btn" data-filter="active">Active</button>
-                <button type="button" class="task-filter-btn" data-filter="completed">Completed</button>
-              </div>
+            <!-- Saved Lists Grid/Container -->
+            <div class="daily-lists-grid" id="daily-lists-container" role="region" aria-label="To-do lists container">
+              <!-- Dynamically populated with .todo-list-card by js/daily.js -->
             </div>
 
-            <!-- Task List Container -->
-            <div class="task-list" id="daily-task-list" role="region" aria-label="Daily tasks list">
-              <!-- Dynamically populated by js/daily.js -->
-            </div>
           </section>
 
-          <!-- Habit Tracker Preview (Planned for Future Phase) -->
-          <div class="placeholder-box" style="margin-top: var(--spacing-8);">
-            <div class="placeholder-box-header">
-              <span class="placeholder-box-title">Everyday Habits</span>
-              <span class="badge badge-daily">Upcoming Phase</span>
-            </div>
-            <p class="card-description">Daily recurring routines and simple habit check-ins to build momentum.</p>
-            <ul class="placeholder-list">
-              <li class="placeholder-item">
-                <span class="placeholder-item-bullet"></span>
-                <span>Morning & evening routines</span>
-              </li>
-              <li class="placeholder-item">
-                <span class="placeholder-item-bullet"></span>
-                <span>One-click habit completion status</span>
-              </li>
-            </ul>
-          </div>
         </section>
 
         <!-- ---------------- View 2: Scholar ---------------- -->

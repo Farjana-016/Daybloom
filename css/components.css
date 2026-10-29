@@ -2,7 +2,7 @@
  * Daybloom Components
  * --------------------------------------------------------------------------
  * Reusable UI components: section banners, cards, badges, buttons,
- * task management forms and items, and clean placeholder layouts.
+ * to-do list manager & checklist editor, and clean placeholder layouts.
  */
 
 /* ---------------- View Header / Hero ---------------- */
@@ -288,7 +288,7 @@
 }
 
 .btn-sm {
-  padding: 4px var(--spacing-3);
+  padding: 5px var(--spacing-3);
   font-size: var(--font-size-xs);
 }
 
@@ -313,6 +313,17 @@
   color: var(--color-text-primary);
 }
 
+.btn-outline {
+  background-color: transparent;
+  color: var(--accent-daily);
+  border-color: var(--accent-daily-border);
+}
+
+.btn-outline:hover {
+  background-color: var(--accent-daily-subtle);
+  border-color: var(--accent-daily);
+}
+
 /* ---------------- Form Inputs ---------------- */
 .input-text,
 .input-date,
@@ -335,84 +346,45 @@
   box-shadow: 0 0 0 3px var(--accent-daily-subtle);
 }
 
-.input-text {
-  flex: 1;
-  min-width: 180px;
-}
-
-/* ---------------- Daily Task Manager ---------------- */
-.daily-task-manager {
+/* ---------------- Daily To-Do Lists Manager ---------------- */
+.daily-lists-section {
   margin-top: var(--spacing-8);
   display: flex;
   flex-direction: column;
   gap: var(--spacing-6);
 }
 
-/* Add Task Form Card */
-.task-form-card {
-  background-color: var(--color-bg-surface);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-lg);
-  padding: var(--spacing-5) var(--spacing-6);
-  box-shadow: var(--shadow-xs);
-}
-
-.task-form-title {
-  font-size: var(--font-size-base);
-  font-weight: var(--font-weight-semibold);
-  color: var(--color-text-primary);
-  margin-bottom: var(--spacing-3);
-}
-
-.task-form-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--spacing-3);
-  align-items: center;
-}
-
-.form-field-group {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-2);
-}
-
-.form-field-label {
-  font-size: var(--font-size-xs);
-  color: var(--color-text-muted);
-}
-
-.task-form-error {
-  font-size: var(--font-size-xs);
-  color: var(--accent-danger-text);
-  margin-top: var(--spacing-2);
-  min-height: 18px;
-}
-
-/* Task Toolbar (Counters & Filters) */
-.task-toolbar {
+/* Toolbar */
+.lists-toolbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
-  gap: var(--spacing-3);
+  gap: var(--spacing-4);
   padding-bottom: var(--spacing-2);
   border-bottom: 1px solid var(--color-border-subtle);
 }
 
-.task-toolbar-title-wrap {
+.lists-toolbar-left {
   display: flex;
   align-items: center;
   gap: var(--spacing-3);
 }
 
-.task-toolbar-heading {
-  font-size: var(--font-size-lg);
-  font-weight: var(--font-weight-semibold);
+.lists-toolbar-heading {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
   color: var(--color-text-primary);
 }
 
-.task-filter-group {
+.lists-toolbar-right {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3);
+  flex-wrap: wrap;
+}
+
+.list-filter-group {
   display: inline-flex;
   background-color: var(--color-bg-subtle);
   border: 1px solid var(--color-border);
@@ -421,8 +393,8 @@
   gap: 2px;
 }
 
-.task-filter-btn {
-  padding: 4px var(--spacing-3);
+.list-filter-btn {
+  padding: 5px var(--spacing-3);
   font-size: var(--font-size-xs);
   font-weight: var(--font-weight-medium);
   border-radius: var(--radius-sm);
@@ -430,46 +402,144 @@
   transition: all var(--transition-fast);
 }
 
-.task-filter-btn:hover {
+.list-filter-btn:hover {
   color: var(--color-text-primary);
 }
 
-.task-filter-btn.active {
+.list-filter-btn.active {
   background-color: var(--color-bg-surface);
   color: var(--accent-daily-text);
   box-shadow: var(--shadow-xs);
   font-weight: var(--font-weight-semibold);
 }
 
-/* Task List Container */
-.task-list {
+/* ---------------- List Creation / Editor Card ---------------- */
+.daily-list-editor {
+  background-color: var(--color-bg-surface);
+  border: 1.5px solid var(--accent-daily-border);
+  border-radius: var(--radius-xl);
+  padding: var(--spacing-6) var(--spacing-8);
+  box-shadow: var(--shadow-md);
+  animation: fadeIn 200ms ease-out forwards;
+}
+
+.editor-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-4);
+}
+
+.editor-title {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+}
+
+.editor-form-body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+}
+
+.editor-title-row {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-1);
+}
+
+.editor-title-input {
+  width: 100%;
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-medium);
+  padding: 10px var(--spacing-4);
+}
+
+/* Deadlines Row (Optional) */
+.editor-deadline-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--spacing-3);
+  padding: var(--spacing-3) var(--spacing-4);
+  background-color: var(--color-bg-subtle);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border-subtle);
+}
+
+.deadline-label {
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-secondary);
+}
+
+.deadline-inputs {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  flex-wrap: wrap;
+}
+
+/* Checklist Section in Editor */
+.editor-checklist-section {
   display: flex;
   flex-direction: column;
   gap: var(--spacing-3);
+  margin-top: var(--spacing-2);
 }
 
-/* Task Item Card */
-.task-card {
+.checklist-section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.checklist-section-title {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+}
+
+.checklist-hint {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+}
+
+.checklist-editor-rows {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+}
+
+.checklist-editor-row {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3);
   background-color: var(--color-bg-surface);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
-  padding: var(--spacing-4) var(--spacing-5);
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-4);
-  box-shadow: var(--shadow-xs);
-  transition: all var(--transition-fast);
+  padding: 6px var(--spacing-3);
+  transition: border-color var(--transition-fast);
 }
 
-.task-card:hover {
-  border-color: var(--color-border-hover);
-  box-shadow: var(--shadow-sm);
+.checklist-editor-row:focus-within {
+  border-color: var(--accent-daily);
+  box-shadow: 0 0 0 2px var(--accent-daily-subtle);
 }
 
-/* Custom Checkbox */
-.task-checkbox {
-  width: 22px;
-  height: 22px;
+.checklist-item-input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  padding: 4px var(--spacing-1);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-primary);
+  outline: none;
+}
+
+.checklist-row-checkbox {
+  width: 20px;
+  height: 20px;
   border-radius: var(--radius-full);
   border: 1.5px solid var(--color-border-hover);
   background-color: var(--color-bg-surface);
@@ -478,61 +548,122 @@
   justify-content: center;
   color: transparent;
   flex-shrink: 0;
-  transition: all var(--transition-fast);
   cursor: pointer;
   padding: 0;
+  transition: all var(--transition-fast);
 }
 
-.task-checkbox:hover {
+.checklist-row-checkbox:hover {
   border-color: var(--accent-daily);
   background-color: var(--accent-daily-subtle);
 }
 
-.task-checkbox.checked {
+.checklist-row-checkbox.checked {
   background-color: var(--accent-daily);
   border-color: var(--accent-daily);
   color: var(--color-text-inverse);
 }
 
-/* Task Details */
-.task-details {
-  flex: 1;
-  min-width: 0;
+.btn-remove-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: var(--radius-sm);
+  color: var(--color-text-muted);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  padding: 0;
+}
+
+.btn-remove-row:hover {
+  background-color: var(--accent-danger-subtle);
+  color: var(--accent-danger-text);
+}
+
+.editor-actions-row {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--spacing-3);
+  margin-top: var(--spacing-4);
+  padding-top: var(--spacing-4);
+  border-top: 1px solid var(--color-border-subtle);
+}
+
+.editor-error-msg {
+  font-size: var(--font-size-xs);
+  color: var(--accent-danger-text);
+  margin-top: var(--spacing-1);
+  display: none;
+}
+
+/* ---------------- Saved Lists Container & Cards ---------------- */
+.daily-lists-grid {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: var(--spacing-4);
 }
 
-.task-title {
-  font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-medium);
+.todo-list-card {
+  background-color: var(--color-bg-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-5) var(--spacing-6);
+  box-shadow: var(--shadow-xs);
+  transition: all var(--transition-fast);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+}
+
+.todo-list-card:hover {
+  border-color: var(--color-border-hover);
+  box-shadow: var(--shadow-sm);
+}
+
+.todo-list-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: var(--spacing-4);
+}
+
+.todo-list-header-main {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+}
+
+.todo-list-title {
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
   color: var(--color-text-primary);
-  word-break: break-word;
-  transition: color var(--transition-fast);
+  margin: 0;
 }
 
-.task-meta-row {
+.todo-list-badges-row {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
   gap: var(--spacing-2);
+}
+
+.list-due-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
   font-size: var(--font-size-xs);
   color: var(--color-text-muted);
 }
 
-.task-due-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-}
-
-.task-due-badge.overdue-text {
+.list-due-pill.overdue-text {
   color: var(--accent-danger-text);
   font-weight: var(--font-weight-medium);
 }
 
-/* Task Action Buttons */
-.task-actions {
+.todo-list-actions {
   display: flex;
   align-items: center;
   gap: var(--spacing-1);
@@ -560,43 +691,68 @@
   color: var(--accent-danger-text);
 }
 
-/* Overdue State */
-.task-card.is-overdue {
+/* Card Checklist Items */
+.todo-list-items-body {
+  border-top: 1px solid var(--color-border-subtle);
+  padding-top: var(--spacing-3);
+}
+
+.card-checklist {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+}
+
+.card-checklist-item {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3);
+  padding: 4px var(--spacing-1);
+  border-radius: var(--radius-sm);
+  transition: background-color var(--transition-fast);
+}
+
+.card-checklist-item:hover {
+  background-color: var(--color-bg-subtle);
+}
+
+.card-checklist-text {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  user-select: none;
+  word-break: break-word;
+  transition: all var(--transition-fast);
+}
+
+.card-checklist-item.is-completed .card-checklist-text {
+  color: var(--color-text-muted);
+  text-decoration: line-through;
+}
+
+.empty-items-hint {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+  font-style: italic;
+  margin: 0;
+}
+
+/* Overdue State for List Card */
+.todo-list-card.is-overdue {
   border-color: var(--accent-danger-border);
   border-left: 3px solid var(--accent-danger);
   background-color: #fffbfa;
 }
 
-/* Completed State */
-.task-card.is-completed {
+/* Completed State for List Card */
+.todo-list-card.is-completed {
   background-color: var(--color-bg-subtle);
   border-color: var(--color-border-subtle);
 }
 
-.task-card.is-completed .task-title {
+.todo-list-card.is-completed .todo-list-title {
   color: var(--color-text-muted);
-  text-decoration: line-through;
-}
-
-/* Inline Edit Form */
-.task-edit-form {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-3);
-}
-
-.edit-inputs-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--spacing-2);
-  align-items: center;
-}
-
-.edit-actions-row {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-2);
 }
 
 /* Empty State Card */
@@ -634,7 +790,7 @@
 .empty-subtitle {
   font-size: var(--font-size-xs);
   color: var(--color-text-muted);
-  max-width: 320px;
+  max-width: 340px;
   margin: 0;
 }
 
@@ -726,33 +882,21 @@
     font-size: var(--font-size-xs);
   }
 
-  .task-form-row {
-    flex-direction: column;
-    align-items: stretch;
+  .daily-list-editor {
+    padding: var(--spacing-4);
   }
 
-  .form-field-group {
+  .editor-deadline-row {
     flex-direction: column;
     align-items: flex-start;
-    gap: 4px;
   }
 
-  .input-text,
-  .input-date,
-  .input-time,
-  .task-form-card .btn-primary {
+  .deadline-inputs {
     width: 100%;
   }
 
-  .edit-inputs-row {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  .edit-title-input,
-  .edit-date-input,
-  .edit-time-input {
-    width: 100%;
+  .deadline-inputs input {
+    flex: 1;
   }
 
   .action-label {
