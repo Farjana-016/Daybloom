@@ -2,7 +2,7 @@
  * Daybloom Components
  * --------------------------------------------------------------------------
  * Reusable UI components: section banners, cards, badges, buttons,
- * and clean placeholder layouts for Daily, Scholar, Growth, and Reflect.
+ * task management forms and items, and clean placeholder layouts.
  */
 
 /* ---------------- View Header / Hero ---------------- */
@@ -272,6 +272,372 @@
   background-color: var(--color-border-hover);
 }
 
+/* ---------------- Buttons ---------------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-2);
+  padding: var(--spacing-2) var(--spacing-4);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  border-radius: var(--radius-md);
+  transition: all var(--transition-fast);
+  cursor: pointer;
+  border: 1px solid transparent;
+}
+
+.btn-sm {
+  padding: 4px var(--spacing-3);
+  font-size: var(--font-size-xs);
+}
+
+.btn-primary {
+  background-color: var(--accent-daily);
+  color: var(--color-text-inverse);
+}
+
+.btn-primary:hover {
+  background-color: var(--accent-daily-text);
+  box-shadow: var(--shadow-sm);
+}
+
+.btn-subtle {
+  background-color: var(--color-bg-surface-hover);
+  color: var(--color-text-secondary);
+  border-color: var(--color-border);
+}
+
+.btn-subtle:hover {
+  background-color: var(--color-border);
+  color: var(--color-text-primary);
+}
+
+/* ---------------- Form Inputs ---------------- */
+.input-text,
+.input-date,
+.input-time {
+  font-family: inherit;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-primary);
+  background-color: var(--color-bg-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 8px var(--spacing-3);
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.input-text:focus,
+.input-date:focus,
+.input-time:focus {
+  outline: none;
+  border-color: var(--accent-daily);
+  box-shadow: 0 0 0 3px var(--accent-daily-subtle);
+}
+
+.input-text {
+  flex: 1;
+  min-width: 180px;
+}
+
+/* ---------------- Daily Task Manager ---------------- */
+.daily-task-manager {
+  margin-top: var(--spacing-8);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-6);
+}
+
+/* Add Task Form Card */
+.task-form-card {
+  background-color: var(--color-bg-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-5) var(--spacing-6);
+  box-shadow: var(--shadow-xs);
+}
+
+.task-form-title {
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+  margin-bottom: var(--spacing-3);
+}
+
+.task-form-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-3);
+  align-items: center;
+}
+
+.form-field-group {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+}
+
+.form-field-label {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+}
+
+.task-form-error {
+  font-size: var(--font-size-xs);
+  color: var(--accent-danger-text);
+  margin-top: var(--spacing-2);
+  min-height: 18px;
+}
+
+/* Task Toolbar (Counters & Filters) */
+.task-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--spacing-3);
+  padding-bottom: var(--spacing-2);
+  border-bottom: 1px solid var(--color-border-subtle);
+}
+
+.task-toolbar-title-wrap {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3);
+}
+
+.task-toolbar-heading {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+}
+
+.task-filter-group {
+  display: inline-flex;
+  background-color: var(--color-bg-subtle);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 2px;
+  gap: 2px;
+}
+
+.task-filter-btn {
+  padding: 4px var(--spacing-3);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  border-radius: var(--radius-sm);
+  color: var(--color-text-secondary);
+  transition: all var(--transition-fast);
+}
+
+.task-filter-btn:hover {
+  color: var(--color-text-primary);
+}
+
+.task-filter-btn.active {
+  background-color: var(--color-bg-surface);
+  color: var(--accent-daily-text);
+  box-shadow: var(--shadow-xs);
+  font-weight: var(--font-weight-semibold);
+}
+
+/* Task List Container */
+.task-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-3);
+}
+
+/* Task Item Card */
+.task-card {
+  background-color: var(--color-bg-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-4) var(--spacing-5);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-4);
+  box-shadow: var(--shadow-xs);
+  transition: all var(--transition-fast);
+}
+
+.task-card:hover {
+  border-color: var(--color-border-hover);
+  box-shadow: var(--shadow-sm);
+}
+
+/* Custom Checkbox */
+.task-checkbox {
+  width: 22px;
+  height: 22px;
+  border-radius: var(--radius-full);
+  border: 1.5px solid var(--color-border-hover);
+  background-color: var(--color-bg-surface);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: transparent;
+  flex-shrink: 0;
+  transition: all var(--transition-fast);
+  cursor: pointer;
+  padding: 0;
+}
+
+.task-checkbox:hover {
+  border-color: var(--accent-daily);
+  background-color: var(--accent-daily-subtle);
+}
+
+.task-checkbox.checked {
+  background-color: var(--accent-daily);
+  border-color: var(--accent-daily);
+  color: var(--color-text-inverse);
+}
+
+/* Task Details */
+.task-details {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.task-title {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-primary);
+  word-break: break-word;
+  transition: color var(--transition-fast);
+}
+
+.task-meta-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--spacing-2);
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+}
+
+.task-due-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.task-due-badge.overdue-text {
+  color: var(--accent-danger-text);
+  font-weight: var(--font-weight-medium);
+}
+
+/* Task Action Buttons */
+.task-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-1);
+  flex-shrink: 0;
+}
+
+.btn-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px var(--spacing-2);
+  border-radius: var(--radius-sm);
+  color: var(--color-text-muted);
+  font-size: var(--font-size-xs);
+  transition: all var(--transition-fast);
+}
+
+.btn-action:hover {
+  background-color: var(--color-bg-surface-hover);
+  color: var(--color-text-primary);
+}
+
+.btn-action.btn-danger-action:hover {
+  background-color: var(--accent-danger-subtle);
+  color: var(--accent-danger-text);
+}
+
+/* Overdue State */
+.task-card.is-overdue {
+  border-color: var(--accent-danger-border);
+  border-left: 3px solid var(--accent-danger);
+  background-color: #fffbfa;
+}
+
+/* Completed State */
+.task-card.is-completed {
+  background-color: var(--color-bg-subtle);
+  border-color: var(--color-border-subtle);
+}
+
+.task-card.is-completed .task-title {
+  color: var(--color-text-muted);
+  text-decoration: line-through;
+}
+
+/* Inline Edit Form */
+.task-edit-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-3);
+}
+
+.edit-inputs-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-2);
+  align-items: center;
+}
+
+.edit-actions-row {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+}
+
+/* Empty State Card */
+.task-empty-card {
+  background-color: var(--color-bg-surface);
+  border: 1px dashed var(--color-border-hover);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-10) var(--spacing-6);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-2);
+}
+
+.empty-icon-wrap {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-full);
+  background-color: var(--color-bg-subtle);
+  color: var(--color-text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: var(--spacing-2);
+}
+
+.empty-title {
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+}
+
+.empty-subtitle {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+  max-width: 320px;
+  margin: 0;
+}
+
 /* ---------------- Badges & Tags ---------------- */
 .badge {
   display: inline-flex;
@@ -314,6 +680,19 @@
   border-color: var(--color-border);
 }
 
+.badge-overdue {
+  background-color: var(--accent-danger-subtle);
+  color: var(--accent-danger-text);
+  border-color: var(--accent-danger-border);
+  font-weight: var(--font-weight-semibold);
+}
+
+.badge-completed {
+  background-color: var(--color-bg-subtle);
+  color: var(--color-text-muted);
+  border-color: var(--color-border);
+}
+
 /* ---------------- Responsive Components ---------------- */
 @media (max-width: 900px) {
   .pillars-grid {
@@ -323,7 +702,16 @@
 
 @media (max-width: 640px) {
   .pillars-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-3);
+  }
+
+  .pillar-card {
+    padding: var(--spacing-3) var(--spacing-4);
+  }
+
+  .pillar-card p {
+    display: none;
   }
 
   .placeholder-grid {
@@ -332,5 +720,42 @@
 
   .welcome-banner {
     padding: var(--spacing-5);
+  }
+
+  .welcome-text p {
+    font-size: var(--font-size-xs);
+  }
+
+  .task-form-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .form-field-group {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+
+  .input-text,
+  .input-date,
+  .input-time,
+  .task-form-card .btn-primary {
+    width: 100%;
+  }
+
+  .edit-inputs-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .edit-title-input,
+  .edit-date-input,
+  .edit-time-input {
+    width: 100%;
+  }
+
+  .action-label {
+    display: none;
   }
 }

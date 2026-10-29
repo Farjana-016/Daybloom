@@ -7,6 +7,7 @@
  * - Scholar: Pastel Purple
  * - Growth: Pastel Green
  * - Reflect: Pastel Pink
+ * - Overdue: Soft Red
  */
 
 :root {
@@ -49,6 +50,12 @@
   --accent-reflect-subtle: #fdf2f8;
   --accent-reflect-border: #fbcfe8;
   --accent-reflect-text: #be185d;
+
+  /* Overdue / Danger: Soft Pastel Red */
+  --accent-danger: #dc2626;
+  --accent-danger-subtle: #fef2f2;
+  --accent-danger-border: #fecaca;
+  --accent-danger-text: #b91c1c;
 
   /* Neutral brand accent (Default) */
   --accent-brand: #3b82f6;

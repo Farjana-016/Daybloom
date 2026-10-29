@@ -2,7 +2,7 @@
  * Daybloom Application Entry Point
  * --------------------------------------------------------------------------
  * Initializes app state, updates real-time date headers, and sets up
- * the client-side navigation.
+ * client-side navigation and the Daily task manager.
  */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -12,7 +12,12 @@ document.addEventListener('DOMContentLoaded', () => {
   // 2. Initialize the navigation system
   DaybloomNav.init();
 
-  // 3. Verify browser localStorage support for future phases
+  // 3. Initialize the Daily task manager (Phase 2)
+  if (typeof DaybloomDaily !== 'undefined') {
+    DaybloomDaily.init();
+  }
+
+  // 4. Verify browser localStorage support
   checkStorageSupport();
 });
 
@@ -38,7 +43,7 @@ function updateDateDisplays() {
 }
 
 /**
- * Verifies localStorage availability for future persistence features.
+ * Verifies localStorage availability for persistence features.
  */
 function checkStorageSupport() {
   try {

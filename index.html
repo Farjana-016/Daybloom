@@ -213,43 +213,88 @@
             </button>
           </div>
 
-          <!-- Placeholder Modules for Daily Feature Phase -->
-          <div class="placeholder-grid">
-            <div class="placeholder-box">
-              <div class="placeholder-box-header">
-                <span class="placeholder-box-title">Today's Tasks</span>
-                <span class="badge badge-daily">Upcoming Phase</span>
-              </div>
-              <p class="card-description">Personal everyday to-dos, quick task creation, and completed items will live here.</p>
-              <ul class="placeholder-list">
-                <li class="placeholder-item">
-                  <span class="placeholder-item-bullet"></span>
-                  <span>Personal task checklists with priority tags</span>
-                </li>
-                <li class="placeholder-item">
-                  <span class="placeholder-item-bullet"></span>
-                  <span>Quick completion toggles & local persistence</span>
-                </li>
-              </ul>
+          <!-- Daily Task Management Section (Phase 2) -->
+          <section class="daily-task-manager" aria-labelledby="daily-task-heading">
+            <!-- Add Task Form Card -->
+            <div class="task-form-card">
+              <h3 class="task-form-title" id="daily-task-heading">Add a Personal Task</h3>
+              <form id="daily-task-form" autocomplete="off">
+                <div class="task-form-row">
+                  <input
+                    type="text"
+                    id="task-title-input"
+                    class="input-text"
+                    placeholder="What needs to be done?"
+                    aria-label="Task title"
+                    required
+                  />
+                  <div class="form-field-group">
+                    <label for="task-date-input" class="form-field-label">Due Date:</label>
+                    <input
+                      type="date"
+                      id="task-date-input"
+                      class="input-date"
+                      aria-label="Due date"
+                      required
+                    />
+                  </div>
+                  <div class="form-field-group">
+                    <label for="task-time-input" class="form-field-label">Time (optional):</label>
+                    <input
+                      type="time"
+                      id="task-time-input"
+                      class="input-time"
+                      aria-label="Due time (optional)"
+                    />
+                  </div>
+                  <button type="submit" class="btn btn-primary" id="btn-add-task">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                      <line x1="12" y1="5" x2="12" y2="19"/>
+                      <line x1="5" y1="12" x2="19" y2="12"/>
+                    </svg>
+                    <span>Add Task</span>
+                  </button>
+                </div>
+                <div class="task-form-error" id="task-form-error" role="alert" aria-live="polite"></div>
+              </form>
             </div>
 
-            <div class="placeholder-box">
-              <div class="placeholder-box-header">
-                <span class="placeholder-box-title">Everyday Habits</span>
-                <span class="badge badge-daily">Upcoming Phase</span>
+            <!-- Task Toolbar (Header, Counter & Filters) -->
+            <div class="task-toolbar">
+              <div class="task-toolbar-title-wrap">
+                <h3 class="task-toolbar-heading">My Tasks</h3>
+                <span class="badge badge-daily" id="daily-active-count">0 active</span>
               </div>
-              <p class="card-description">Daily recurring routines and simple habit check-ins to build momentum.</p>
-              <ul class="placeholder-list">
-                <li class="placeholder-item">
-                  <span class="placeholder-item-bullet"></span>
-                  <span>Morning & evening routines</span>
-                </li>
-                <li class="placeholder-item">
-                  <span class="placeholder-item-bullet"></span>
-                  <span>One-click habit completion status</span>
-                </li>
-              </ul>
+              <div class="task-filter-group" role="tablist" aria-label="Filter tasks">
+                <button type="button" class="task-filter-btn active" data-filter="all">All</button>
+                <button type="button" class="task-filter-btn" data-filter="active">Active</button>
+                <button type="button" class="task-filter-btn" data-filter="completed">Completed</button>
+              </div>
             </div>
+
+            <!-- Task List Container -->
+            <div class="task-list" id="daily-task-list" role="region" aria-label="Daily tasks list">
+              <!-- Dynamically populated by js/daily.js -->
+            </div>
+          </section>
+
+          <!-- Habit Tracker Preview (Planned for Future Phase) -->
+          <div class="placeholder-box" style="margin-top: var(--spacing-8);">
+            <div class="placeholder-box-header">
+              <span class="placeholder-box-title">Everyday Habits</span>
+              <span class="badge badge-daily">Upcoming Phase</span>
+            </div>
+            <p class="card-description">Daily recurring routines and simple habit check-ins to build momentum.</p>
+            <ul class="placeholder-list">
+              <li class="placeholder-item">
+                <span class="placeholder-item-bullet"></span>
+                <span>Morning & evening routines</span>
+              </li>
+              <li class="placeholder-item">
+                <span class="placeholder-item-bullet"></span>
+                <span>One-click habit completion status</span>
+              </li>
+            </ul>
           </div>
         </section>
 
@@ -476,6 +521,7 @@
 
   <!-- JavaScript Modules -->
   <script src="js/navigation.js"></script>
+  <script src="js/daily.js"></script>
   <script src="js/app.js"></script>
 </body>
 </html>
