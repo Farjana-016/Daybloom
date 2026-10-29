@@ -24,7 +24,12 @@ const DaybloomNav = (() => {
     sidebarLinks.forEach((link) => {
       const isTarget = link.getAttribute('data-section') === sectionId;
       link.classList.toggle('active', isTarget);
-      link.setAttribute('aria-current', isTarget ? 'page' : 'false');
+      link.setAttribute('aria-selected', isTarget ? 'true' : 'false');
+      if (isTarget) {
+        link.setAttribute('aria-current', 'page');
+      } else {
+        link.removeAttribute('aria-current');
+      }
     });
 
     // 2. Update mobile bottom nav items
@@ -32,7 +37,12 @@ const DaybloomNav = (() => {
     mobileLinks.forEach((link) => {
       const isTarget = link.getAttribute('data-section') === sectionId;
       link.classList.toggle('active', isTarget);
-      link.setAttribute('aria-current', isTarget ? 'page' : 'false');
+      link.setAttribute('aria-selected', isTarget ? 'true' : 'false');
+      if (isTarget) {
+        link.setAttribute('aria-current', 'page');
+      } else {
+        link.removeAttribute('aria-current');
+      }
     });
 
     // 3. Update view panels in the main content area
