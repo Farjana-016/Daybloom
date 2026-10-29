@@ -57,6 +57,43 @@
   --accent-danger-border: #fecaca;
   --accent-danger-text: #b91c1c;
 
+  /* ---------------- Scholar Category Accents ---------------- */
+  /* Exams: Purple */
+  --cat-exams: #7c3aed;
+  --cat-exams-subtle: #f5f3ff;
+  --cat-exams-border: #ddd6fe;
+  --cat-exams-text: #6d28d9;
+
+  /* Tests: Blue */
+  --cat-tests: #2563eb;
+  --cat-tests-subtle: #eff6ff;
+  --cat-tests-border: #bfdbfe;
+  --cat-tests-text: #1d4ed8;
+
+  /* Records: Teal */
+  --cat-records: #0f766e;
+  --cat-records-subtle: #f0fdfa;
+  --cat-records-border: #99f6e4;
+  --cat-records-text: #0f766e;
+
+  /* Assignments: Amber */
+  --cat-assignments: #d97706;
+  --cat-assignments-subtle: #fffbeb;
+  --cat-assignments-border: #fde68a;
+  --cat-assignments-text: #b45309;
+
+  /* Skill Building: Emerald Green */
+  --cat-skills: #059669;
+  --cat-skills-subtle: #ecfdf5;
+  --cat-skills-border: #a7f3d0;
+  --cat-skills-text: #047857;
+
+  /* Projects: Rose Pink */
+  --cat-projects: #db2777;
+  --cat-projects-subtle: #fdf2f8;
+  --cat-projects-border: #fbcfe8;
+  --cat-projects-text: #be185d;
+
   /* Neutral brand accent (Default) */
   --accent-brand: #3b82f6;
   --accent-brand-subtle: #f0f7ff;

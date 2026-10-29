@@ -903,3 +903,489 @@
     display: none;
   }
 }
+
+/* ---------------- Scholar Academic Section ---------------- */
+.scholar-workspace {
+  margin-top: var(--spacing-8);
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: var(--spacing-6);
+  align-items: start;
+}
+
+/* Calendar Pane */
+.scholar-calendar-pane {
+  background-color: var(--color-bg-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  padding: var(--spacing-6);
+  box-shadow: var(--shadow-xs);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+}
+
+.calendar-nav-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--spacing-3);
+  padding-bottom: var(--spacing-2);
+}
+
+.calendar-nav-left {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3);
+}
+
+.calendar-month-title {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+  min-width: 150px;
+}
+
+.calendar-nav-controls {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-1);
+}
+
+.btn-calendar-nav {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--color-border);
+  background-color: var(--color-bg-surface);
+  color: var(--color-text-secondary);
+  transition: all var(--transition-fast);
+}
+
+.btn-calendar-nav:hover {
+  background-color: var(--color-bg-surface-hover);
+  color: var(--color-text-primary);
+  border-color: var(--color-border-hover);
+}
+
+/* Category Filters Bar */
+.scholar-category-filters {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  flex-wrap: wrap;
+  padding: var(--spacing-2) 0;
+  border-top: 1px solid var(--color-border-subtle);
+  border-bottom: 1px solid var(--color-border-subtle);
+}
+
+.cat-filter-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px var(--spacing-3);
+  border-radius: var(--radius-full);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  border: 1px solid var(--color-border);
+  background-color: var(--color-bg-surface);
+  color: var(--color-text-secondary);
+  transition: all var(--transition-fast);
+  cursor: pointer;
+}
+
+.cat-filter-btn:hover {
+  background-color: var(--color-bg-subtle);
+  color: var(--color-text-primary);
+}
+
+.cat-filter-btn.active {
+  background-color: var(--accent-scholar-subtle);
+  color: var(--accent-scholar-text);
+  border-color: var(--accent-scholar-border);
+  font-weight: var(--font-weight-semibold);
+}
+
+/* Weekday Column Headers */
+.calendar-weekdays-row {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+  text-align: center;
+}
+
+.calendar-weekday-col {
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-muted);
+  padding: var(--spacing-1) 0;
+}
+
+/* Calendar Days Grid */
+.calendar-days-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+}
+
+.calendar-day-cell {
+  aspect-ratio: 1 / 1;
+  min-height: 44px;
+  background-color: var(--color-bg-surface);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-md);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 4px;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  position: relative;
+}
+
+.calendar-day-cell:hover {
+  border-color: var(--accent-scholar-border);
+  background-color: var(--accent-scholar-subtle);
+}
+
+.calendar-day-cell.is-today {
+  border-color: var(--accent-scholar);
+  font-weight: var(--font-weight-bold);
+}
+
+.calendar-day-cell.is-today .day-number {
+  color: var(--accent-scholar);
+}
+
+.calendar-day-cell.is-selected {
+  background-color: var(--accent-scholar-subtle);
+  border-color: var(--accent-scholar);
+  box-shadow: 0 0 0 2px var(--accent-scholar-border);
+}
+
+.calendar-day-cell.is-other-month {
+  opacity: 0.3;
+  cursor: default;
+  pointer-events: none;
+}
+
+.calendar-day-cell.has-overdue {
+  border-color: var(--accent-danger-border);
+}
+
+.day-number {
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-primary);
+}
+
+/* Category Indicator Dots in Day Cells */
+.calendar-task-dots {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  flex-wrap: wrap;
+  width: 100%;
+  margin-top: auto;
+  padding-bottom: 2px;
+}
+
+.cat-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: var(--radius-full);
+  flex-shrink: 0;
+}
+
+.cat-dot.cat-exams { background-color: var(--cat-exams); }
+.cat-dot.cat-tests { background-color: var(--cat-tests); }
+.cat-dot.cat-records { background-color: var(--cat-records); }
+.cat-dot.cat-assignments { background-color: var(--cat-assignments); }
+.cat-dot.cat-skill-building { background-color: var(--cat-skills); }
+.cat-dot.cat-projects { background-color: var(--cat-projects); }
+
+.cat-dot-more {
+  font-size: 8px;
+  color: var(--color-text-muted);
+  line-height: 1;
+}
+
+/* ---------------- Agenda Pane ---------------- */
+.scholar-agenda-pane {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+}
+
+.agenda-header {
+  background-color: var(--color-bg-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-4) var(--spacing-5);
+  box-shadow: var(--shadow-xs);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--spacing-3);
+}
+
+.agenda-header-info {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3);
+}
+
+.agenda-date-title {
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+  margin: 0;
+}
+
+/* Academic Task Editor Card */
+.scholar-task-editor {
+  background-color: var(--color-bg-surface);
+  border: 1.5px solid var(--accent-scholar-border);
+  border-radius: var(--radius-xl);
+  padding: var(--spacing-5) var(--spacing-6);
+  box-shadow: var(--shadow-md);
+  animation: fadeIn 200ms ease-out forwards;
+}
+
+.scholar-editor-header {
+  margin-bottom: var(--spacing-4);
+}
+
+.scholar-editor-title {
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+  margin: 0;
+}
+
+.scholar-editor-grid {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-3);
+}
+
+.editor-field-row {
+  display: flex;
+  gap: var(--spacing-3);
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.editor-radio-group {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-4);
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+}
+
+.editor-radio-label {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-1);
+  cursor: pointer;
+}
+
+.scholar-textarea {
+  font-family: inherit;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-primary);
+  background-color: var(--color-bg-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 8px var(--spacing-3);
+  width: 100%;
+  resize: vertical;
+  min-height: 60px;
+}
+
+.scholar-textarea:focus {
+  outline: none;
+  border-color: var(--accent-scholar);
+  box-shadow: 0 0 0 3px var(--accent-scholar-subtle);
+}
+
+.select-category {
+  font-family: inherit;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-primary);
+  background-color: var(--color-bg-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 8px var(--spacing-3);
+}
+
+.select-category:focus {
+  outline: none;
+  border-color: var(--accent-scholar);
+  box-shadow: 0 0 0 3px var(--accent-scholar-subtle);
+}
+
+/* Agenda Tasks List */
+.scholar-agenda-tasks {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-3);
+}
+
+/* Scholar Task Card */
+.scholar-task-card {
+  background-color: var(--color-bg-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-4) var(--spacing-5);
+  box-shadow: var(--shadow-xs);
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-3);
+  transition: all var(--transition-fast);
+}
+
+.scholar-task-card:hover {
+  border-color: var(--color-border-hover);
+  box-shadow: var(--shadow-sm);
+}
+
+.scholar-task-left {
+  padding-top: 2px;
+}
+
+.scholar-task-center {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.scholar-task-header-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--spacing-2);
+}
+
+.scholar-task-title {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+  margin: 0;
+  word-break: break-word;
+}
+
+.scholar-task-meta-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--spacing-2);
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+}
+
+.task-time-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.task-time-pill.overdue-text {
+  color: var(--accent-danger-text);
+  font-weight: var(--font-weight-medium);
+}
+
+.scholar-task-notes {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+  background-color: var(--color-bg-subtle);
+  padding: 6px var(--spacing-3);
+  border-radius: var(--radius-sm);
+  margin-top: 4px;
+  line-height: var(--line-height-normal);
+}
+
+.scholar-notes-hint {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+}
+
+/* Category Badges */
+.cat-badge-exams { background-color: var(--cat-exams-subtle); color: var(--cat-exams-text); border-color: var(--cat-exams-border); }
+.cat-badge-tests { background-color: var(--cat-tests-subtle); color: var(--cat-tests-text); border-color: var(--cat-tests-border); }
+.cat-badge-records { background-color: var(--cat-records-subtle); color: var(--cat-records-text); border-color: var(--cat-records-border); }
+.cat-badge-assignments { background-color: var(--cat-assignments-subtle); color: var(--cat-assignments-text); border-color: var(--cat-assignments-border); }
+.cat-badge-skill-building { background-color: var(--cat-skills-subtle); color: var(--cat-skills-text); border-color: var(--cat-skills-border); }
+.cat-badge-projects { background-color: var(--cat-projects-subtle); color: var(--cat-projects-text); border-color: var(--cat-projects-border); }
+
+/* Date Type Badges */
+.date-type-badge.type-event {
+  background-color: var(--color-bg-subtle);
+  color: var(--color-text-secondary);
+  border: 1px solid var(--color-border);
+}
+
+.date-type-badge.type-deadline {
+  background-color: #fff7ed;
+  color: #c2410c;
+  border: 1px solid #fed7aa;
+}
+
+.badge-course {
+  background-color: var(--color-bg-subtle);
+  color: var(--color-text-secondary);
+  border: 1px solid var(--color-border);
+  font-family: monospace;
+}
+
+/* Overdue State for Scholar Card */
+.scholar-task-card.is-overdue {
+  border-color: var(--accent-danger-border);
+  border-left: 3px solid var(--accent-danger);
+  background-color: #fffbfa;
+}
+
+/* Completed State for Scholar Card */
+.scholar-task-card.is-completed {
+  background-color: var(--color-bg-subtle);
+  border-color: var(--color-border-subtle);
+}
+
+.scholar-task-card.is-completed .scholar-task-title {
+  color: var(--color-text-muted);
+  text-decoration: line-through;
+}
+
+/* Responsive Scholar Workspace */
+@media (max-width: 900px) {
+  .scholar-workspace {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .calendar-day-cell {
+    min-height: 38px;
+    padding: 2px;
+  }
+
+  .cat-dot {
+    width: 4px;
+    height: 4px;
+  }
+
+  .editor-field-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}

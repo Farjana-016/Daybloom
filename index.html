@@ -322,48 +322,180 @@
               </div>
               <div>
                 <h1 class="view-title">Scholar</h1>
-                <p class="view-subtitle">Academic tasks and calendar.</p>
+                <p class="view-subtitle">Academic tasks, event calendar and deadlines.</p>
               </div>
             </div>
             <span class="badge badge-scholar">Academic Hub</span>
           </header>
 
-          <div class="placeholder-grid">
-            <div class="placeholder-box">
-              <div class="placeholder-box-header">
-                <span class="placeholder-box-title">Course Deadlines & Exams</span>
-                <span class="badge badge-scholar">Upcoming Phase</span>
+          <!-- Scholar Dual-Pane Workspace -->
+          <div class="scholar-workspace">
+            
+            <!-- Left Pane: Monthly Calendar Grid -->
+            <div class="scholar-calendar-pane">
+              <div class="calendar-nav-bar">
+                <div class="calendar-nav-left">
+                  <h3 class="calendar-month-title" id="scholar-month-title">October 2026</h3>
+                  <div class="calendar-nav-controls">
+                    <button type="button" class="btn-calendar-nav" id="scholar-prev-month" title="Previous Month" aria-label="Previous Month">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="15 18 9 12 15 6"/>
+                      </svg>
+                    </button>
+                    <button type="button" class="btn-calendar-nav" id="scholar-next-month" title="Next Month" aria-label="Next Month">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="9 18 15 12 9 6"/>
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+
+                <button type="button" class="btn btn-sm btn-subtle" id="scholar-today-btn">Today</button>
               </div>
-              <p class="card-description">Track homework assignments, lab submissions, and semester examinations in one place.</p>
-              <ul class="placeholder-list">
-                <li class="placeholder-item">
-                  <span class="placeholder-item-bullet"></span>
-                  <span>Due-date sorting and course code categorization</span>
-                </li>
-                <li class="placeholder-item">
-                  <span class="placeholder-item-bullet"></span>
-                  <span>Upcoming exams and project deliverables</span>
-                </li>
-              </ul>
+
+              <!-- Six Required Category Filters -->
+              <div class="scholar-category-filters" id="scholar-category-filters" role="tablist" aria-label="Filter calendar by academic category">
+                <button type="button" class="cat-filter-btn active" data-category="all">All</button>
+                <button type="button" class="cat-filter-btn" data-category="Exams">
+                  <span class="cat-dot cat-exams"></span>
+                  <span>Exams</span>
+                </button>
+                <button type="button" class="cat-filter-btn" data-category="Tests">
+                  <span class="cat-dot cat-tests"></span>
+                  <span>Tests</span>
+                </button>
+                <button type="button" class="cat-filter-btn" data-category="Records">
+                  <span class="cat-dot cat-records"></span>
+                  <span>Records</span>
+                </button>
+                <button type="button" class="cat-filter-btn" data-category="Assignments">
+                  <span class="cat-dot cat-assignments"></span>
+                  <span>Assignments</span>
+                </button>
+                <button type="button" class="cat-filter-btn" data-category="Skill Building">
+                  <span class="cat-dot cat-skill-building"></span>
+                  <span>Skill Building</span>
+                </button>
+                <button type="button" class="cat-filter-btn" data-category="Projects">
+                  <span class="cat-dot cat-projects"></span>
+                  <span>Projects</span>
+                </button>
+              </div>
+
+              <!-- 7-Column Calendar Grid (Sunday - Saturday order) -->
+              <div id="scholar-calendar-grid">
+                <!-- Dynamically populated by js/scholar.js -->
+              </div>
             </div>
 
-            <div class="placeholder-box">
-              <div class="placeholder-box-header">
-                <span class="placeholder-box-title">Academic Schedule</span>
-                <span class="badge badge-scholar">Upcoming Phase</span>
+            <!-- Right Pane: Selected Date Agenda & Task Management -->
+            <div class="scholar-agenda-pane">
+              <div class="agenda-header">
+                <div class="agenda-header-info">
+                  <h4 class="agenda-date-title" id="scholar-selected-date-title">Selected Date</h4>
+                  <span class="badge badge-scholar" id="scholar-date-count-badge">0 tasks</span>
+                </div>
+                <button type="button" class="btn btn-sm btn-primary" id="btn-add-scholar-task">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="12" y1="5" x2="12" y2="19"/>
+                    <line x1="5" y1="12" x2="19" y2="12"/>
+                  </svg>
+                  <span>Add Task</span>
+                </button>
               </div>
-              <p class="card-description">Timetable for lectures, labs, office hours, and study sessions.</p>
-              <ul class="placeholder-list">
-                <li class="placeholder-item">
-                  <span class="placeholder-item-bullet"></span>
-                  <span>Weekly lecture schedule overview</span>
-                </li>
-                <li class="placeholder-item">
-                  <span class="placeholder-item-bullet"></span>
-                  <span>Study blocks and assignment work windows</span>
-                </li>
-              </ul>
+
+              <!-- Task Creation / Edit Form Card (Hidden by default) -->
+              <div class="scholar-task-editor" id="scholar-task-editor" style="display: none;" role="dialog" aria-labelledby="scholar-editor-heading">
+                <div class="scholar-editor-header">
+                  <h4 class="scholar-editor-title" id="scholar-editor-heading">Add Academic Task</h4>
+                </div>
+
+                <div class="scholar-editor-grid">
+                  <input
+                    type="text"
+                    id="scholar-input-title"
+                    class="input-text"
+                    placeholder="Task title (e.g. Midterm Examination, Lab Report)..."
+                    aria-label="Academic task title"
+                    required
+                  />
+
+                  <!-- Category & Date Type Selection -->
+                  <div class="editor-field-row">
+                    <div style="flex: 1; min-width: 140px;">
+                      <label for="scholar-select-category" class="form-field-label" style="display:block; margin-bottom:4px;">Category:</label>
+                      <select id="scholar-select-category" class="select-category" style="width: 100%;">
+                        <option value="Exams">Exams</option>
+                        <option value="Tests">Tests</option>
+                        <option value="Records">Records</option>
+                        <option value="Assignments">Assignments</option>
+                        <option value="Skill Building">Skill Building</option>
+                        <option value="Projects">Projects</option>
+                      </select>
+                    </div>
+
+                    <div style="flex: 1; min-width: 160px;">
+                      <span class="form-field-label" style="display:block; margin-bottom:4px;">Date Type:</span>
+                      <div class="editor-radio-group">
+                        <label class="editor-radio-label">
+                          <input type="radio" name="scholar-date-type" id="scholar-type-event" value="event" checked />
+                          <span>Event</span>
+                        </label>
+                        <label class="editor-radio-label">
+                          <input type="radio" name="scholar-date-type" id="scholar-type-deadline" value="deadline" />
+                          <span>Deadline</span>
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Course / Subject Code -->
+                  <div class="editor-field-row">
+                    <input
+                      type="text"
+                      id="scholar-input-course"
+                      class="input-text"
+                      placeholder="Course/Subject (e.g. CS201, Math)..."
+                      aria-label="Course code"
+                      style="width: 100%;"
+                    />
+                  </div>
+
+                  <!-- Due Date & Time -->
+                  <div class="editor-field-row">
+                    <div style="flex: 1;">
+                      <label for="scholar-input-date" class="form-field-label" style="display:block; margin-bottom:4px;">Date:</label>
+                      <input type="date" id="scholar-input-date" class="input-date" style="width: 100%;" required />
+                    </div>
+                    <div style="flex: 1;">
+                      <label for="scholar-input-time" class="form-field-label" style="display:block; margin-bottom:4px;">Time (optional):</label>
+                      <input type="time" id="scholar-input-time" class="input-time" style="width: 100%;" />
+                    </div>
+                  </div>
+
+                  <!-- Notes -->
+                  <textarea
+                    id="scholar-input-notes"
+                    class="scholar-textarea"
+                    placeholder="Notes, syllabus chapters, or submission instructions (optional)..."
+                    aria-label="Task notes"
+                  ></textarea>
+
+                  <div class="editor-error-msg" id="scholar-editor-error" role="alert"></div>
+
+                  <div class="editor-actions-row">
+                    <button type="button" class="btn btn-sm btn-subtle" id="scholar-btn-cancel">Cancel</button>
+                    <button type="button" class="btn btn-sm btn-primary" id="scholar-btn-save">Save Task</button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- List of Academic Tasks for Selected Date -->
+              <div class="scholar-agenda-tasks" id="scholar-agenda-tasks" role="region" aria-label="Selected date academic tasks">
+                <!-- Dynamically populated by js/scholar.js -->
+              </div>
             </div>
+
           </div>
         </section>
 
@@ -533,6 +665,7 @@
   <!-- JavaScript Modules -->
   <script src="js/navigation.js"></script>
   <script src="js/daily.js"></script>
+  <script src="js/scholar.js"></script>
   <script src="js/app.js"></script>
 </body>
 </html>

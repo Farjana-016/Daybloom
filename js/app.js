@@ -17,7 +17,12 @@ document.addEventListener('DOMContentLoaded', () => {
     DaybloomDaily.init();
   }
 
-  // 4. Verify browser localStorage support
+  // 4. Initialize Scholar academic manager (Phase 3)
+  if (typeof DaybloomScholar !== 'undefined') {
+    DaybloomScholar.init();
+  }
+
+  // 5. Verify browser localStorage support
   checkStorageSupport();
 });
 
