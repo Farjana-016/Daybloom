@@ -1,0 +1,336 @@
+/**
+ * Daybloom Components
+ * --------------------------------------------------------------------------
+ * Reusable UI components: section banners, cards, badges, buttons,
+ * and clean placeholder layouts for Daily, Scholar, Growth, and Reflect.
+ */
+
+/* ---------------- View Header / Hero ---------------- */
+.view-header {
+  margin-bottom: var(--spacing-8);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: var(--spacing-4);
+  flex-wrap: wrap;
+}
+
+.view-header-main {
+  display: flex;
+  gap: var(--spacing-4);
+  align-items: center;
+}
+
+.view-icon-badge {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.view-icon-badge.daily {
+  background-color: var(--accent-daily-subtle);
+  color: var(--accent-daily);
+  border: 1px solid var(--accent-daily-border);
+}
+
+.view-icon-badge.scholar {
+  background-color: var(--accent-scholar-subtle);
+  color: var(--accent-scholar);
+  border: 1px solid var(--accent-scholar-border);
+}
+
+.view-icon-badge.growth {
+  background-color: var(--accent-growth-subtle);
+  color: var(--accent-growth);
+  border: 1px solid var(--accent-growth-border);
+}
+
+.view-icon-badge.reflect {
+  background-color: var(--accent-reflect-subtle);
+  color: var(--accent-reflect);
+  border: 1px solid var(--accent-reflect-border);
+}
+
+.view-title {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+  margin-bottom: 2px;
+}
+
+.view-subtitle {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  margin: 0;
+}
+
+/* ---------------- Cards & Surfaces ---------------- */
+.card {
+  background-color: var(--color-bg-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-6);
+  box-shadow: var(--shadow-xs);
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.card:hover {
+  border-color: var(--color-border-hover);
+  box-shadow: var(--shadow-sm);
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--spacing-4);
+}
+
+.card-title {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+}
+
+.card-description {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-relaxed);
+  margin-bottom: var(--spacing-4);
+}
+
+/* ---------------- Overview Banner ---------------- */
+.welcome-banner {
+  background-color: var(--color-bg-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  padding: var(--spacing-6) var(--spacing-8);
+  margin-bottom: var(--spacing-8);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--spacing-6);
+  box-shadow: var(--shadow-xs);
+}
+
+.welcome-text h2 {
+  font-size: var(--font-size-xl);
+  margin-bottom: var(--spacing-2);
+}
+
+.welcome-text p {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  margin: 0;
+  max-width: 600px;
+}
+
+/* ---------------- Section Navigation Quick-Cards ---------------- */
+.pillars-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--spacing-4);
+  margin-bottom: var(--spacing-8);
+}
+
+.pillar-card {
+  background-color: var(--color-bg-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-5);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-3);
+  text-align: left;
+}
+
+.pillar-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.pillar-card[data-target="daily"]:hover {
+  border-color: var(--accent-daily-border);
+}
+
+.pillar-card[data-target="scholar"]:hover {
+  border-color: var(--accent-scholar-border);
+}
+
+.pillar-card[data-target="growth"]:hover {
+  border-color: var(--accent-growth-border);
+}
+
+.pillar-card[data-target="reflect"]:hover {
+  border-color: var(--accent-reflect-border);
+}
+
+.pillar-icon-box {
+  width: 38px;
+  height: 38px;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pillar-card[data-target="daily"] .pillar-icon-box {
+  background-color: var(--accent-daily-subtle);
+  color: var(--accent-daily);
+}
+
+.pillar-card[data-target="scholar"] .pillar-icon-box {
+  background-color: var(--accent-scholar-subtle);
+  color: var(--accent-scholar);
+}
+
+.pillar-card[data-target="growth"] .pillar-icon-box {
+  background-color: var(--accent-growth-subtle);
+  color: var(--accent-growth);
+}
+
+.pillar-card[data-target="reflect"] .pillar-icon-box {
+  background-color: var(--accent-reflect-subtle);
+  color: var(--accent-reflect);
+}
+
+.pillar-card h4 {
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.pillar-card p {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+  margin: 0;
+  line-height: var(--line-height-normal);
+}
+
+/* ---------------- Placeholder Modules ---------------- */
+.placeholder-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--spacing-6);
+  margin-top: var(--spacing-6);
+}
+
+.placeholder-box {
+  background-color: var(--color-bg-surface);
+  border: 1px dashed var(--color-border-hover);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-3);
+  min-height: 180px;
+}
+
+.placeholder-box-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.placeholder-box-title {
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-primary);
+}
+
+.placeholder-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+}
+
+.placeholder-item {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3);
+  padding: var(--spacing-3);
+  background-color: var(--color-bg-app);
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+}
+
+.placeholder-item-bullet {
+  width: 6px;
+  height: 6px;
+  border-radius: var(--radius-full);
+  background-color: var(--color-border-hover);
+}
+
+/* ---------------- Badges & Tags ---------------- */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-1);
+  padding: 2px var(--spacing-2);
+  border-radius: var(--radius-full);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  border: 1px solid transparent;
+}
+
+.badge-daily {
+  background-color: var(--accent-daily-subtle);
+  color: var(--accent-daily-text);
+  border-color: var(--accent-daily-border);
+}
+
+.badge-scholar {
+  background-color: var(--accent-scholar-subtle);
+  color: var(--accent-scholar-text);
+  border-color: var(--accent-scholar-border);
+}
+
+.badge-growth {
+  background-color: var(--accent-growth-subtle);
+  color: var(--accent-growth-text);
+  border-color: var(--accent-growth-border);
+}
+
+.badge-reflect {
+  background-color: var(--accent-reflect-subtle);
+  color: var(--accent-reflect-text);
+  border-color: var(--accent-reflect-border);
+}
+
+.badge-neutral {
+  background-color: var(--color-bg-subtle);
+  color: var(--color-text-secondary);
+  border-color: var(--color-border);
+}
+
+/* ---------------- Responsive Components ---------------- */
+@media (max-width: 900px) {
+  .pillars-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .pillars-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .placeholder-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .welcome-banner {
+    padding: var(--spacing-5);
+  }
+}
