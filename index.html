@@ -1,671 +1,738 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Daybloom</title>
-
-  <!-- Daybloom Modular Design System -->
-  <link rel="stylesheet" href="css/variables.css">
-  <link rel="stylesheet" href="css/base.css">
-  <link rel="stylesheet" href="css/layout.css">
-  <link rel="stylesheet" href="css/components.css">
-</head>
-<body>
-
-  <div class="app-shell">
-
-    <!-- ---------------- Desktop Sidebar Navigation ---------------- -->
-    <aside class="sidebar" aria-label="Main Navigation">
-      <div class="sidebar-header">
-        <div class="brand-icon-wrapper" aria-hidden="true">
-          <!-- Daybloom Minimalist Bloom Mark -->
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8z"/>
-            <path d="M12 2v2"/>
-            <path d="M12 20v2"/>
-            <path d="m4.93 4.93 1.41 1.41"/>
-            <path d="m17.66 17.66 1.41 1.41"/>
-            <path d="M2 12h2"/>
-            <path d="M20 12h2"/>
-            <path d="m6.34 17.66-1.41 1.41"/>
-            <path d="m19.07 4.93-1.41 1.41"/>
-          </svg>
-        </div>
-        <span class="brand-title">Daybloom</span>
-      </div>
-
-      <nav class="sidebar-nav" role="tablist">
-        <!-- 1. Daily -->
-        <a href="#daily" class="nav-link active" data-section="daily" role="tab" aria-selected="true" aria-controls="view-daily">
-          <span class="nav-link-icon" aria-hidden="true">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="12" cy="12" r="10"/>
-              <path d="m9 12 2 2 4-4"/>
-            </svg>
-          </span>
-          <span>Daily</span>
-        </a>
-
-        <!-- 2. Scholar -->
-        <a href="#scholar" class="nav-link" data-section="scholar" role="tab" aria-selected="false" aria-controls="view-scholar">
-          <span class="nav-link-icon" aria-hidden="true">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z"/>
-              <path d="M22 10v6"/>
-              <path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5"/>
-            </svg>
-          </span>
-          <span>Scholar</span>
-        </a>
-
-        <!-- 3. Growth -->
-        <a href="#growth" class="nav-link" data-section="growth" role="tab" aria-selected="false" aria-controls="view-growth">
-          <span class="nav-link-icon" aria-hidden="true">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-              <polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/>
-              <polyline points="16 7 22 7 22 13"/>
-            </svg>
-          </span>
-          <span>Growth</span>
-        </a>
-
-        <!-- 4. Reflect -->
-        <a href="#reflect" class="nav-link" data-section="reflect" role="tab" aria-selected="false" aria-controls="view-reflect">
-          <span class="nav-link-icon" aria-hidden="true">
-            <!-- Professional Notebook-Pen Icon -->
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M13.4 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7.4"/>
-              <path d="M2 6h4"/>
-              <path d="M2 10h4"/>
-              <path d="M2 14h4"/>
-              <path d="M2 18h4"/>
-              <path d="M18.4 2.6a2.12 2.12 0 1 1 3 3L14 13l-4 1 1-4z"/>
-            </svg>
-          </span>
-          <span>Reflect</span>
-        </a>
-      </nav>
-
-      <div class="sidebar-footer">
-        <div class="user-indicator">
-          <span class="indicator-dot" aria-hidden="true"></span>
-          <span>Browser Storage Ready</span>
-        </div>
-      </div>
-    </aside>
-
-    <!-- ---------------- Main Application Area ---------------- -->
-    <div class="main-wrapper">
-
-      <!-- Top Header Bar -->
-      <header class="app-header">
-        <!-- Mobile-only Brand Header -->
-        <div class="header-brand-mobile">
-          <div class="brand-icon-wrapper" aria-hidden="true">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8z"/>
-              <path d="M12 2v2"/>
-              <path d="M12 20v2"/>
-              <path d="m4.93 4.93 1.41 1.41"/>
-              <path d="m17.66 17.66 1.41 1.41"/>
-              <path d="M2 12h2"/>
-              <path d="M20 12h2"/>
-            </svg>
-          </div>
-          <span class="brand-title" style="font-size: var(--font-size-lg);">Daybloom</span>
-        </div>
-
-        <!-- Date & Status Badges -->
-        <div class="header-date-badge">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <rect width="18" height="18" x="3" y="4" rx="2" ry="2"/>
-            <line x1="16" x2="16" y1="2" y2="6"/>
-            <line x1="8" x2="8" y1="2" y2="6"/>
-            <line x1="3" x2="21" y1="10" y2="10"/>
-          </svg>
-          <span class="current-date-text">Today</span>
-        </div>
-
-        <div class="header-status-badge">
-          <span>Client-only</span>
-        </div>
-      </header>
-
-      <!-- Main Content Views Container -->
-      <main class="content-area" id="main-content">
-
-        <!-- ---------------- View 1: Daily ---------------- -->
-        <section class="view-panel active" id="view-daily" role="tabpanel" aria-labelledby="Daily View">
-          <header class="view-header">
-            <div class="view-header-main">
-              <div class="view-icon-badge daily">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                  <circle cx="12" cy="12" r="10"/>
-                  <path d="m9 12 2 2 4-4"/>
-                </svg>
-              </div>
-              <div>
-                <h1 class="view-title">Daily</h1>
-                <p class="view-subtitle">Personal, everyday to-do lists and task checklists.</p>
-              </div>
-            </div>
-            <span class="badge badge-daily">Active Section</span>
-          </header>
-
-          <!-- Overview Welcome Banner -->
-          <div class="welcome-banner">
-            <div class="welcome-text">
-              <h2>Welcome to Daybloom</h2>
-              <p>A minimal personal productivity workspace tailored for focused days. Browse the four pillars below or use the navigation to switch views.</p>
-            </div>
-          </div>
-
-          <!-- Quick Access Pillars -->
-          <div class="pillars-grid">
-            <button class="pillar-card" data-target="daily">
-              <div class="pillar-icon-box">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                  <circle cx="12" cy="12" r="10"/>
-                  <path d="m9 12 2 2 4-4"/>
-                </svg>
-              </div>
-              <h4>Daily <span>&rarr;</span></h4>
-              <p>Personal to-do lists and checklists.</p>
-            </button>
-
-            <button class="pillar-card" data-target="scholar">
-              <div class="pillar-icon-box">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z"/>
-                  <path d="M22 10v6"/>
-                  <path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5"/>
-                </svg>
-              </div>
-              <h4>Scholar <span>&rarr;</span></h4>
-              <p>Academic tasks, classes, and assignment tracker.</p>
-            </button>
-
-            <button class="pillar-card" data-target="growth">
-              <div class="pillar-icon-box">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                  <polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/>
-                  <polyline points="16 7 22 7 22 13"/>
-                </svg>
-              </div>
-              <h4>Growth <span>&rarr;</span></h4>
-              <p>Productivity statistics and progress metrics.</p>
-            </button>
-
-            <button class="pillar-card" data-target="reflect">
-              <div class="pillar-icon-box">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M13.4 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7.4"/>
-                  <path d="M2 6h4"/>
-                  <path d="M2 10h4"/>
-                  <path d="M2 14h4"/>
-                  <path d="M2 18h4"/>
-                  <path d="M18.4 2.6a2.12 2.12 0 1 1 3 3L14 13l-4 1 1-4z"/>
-                </svg>
-              </div>
-              <h4>Reflect <span>&rarr;</span></h4>
-              <p>Journal entries and mindful mood check-ins.</p>
-            </button>
-          </div>
-
-          <!-- Daily To-Do Lists Management Section -->
-          <section class="daily-lists-section" aria-labelledby="daily-lists-heading">
-            
-            <!-- Toolbar: Header, Counters, Filter tabs & Create List Button -->
-            <div class="lists-toolbar">
-              <div class="lists-toolbar-left">
-                <h3 class="lists-toolbar-heading" id="daily-lists-heading">To-Do Lists</h3>
-                <span class="badge badge-daily" id="daily-lists-count">0 active</span>
-              </div>
-
-              <div class="lists-toolbar-right">
-                <div class="list-filter-group" role="tablist" aria-label="Filter to-do lists">
-                  <button type="button" class="list-filter-btn active" data-filter="all">All</button>
-                  <button type="button" class="list-filter-btn" data-filter="active">Active</button>
-                  <button type="button" class="list-filter-btn" data-filter="completed">Completed</button>
-                </div>
-
-                <button type="button" class="btn btn-primary" id="btn-create-list">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                    <line x1="12" y1="5" x2="12" y2="19"/>
-                    <line x1="5" y1="12" x2="19" y2="12"/>
-                  </svg>
-                  <span>New List</span>
-                </button>
-              </div>
-            </div>
-
-            <!-- List Creation / Editing Interface Card (Hidden by default) -->
-            <div class="daily-list-editor" id="daily-list-editor" style="display: none;" role="dialog" aria-labelledby="editor-heading">
-              <div class="editor-header">
-                <h3 class="editor-title" id="editor-heading">Create To-Do List</h3>
-              </div>
-
-              <div class="editor-form-body">
-                <!-- List Title -->
-                <div class="editor-title-row">
-                  <input
-                    type="text"
-                    id="editor-list-title"
-                    class="input-text editor-title-input"
-                    placeholder="List title (e.g. Things to buy, College prep)..."
-                    aria-label="List title"
-                    required
-                  />
-                  <div class="editor-error-msg" id="editor-error-msg" role="alert"></div>
-                </div>
-
-                <!-- Optional Deadline -->
-                <div class="editor-deadline-row">
-                  <span class="deadline-label">Deadline (optional):</span>
-                  <div class="deadline-inputs">
-                    <input type="date" id="editor-list-date" class="input-date" aria-label="Due date (optional)" />
-                    <input type="time" id="editor-list-time" class="input-time" aria-label="Due time (optional)" />
-                    <button type="button" class="btn btn-sm btn-subtle" id="btn-clear-deadline">Clear deadline</button>
-                  </div>
-                </div>
-
-                <!-- Checklist Items Section -->
-                <div class="editor-checklist-section">
-                  <div class="checklist-section-header">
-                    <span class="checklist-section-title">Checklist Items</span>
-                    <span class="checklist-hint">Press Enter to add the next row</span>
-                  </div>
-
-                  <div class="checklist-editor-rows" id="editor-checklist-rows">
-                    <!-- Dynamically populated rows -->
-                  </div>
-
-                  <div>
-                    <button type="button" class="btn btn-sm btn-outline" id="btn-add-checklist-row">
-                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                        <line x1="12" y1="5" x2="12" y2="19"/>
-                        <line x1="5" y1="12" x2="19" y2="12"/>
-                      </svg>
-                      <span>Add Item</span>
-                    </button>
-                  </div>
-                </div>
-
-                <!-- Editor Action Buttons -->
-                <div class="editor-actions-row">
-                  <button type="button" class="btn btn-subtle" id="btn-cancel-list">Cancel</button>
-                  <button type="button" class="btn btn-primary" id="btn-save-list">Save List</button>
-                </div>
-              </div>
-            </div>
-
-            <!-- Saved Lists Grid/Container -->
-            <div class="daily-lists-grid" id="daily-lists-container" role="region" aria-label="To-do lists container">
-              <!-- Dynamically populated with .todo-list-card by js/daily.js -->
-            </div>
-
-          </section>
-
-        </section>
-
-        <!-- ---------------- View 2: Scholar ---------------- -->
-        <section class="view-panel" id="view-scholar" role="tabpanel" aria-labelledby="Scholar View">
-          <header class="view-header">
-            <div class="view-header-main">
-              <div class="view-icon-badge scholar">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z"/>
-                  <path d="M22 10v6"/>
-                  <path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5"/>
-                </svg>
-              </div>
-              <div>
-                <h1 class="view-title">Scholar</h1>
-                <p class="view-subtitle">Academic tasks, event calendar and deadlines.</p>
-              </div>
-            </div>
-            <span class="badge badge-scholar">Academic Hub</span>
-          </header>
-
-          <!-- Scholar Dual-Pane Workspace -->
-          <div class="scholar-workspace">
-            
-            <!-- Left Pane: Monthly Calendar Grid -->
-            <div class="scholar-calendar-pane">
-              <div class="calendar-nav-bar">
-                <div class="calendar-nav-left">
-                  <h3 class="calendar-month-title" id="scholar-month-title">October 2026</h3>
-                  <div class="calendar-nav-controls">
-                    <button type="button" class="btn-calendar-nav" id="scholar-prev-month" title="Previous Month" aria-label="Previous Month">
-                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                        <polyline points="15 18 9 12 15 6"/>
-                      </svg>
-                    </button>
-                    <button type="button" class="btn-calendar-nav" id="scholar-next-month" title="Next Month" aria-label="Next Month">
-                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                        <polyline points="9 18 15 12 9 6"/>
-                      </svg>
-                    </button>
-                  </div>
-                </div>
-
-                <button type="button" class="btn btn-sm btn-subtle" id="scholar-today-btn">Today</button>
-              </div>
-
-              <!-- Six Required Category Filters -->
-              <div class="scholar-category-filters" id="scholar-category-filters" role="tablist" aria-label="Filter calendar by academic category">
-                <button type="button" class="cat-filter-btn active" data-category="all">All</button>
-                <button type="button" class="cat-filter-btn" data-category="Exams">
-                  <span class="cat-dot cat-exams"></span>
-                  <span>Exams</span>
-                </button>
-                <button type="button" class="cat-filter-btn" data-category="Tests">
-                  <span class="cat-dot cat-tests"></span>
-                  <span>Tests</span>
-                </button>
-                <button type="button" class="cat-filter-btn" data-category="Records">
-                  <span class="cat-dot cat-records"></span>
-                  <span>Records</span>
-                </button>
-                <button type="button" class="cat-filter-btn" data-category="Assignments">
-                  <span class="cat-dot cat-assignments"></span>
-                  <span>Assignments</span>
-                </button>
-                <button type="button" class="cat-filter-btn" data-category="Skill Building">
-                  <span class="cat-dot cat-skill-building"></span>
-                  <span>Skill Building</span>
-                </button>
-                <button type="button" class="cat-filter-btn" data-category="Projects">
-                  <span class="cat-dot cat-projects"></span>
-                  <span>Projects</span>
-                </button>
-              </div>
-
-              <!-- 7-Column Calendar Grid (Sunday - Saturday order) -->
-              <div id="scholar-calendar-grid">
-                <!-- Dynamically populated by js/scholar.js -->
-              </div>
-            </div>
-
-            <!-- Right Pane: Selected Date Agenda & Task Management -->
-            <div class="scholar-agenda-pane">
-              <div class="agenda-header">
-                <div class="agenda-header-info">
-                  <h4 class="agenda-date-title" id="scholar-selected-date-title">Selected Date</h4>
-                  <span class="badge badge-scholar" id="scholar-date-count-badge">0 tasks</span>
-                </div>
-                <button type="button" class="btn btn-sm btn-primary" id="btn-add-scholar-task">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                    <line x1="12" y1="5" x2="12" y2="19"/>
-                    <line x1="5" y1="12" x2="19" y2="12"/>
-                  </svg>
-                  <span>Add Task</span>
-                </button>
-              </div>
-
-              <!-- Task Creation / Edit Form Card (Hidden by default) -->
-              <div class="scholar-task-editor" id="scholar-task-editor" style="display: none;" role="dialog" aria-labelledby="scholar-editor-heading">
-                <div class="scholar-editor-header">
-                  <h4 class="scholar-editor-title" id="scholar-editor-heading">Add Academic Task</h4>
-                </div>
-
-                <div class="scholar-editor-grid">
-                  <input
-                    type="text"
-                    id="scholar-input-title"
-                    class="input-text"
-                    placeholder="Task title (e.g. Midterm Examination, Lab Report)..."
-                    aria-label="Academic task title"
-                    required
-                  />
-
-                  <!-- Category & Date Type Selection -->
-                  <div class="editor-field-row">
-                    <div style="flex: 1; min-width: 140px;">
-                      <label for="scholar-select-category" class="form-field-label" style="display:block; margin-bottom:4px;">Category:</label>
-                      <select id="scholar-select-category" class="select-category" style="width: 100%;">
-                        <option value="Exams">Exams</option>
-                        <option value="Tests">Tests</option>
-                        <option value="Records">Records</option>
-                        <option value="Assignments">Assignments</option>
-                        <option value="Skill Building">Skill Building</option>
-                        <option value="Projects">Projects</option>
-                      </select>
-                    </div>
-
-                    <div style="flex: 1; min-width: 160px;">
-                      <span class="form-field-label" style="display:block; margin-bottom:4px;">Date Type:</span>
-                      <div class="editor-radio-group">
-                        <label class="editor-radio-label">
-                          <input type="radio" name="scholar-date-type" id="scholar-type-event" value="event" checked />
-                          <span>Event</span>
-                        </label>
-                        <label class="editor-radio-label">
-                          <input type="radio" name="scholar-date-type" id="scholar-type-deadline" value="deadline" />
-                          <span>Deadline</span>
-                        </label>
-                      </div>
-                    </div>
-                  </div>
-
-                  <!-- Course / Subject Code -->
-                  <div class="editor-field-row">
-                    <input
-                      type="text"
-                      id="scholar-input-course"
-                      class="input-text"
-                      placeholder="Course/Subject (e.g. CS201, Math)..."
-                      aria-label="Course code"
-                      style="width: 100%;"
-                    />
-                  </div>
-
-                  <!-- Due Date & Time -->
-                  <div class="editor-field-row">
-                    <div style="flex: 1;">
-                      <label for="scholar-input-date" class="form-field-label" style="display:block; margin-bottom:4px;">Date:</label>
-                      <input type="date" id="scholar-input-date" class="input-date" style="width: 100%;" required />
-                    </div>
-                    <div style="flex: 1;">
-                      <label for="scholar-input-time" class="form-field-label" style="display:block; margin-bottom:4px;">Time (optional):</label>
-                      <input type="time" id="scholar-input-time" class="input-time" style="width: 100%;" />
-                    </div>
-                  </div>
-
-                  <!-- Notes -->
-                  <textarea
-                    id="scholar-input-notes"
-                    class="scholar-textarea"
-                    placeholder="Notes, syllabus chapters, or submission instructions (optional)..."
-                    aria-label="Task notes"
-                  ></textarea>
-
-                  <div class="editor-error-msg" id="scholar-editor-error" role="alert"></div>
-
-                  <div class="editor-actions-row">
-                    <button type="button" class="btn btn-sm btn-subtle" id="scholar-btn-cancel">Cancel</button>
-                    <button type="button" class="btn btn-sm btn-primary" id="scholar-btn-save">Save Task</button>
-                  </div>
-                </div>
-              </div>
-
-              <!-- List of Academic Tasks for Selected Date -->
-              <div class="scholar-agenda-tasks" id="scholar-agenda-tasks" role="region" aria-label="Selected date academic tasks">
-                <!-- Dynamically populated by js/scholar.js -->
-              </div>
-            </div>
-
-          </div>
-        </section>
-
-        <!-- ---------------- View 3: Growth ---------------- -->
-        <section class="view-panel" id="view-growth" role="tabpanel" aria-labelledby="Growth View">
-          <header class="view-header">
-            <div class="view-header-main">
-              <div class="view-icon-badge growth">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                  <polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/>
-                  <polyline points="16 7 22 7 22 13"/>
-                </svg>
-              </div>
-              <div>
-                <h1 class="view-title">Growth</h1>
-                <p class="view-subtitle">Productivity statistics and progress.</p>
-              </div>
-            </div>
-            <span class="badge badge-growth">Insights</span>
-          </header>
-
-          <div class="placeholder-grid">
-            <div class="placeholder-box">
-              <div class="placeholder-box-header">
-                <span class="placeholder-box-title">Task Completion Trends</span>
-                <span class="badge badge-growth">Upcoming Phase</span>
-              </div>
-              <p class="card-description">Clean visual overview of your weekly and monthly productivity consistency.</p>
-              <ul class="placeholder-list">
-                <li class="placeholder-item">
-                  <span class="placeholder-item-bullet"></span>
-                  <span>Weekly task completion ratios</span>
-                </li>
-                <li class="placeholder-item">
-                  <span class="placeholder-item-bullet"></span>
-                  <span>Focus consistency streaks</span>
-                </li>
-              </ul>
-            </div>
-
-            <div class="placeholder-box">
-              <div class="placeholder-box-header">
-                <span class="placeholder-box-title">Personal Momentum</span>
-                <span class="badge badge-growth">Upcoming Phase</span>
-              </div>
-              <p class="card-description">Understated metrics tracking habit adherence without stress or gamified clutter.</p>
-              <ul class="placeholder-list">
-                <li class="placeholder-item">
-                  <span class="placeholder-item-bullet"></span>
-                  <span>Habit check-in consistency</span>
-                </li>
-                <li class="placeholder-item">
-                  <span class="placeholder-item-bullet"></span>
-                  <span>Subject-by-subject study distribution</span>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </section>
-
-        <!-- ---------------- View 4: Reflect ---------------- -->
-        <section class="view-panel" id="view-reflect" role="tabpanel" aria-labelledby="Reflect View">
-          <header class="view-header">
-            <div class="view-header-main">
-              <div class="view-icon-badge reflect">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M13.4 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7.4"/>
-                  <path d="M2 6h4"/>
-                  <path d="M2 10h4"/>
-                  <path d="M2 14h4"/>
-                  <path d="M2 18h4"/>
-                  <path d="M18.4 2.6a2.12 2.12 0 1 1 3 3L14 13l-4 1 1-4z"/>
-                </svg>
-              </div>
-              <div>
-                <h1 class="view-title">Reflect</h1>
-                <p class="view-subtitle">Journal entries and mood tracking.</p>
-              </div>
-            </div>
-            <span class="badge badge-reflect">Mindfulness</span>
-          </header>
-
-          <div class="placeholder-grid">
-            <div class="placeholder-box">
-              <div class="placeholder-box-header">
-                <span class="placeholder-box-title">Daily Journal</span>
-                <span class="badge badge-reflect">Upcoming Phase</span>
-              </div>
-              <p class="card-description">A calm, private writing space for daily thoughts, reflections, and learnings.</p>
-              <ul class="placeholder-list">
-                <li class="placeholder-item">
-                  <span class="placeholder-item-bullet"></span>
-                  <span>Quick-prompt journaling or freeform writing</span>
-                </li>
-                <li class="placeholder-item">
-                  <span class="placeholder-item-bullet"></span>
-                  <span>Local client-side encrypted or stored entries</span>
-                </li>
-              </ul>
-            </div>
-
-            <div class="placeholder-box">
-              <div class="placeholder-box-header">
-                <span class="placeholder-box-title">Mood & Energy Log</span>
-                <span class="badge badge-reflect">Upcoming Phase</span>
-              </div>
-              <p class="card-description">Mindful check-in to observe mood trends and energy patterns throughout the week.</p>
-              <ul class="placeholder-list">
-                <li class="placeholder-item">
-                  <span class="placeholder-item-bullet"></span>
-                  <span>Minimalist mood scale (Calm, Focused, Tired, Energized)</span>
-                </li>
-                <li class="placeholder-item">
-                  <span class="placeholder-item-bullet"></span>
-                  <span>Daily reflection notes</span>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </section>
-
-      </main>
-    </div>
-
-    <!-- ---------------- Mobile Bottom Navigation Bar ---------------- -->
-    <nav class="mobile-nav" aria-label="Mobile Navigation" role="tablist">
-      <a href="#daily" class="mobile-nav-item active" data-section="daily" role="tab" aria-selected="true" aria-controls="view-daily">
-        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-          <circle cx="12" cy="12" r="10"/>
-          <path d="m9 12 2 2 4-4"/>
-        </svg>
-        <span>Daily</span>
-      </a>
-
-      <a href="#scholar" class="mobile-nav-item" data-section="scholar" role="tab" aria-selected="false" aria-controls="view-scholar">
-        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z"/>
-          <path d="M22 10v6"/>
-          <path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5"/>
-        </svg>
-        <span>Scholar</span>
-      </a>
-
-      <a href="#growth" class="mobile-nav-item" data-section="growth" role="tab" aria-selected="false" aria-controls="view-growth">
-        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-          <polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/>
-          <polyline points="16 7 22 7 22 13"/>
-        </svg>
-        <span>Growth</span>
-      </a>
-
-      <a href="#reflect" class="mobile-nav-item" data-section="reflect" role="tab" aria-selected="false" aria-controls="view-reflect">
-        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M13.4 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7.4"/>
-          <path d="M2 6h4"/>
-          <path d="M2 10h4"/>
-          <path d="M2 14h4"/>
-          <path d="M2 18h4"/>
-          <path d="M18.4 2.6a2.12 2.12 0 1 1 3 3L14 13l-4 1 1-4z"/>
-        </svg>
-        <span>Reflect</span>
-      </a>
-    </nav>
-
-  </div>
-
-  <!-- JavaScript Modules -->
-  <script src="js/navigation.js"></script>
-  <script src="js/daily.js"></script>
-  <script src="js/scholar.js"></script>
-  <script src="js/app.js"></script>
-</body>
-</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Daybloom</title>
+
+  <!-- Daybloom Modular Design System -->
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+</head>
+<body>
+
+  <div class="app-shell">
+
+    <!-- ---------------- Desktop Sidebar Navigation ---------------- -->
+    <aside class="sidebar" aria-label="Main Navigation">
+      <div class="sidebar-header">
+        <div class="brand-icon-wrapper" aria-hidden="true">
+          <!-- Daybloom Minimalist Bloom Mark -->
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8z"/>
+            <path d="M12 2v2"/>
+            <path d="M12 20v2"/>
+            <path d="m4.93 4.93 1.41 1.41"/>
+            <path d="m17.66 17.66 1.41 1.41"/>
+            <path d="M2 12h2"/>
+            <path d="M20 12h2"/>
+            <path d="m6.34 17.66-1.41 1.41"/>
+            <path d="m19.07 4.93-1.41 1.41"/>
+          </svg>
+        </div>
+        <span class="brand-title">Daybloom</span>
+      </div>
+
+      <nav class="sidebar-nav" role="tablist">
+        <!-- 1. Daily -->
+        <a href="#daily" class="nav-link active" data-section="daily" role="tab" aria-selected="true" aria-controls="view-daily">
+          <span class="nav-link-icon" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"/>
+              <path d="m9 12 2 2 4-4"/>
+            </svg>
+          </span>
+          <span>Daily</span>
+        </a>
+
+        <!-- 2. Scholar -->
+        <a href="#scholar" class="nav-link" data-section="scholar" role="tab" aria-selected="false" aria-controls="view-scholar">
+          <span class="nav-link-icon" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z"/>
+              <path d="M22 10v6"/>
+              <path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5"/>
+            </svg>
+          </span>
+          <span>Scholar</span>
+        </a>
+
+        <!-- 3. Growth -->
+        <a href="#growth" class="nav-link" data-section="growth" role="tab" aria-selected="false" aria-controls="view-growth">
+          <span class="nav-link-icon" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/>
+              <polyline points="16 7 22 7 22 13"/>
+            </svg>
+          </span>
+          <span>Growth</span>
+        </a>
+
+        <!-- 4. Reflect -->
+        <a href="#reflect" class="nav-link" data-section="reflect" role="tab" aria-selected="false" aria-controls="view-reflect">
+          <span class="nav-link-icon" aria-hidden="true">
+            <!-- Professional Notebook-Pen Icon -->
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M13.4 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7.4"/>
+              <path d="M2 6h4"/>
+              <path d="M2 10h4"/>
+              <path d="M2 14h4"/>
+              <path d="M2 18h4"/>
+              <path d="M18.4 2.6a2.12 2.12 0 1 1 3 3L14 13l-4 1 1-4z"/>
+            </svg>
+          </span>
+          <span>Reflect</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="user-indicator">
+          <span class="indicator-dot" aria-hidden="true"></span>
+          <span>Browser Storage Ready</span>
+        </div>
+      </div>
+    </aside>
+
+    <!-- ---------------- Main Application Area ---------------- -->
+    <div class="main-wrapper">
+
+      <!-- Top Header Bar -->
+      <header class="app-header">
+        <!-- Mobile-only Brand Header -->
+        <div class="header-brand-mobile">
+          <div class="brand-icon-wrapper" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8z"/>
+              <path d="M12 2v2"/>
+              <path d="M12 20v2"/>
+              <path d="m4.93 4.93 1.41 1.41"/>
+              <path d="m17.66 17.66 1.41 1.41"/>
+              <path d="M2 12h2"/>
+              <path d="M20 12h2"/>
+            </svg>
+          </div>
+          <span class="brand-title" style="font-size: var(--font-size-lg);">Daybloom</span>
+        </div>
+
+        <!-- Date & Status Badges -->
+        <div class="header-date-badge">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect width="18" height="18" x="3" y="4" rx="2" ry="2"/>
+            <line x1="16" x2="16" y1="2" y2="6"/>
+            <line x1="8" x2="8" y1="2" y2="6"/>
+            <line x1="3" x2="21" y1="10" y2="10"/>
+          </svg>
+          <span class="current-date-text">Today</span>
+        </div>
+
+        <div class="header-status-badge">
+          <span>Client-only</span>
+        </div>
+      </header>
+
+      <!-- Main Content Views Container -->
+      <main class="content-area" id="main-content">
+
+        <!-- ---------------- View 1: Daily ---------------- -->
+        <section class="view-panel active" id="view-daily" role="tabpanel" aria-labelledby="Daily View">
+          <header class="view-header">
+            <div class="view-header-main">
+              <div class="view-icon-badge daily">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10"/>
+                  <path d="m9 12 2 2 4-4"/>
+                </svg>
+              </div>
+              <div>
+                <h1 class="view-title">Daily</h1>
+                <p class="view-subtitle">Personal, everyday to-do lists and task checklists.</p>
+              </div>
+            </div>
+            <span class="badge badge-daily">Active Section</span>
+          </header>
+
+          <!-- Overview Welcome Banner -->
+          <div class="welcome-banner">
+            <div class="welcome-text">
+              <h2>Welcome to Daybloom</h2>
+              <p>A minimal personal productivity workspace tailored for focused days. Browse the four pillars below or use the navigation to switch views.</p>
+            </div>
+          </div>
+
+          <!-- Quick Access Pillars -->
+          <div class="pillars-grid">
+            <button class="pillar-card" data-target="daily">
+              <div class="pillar-icon-box">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10"/>
+                  <path d="m9 12 2 2 4-4"/>
+                </svg>
+              </div>
+              <h4>Daily <span>&rarr;</span></h4>
+              <p>Personal to-do lists and checklists.</p>
+            </button>
+
+            <button class="pillar-card" data-target="scholar">
+              <div class="pillar-icon-box">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z"/>
+                  <path d="M22 10v6"/>
+                  <path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5"/>
+                </svg>
+              </div>
+              <h4>Scholar <span>&rarr;</span></h4>
+              <p>Academic tasks, classes, and assignment tracker.</p>
+            </button>
+
+            <button class="pillar-card" data-target="growth">
+              <div class="pillar-icon-box">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/>
+                  <polyline points="16 7 22 7 22 13"/>
+                </svg>
+              </div>
+              <h4>Growth <span>&rarr;</span></h4>
+              <p>Productivity statistics and progress metrics.</p>
+            </button>
+
+            <button class="pillar-card" data-target="reflect">
+              <div class="pillar-icon-box">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M13.4 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7.4"/>
+                  <path d="M2 6h4"/>
+                  <path d="M2 10h4"/>
+                  <path d="M2 14h4"/>
+                  <path d="M2 18h4"/>
+                  <path d="M18.4 2.6a2.12 2.12 0 1 1 3 3L14 13l-4 1 1-4z"/>
+                </svg>
+              </div>
+              <h4>Reflect <span>&rarr;</span></h4>
+              <p>Journal entries and mindful mood check-ins.</p>
+            </button>
+          </div>
+
+          <!-- Daily To-Do Lists Management Section -->
+          <section class="daily-lists-section" aria-labelledby="daily-lists-heading">
+            
+            <!-- Toolbar: Header, Counters, Filter tabs & Create List Button -->
+            <div class="lists-toolbar">
+              <div class="lists-toolbar-left">
+                <h3 class="lists-toolbar-heading" id="daily-lists-heading">To-Do Lists</h3>
+                <span class="badge badge-daily" id="daily-lists-count">0 active</span>
+              </div>
+
+              <div class="lists-toolbar-right">
+                <div class="list-filter-group" role="tablist" aria-label="Filter to-do lists">
+                  <button type="button" class="list-filter-btn active" data-filter="all">All</button>
+                  <button type="button" class="list-filter-btn" data-filter="active">Active</button>
+                  <button type="button" class="list-filter-btn" data-filter="completed">Completed</button>
+                </div>
+
+                <button type="button" class="btn btn-primary" id="btn-create-list">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="12" y1="5" x2="12" y2="19"/>
+                    <line x1="5" y1="12" x2="19" y2="12"/>
+                  </svg>
+                  <span>New List</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- List Creation / Editing Interface Card (Hidden by default) -->
+            <div class="daily-list-editor" id="daily-list-editor" style="display: none;" role="dialog" aria-labelledby="editor-heading">
+              <div class="editor-header">
+                <h3 class="editor-title" id="editor-heading">Create To-Do List</h3>
+              </div>
+
+              <div class="editor-form-body">
+                <!-- List Title -->
+                <div class="editor-title-row">
+                  <input
+                    type="text"
+                    id="editor-list-title"
+                    class="input-text editor-title-input"
+                    placeholder="List title (e.g. Things to buy, College prep)..."
+                    aria-label="List title"
+                    required
+                  />
+                  <div class="editor-error-msg" id="editor-error-msg" role="alert"></div>
+                </div>
+
+                <!-- Optional Deadline -->
+                <div class="editor-deadline-row">
+                  <span class="deadline-label">Deadline (optional):</span>
+                  <div class="deadline-inputs">
+                    <input type="date" id="editor-list-date" class="input-date" aria-label="Due date (optional)" />
+                    <input type="time" id="editor-list-time" class="input-time" aria-label="Due time (optional)" />
+                    <button type="button" class="btn btn-sm btn-subtle" id="btn-clear-deadline">Clear deadline</button>
+                  </div>
+                </div>
+
+                <!-- Checklist Items Section -->
+                <div class="editor-checklist-section">
+                  <div class="checklist-section-header">
+                    <span class="checklist-section-title">Checklist Items</span>
+                    <span class="checklist-hint">Press Enter to add the next row</span>
+                  </div>
+
+                  <div class="checklist-editor-rows" id="editor-checklist-rows">
+                    <!-- Dynamically populated rows -->
+                  </div>
+
+                  <div>
+                    <button type="button" class="btn btn-sm btn-outline" id="btn-add-checklist-row">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="12" y1="5" x2="12" y2="19"/>
+                        <line x1="5" y1="12" x2="19" y2="12"/>
+                      </svg>
+                      <span>Add Item</span>
+                    </button>
+                  </div>
+                </div>
+
+                <!-- Editor Action Buttons -->
+                <div class="editor-actions-row">
+                  <button type="button" class="btn btn-subtle" id="btn-cancel-list">Cancel</button>
+                  <button type="button" class="btn btn-primary" id="btn-save-list">Save List</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Saved Lists Grid/Container -->
+            <div class="daily-lists-grid" id="daily-lists-container" role="region" aria-label="To-do lists container">
+              <!-- Dynamically populated with .todo-list-card by js/daily.js -->
+            </div>
+
+          </section>
+
+        </section>
+
+        <!-- ---------------- View 2: Scholar ---------------- -->
+        <section class="view-panel" id="view-scholar" role="tabpanel" aria-labelledby="Scholar View">
+          <header class="view-header">
+            <div class="view-header-main">
+              <div class="view-icon-badge scholar">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z"/>
+                  <path d="M22 10v6"/>
+                  <path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5"/>
+                </svg>
+              </div>
+              <div>
+                <h1 class="view-title">Scholar</h1>
+                <p class="view-subtitle">Academic tasks, event calendar and deadlines.</p>
+              </div>
+            </div>
+            <span class="badge badge-scholar">Academic Hub</span>
+          </header>
+
+          <!-- Scholar Dual-Pane Workspace -->
+          <div class="scholar-workspace">
+            
+            <!-- Left Pane: Monthly Calendar Grid -->
+            <div class="scholar-calendar-pane">
+              <div class="calendar-nav-bar">
+                <div class="calendar-nav-left">
+                  <h3 class="calendar-month-title" id="scholar-month-title">October 2026</h3>
+                  <div class="calendar-nav-controls">
+                    <button type="button" class="btn-calendar-nav" id="scholar-prev-month" title="Previous Month" aria-label="Previous Month">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="15 18 9 12 15 6"/>
+                      </svg>
+                    </button>
+                    <button type="button" class="btn-calendar-nav" id="scholar-next-month" title="Next Month" aria-label="Next Month">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="9 18 15 12 9 6"/>
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+
+                <button type="button" class="btn btn-sm btn-subtle" id="scholar-today-btn">Today</button>
+              </div>
+
+              <!-- Six Required Category Filters -->
+              <div class="scholar-category-filters" id="scholar-category-filters" role="tablist" aria-label="Filter calendar by academic category">
+                <button type="button" class="cat-filter-btn active" data-category="all">All</button>
+                <button type="button" class="cat-filter-btn" data-category="Exams">
+                  <span class="cat-dot cat-exams"></span>
+                  <span>Exams</span>
+                </button>
+                <button type="button" class="cat-filter-btn" data-category="Tests">
+                  <span class="cat-dot cat-tests"></span>
+                  <span>Tests</span>
+                </button>
+                <button type="button" class="cat-filter-btn" data-category="Records">
+                  <span class="cat-dot cat-records"></span>
+                  <span>Records</span>
+                </button>
+                <button type="button" class="cat-filter-btn" data-category="Assignments">
+                  <span class="cat-dot cat-assignments"></span>
+                  <span>Assignments</span>
+                </button>
+                <button type="button" class="cat-filter-btn" data-category="Skill Building">
+                  <span class="cat-dot cat-skill-building"></span>
+                  <span>Skill Building</span>
+                </button>
+                <button type="button" class="cat-filter-btn" data-category="Projects">
+                  <span class="cat-dot cat-projects"></span>
+                  <span>Projects</span>
+                </button>
+              </div>
+
+              <!-- 7-Column Calendar Grid (Sunday - Saturday order) -->
+              <div id="scholar-calendar-grid">
+                <!-- Dynamically populated by js/scholar.js -->
+              </div>
+            </div>
+
+            <!-- Right Pane: Selected Date Agenda & Task Management -->
+            <div class="scholar-agenda-pane">
+              <div class="agenda-header">
+                <div class="agenda-header-info">
+                  <h4 class="agenda-date-title" id="scholar-selected-date-title">Selected Date</h4>
+                  <span class="badge badge-scholar" id="scholar-date-count-badge">0 tasks</span>
+                </div>
+                <button type="button" class="btn btn-sm btn-primary" id="btn-add-scholar-task">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="12" y1="5" x2="12" y2="19"/>
+                    <line x1="5" y1="12" x2="19" y2="12"/>
+                  </svg>
+                  <span>Add Task</span>
+                </button>
+              </div>
+
+              <!-- Task Creation / Edit Form Card (Hidden by default) -->
+              <div class="scholar-task-editor" id="scholar-task-editor" style="display: none;" role="dialog" aria-labelledby="scholar-editor-heading">
+                <div class="scholar-editor-header">
+                  <h4 class="scholar-editor-title" id="scholar-editor-heading">Add Academic Task</h4>
+                </div>
+
+                <div class="scholar-editor-grid">
+                  <input
+                    type="text"
+                    id="scholar-input-title"
+                    class="input-text"
+                    placeholder="Task title (e.g. Midterm Examination, Lab Report)..."
+                    aria-label="Academic task title"
+                    required
+                  />
+
+                  <!-- Category & Date Type Selection -->
+                  <div class="editor-field-row">
+                    <div style="flex: 1; min-width: 140px;">
+                      <label for="scholar-select-category" class="form-field-label" style="display:block; margin-bottom:4px;">Category:</label>
+                      <select id="scholar-select-category" class="select-category" style="width: 100%;">
+                        <option value="Exams">Exams</option>
+                        <option value="Tests">Tests</option>
+                        <option value="Records">Records</option>
+                        <option value="Assignments">Assignments</option>
+                        <option value="Skill Building">Skill Building</option>
+                        <option value="Projects">Projects</option>
+                      </select>
+                    </div>
+
+                    <div style="flex: 1; min-width: 160px;">
+                      <span class="form-field-label" style="display:block; margin-bottom:4px;">Date Type:</span>
+                      <div class="editor-radio-group">
+                        <label class="editor-radio-label">
+                          <input type="radio" name="scholar-date-type" id="scholar-type-event" value="event" checked />
+                          <span>Event</span>
+                        </label>
+                        <label class="editor-radio-label">
+                          <input type="radio" name="scholar-date-type" id="scholar-type-deadline" value="deadline" />
+                          <span>Deadline</span>
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Course / Subject Code -->
+                  <div class="editor-field-row">
+                    <input
+                      type="text"
+                      id="scholar-input-course"
+                      class="input-text"
+                      placeholder="Course/Subject (e.g. CS201, Math)..."
+                      aria-label="Course code"
+                      style="width: 100%;"
+                    />
+                  </div>
+
+                  <!-- Due Date & Time -->
+                  <div class="editor-field-row">
+                    <div style="flex: 1;">
+                      <label for="scholar-input-date" class="form-field-label" style="display:block; margin-bottom:4px;">Date:</label>
+                      <input type="date" id="scholar-input-date" class="input-date" style="width: 100%;" required />
+                    </div>
+                    <div style="flex: 1;">
+                      <label for="scholar-input-time" class="form-field-label" style="display:block; margin-bottom:4px;">Time (optional):</label>
+                      <input type="time" id="scholar-input-time" class="input-time" style="width: 100%;" />
+                    </div>
+                  </div>
+
+                  <!-- Notes -->
+                  <textarea
+                    id="scholar-input-notes"
+                    class="scholar-textarea"
+                    placeholder="Notes, syllabus chapters, or submission instructions (optional)..."
+                    aria-label="Task notes"
+                  ></textarea>
+
+                  <div class="editor-error-msg" id="scholar-editor-error" role="alert"></div>
+
+                  <div class="editor-actions-row">
+                    <button type="button" class="btn btn-sm btn-subtle" id="scholar-btn-cancel">Cancel</button>
+                    <button type="button" class="btn btn-sm btn-primary" id="scholar-btn-save">Save Task</button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- List of Academic Tasks for Selected Date -->
+              <div class="scholar-agenda-tasks" id="scholar-agenda-tasks" role="region" aria-label="Selected date academic tasks">
+                <!-- Dynamically populated by js/scholar.js -->
+              </div>
+            </div>
+
+          </div>
+
+          <!-- ---------------- All Academic Tasks Section ---------------- -->
+          <section class="scholar-all-tasks-section" aria-labelledby="scholar-all-tasks-heading">
+            <div class="all-tasks-toolbar">
+              <div class="all-tasks-toolbar-left">
+                <div class="all-tasks-title-wrap">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/>
+                    <rect x="8" y="2" width="8" height="4" rx="1" ry="1"/>
+                    <path d="m9 14 2 2 4-4"/>
+                  </svg>
+                  <h3 class="all-tasks-heading" id="scholar-all-tasks-heading">All Academic Tasks</h3>
+                </div>
+                <span class="badge badge-scholar" id="scholar-all-count-badge">0 tasks</span>
+              </div>
+
+              <div class="all-tasks-toolbar-right">
+                <!-- Status Filter Tabs: All, Upcoming, Completed, Overdue -->
+                <div class="scholar-status-filter-group" role="tablist" aria-label="Filter academic tasks by status">
+                  <button type="button" class="scholar-status-btn active" data-status="all" role="tab" aria-selected="true">
+                    <span>All</span>
+                    <span class="status-count" id="count-status-all">0</span>
+                  </button>
+                  <button type="button" class="scholar-status-btn" data-status="upcoming" role="tab" aria-selected="false">
+                    <span>Upcoming</span>
+                    <span class="status-count" id="count-status-upcoming">0</span>
+                  </button>
+                  <button type="button" class="scholar-status-btn" data-status="completed" role="tab" aria-selected="false">
+                    <span>Completed</span>
+                    <span class="status-count" id="count-status-completed">0</span>
+                  </button>
+                  <button type="button" class="scholar-status-btn" data-status="overdue" role="tab" aria-selected="false">
+                    <span>Overdue</span>
+                    <span class="status-count" id="count-status-overdue">0</span>
+                  </button>
+                </div>
+
+                <!-- Category Filter Dropdown (Synchronized with category filter) -->
+                <div class="all-tasks-category-filter">
+                  <label for="scholar-all-cat-select" class="sr-only">Filter by category</label>
+                  <select id="scholar-all-cat-select" class="select-category-filter" aria-label="Filter academic tasks by category">
+                    <option value="all">All Categories</option>
+                    <option value="Exams">Exams</option>
+                    <option value="Tests">Tests</option>
+                    <option value="Records">Records</option>
+                    <option value="Assignments">Assignments</option>
+                    <option value="Skill Building">Skill Building</option>
+                    <option value="Projects">Projects</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <!-- Active Category Hint & Clear Pill -->
+            <div class="all-tasks-filter-chip-row" id="scholar-active-filter-chip-row" style="display: none;">
+              <span class="filter-chip-label">Category filter:</span>
+              <button type="button" class="filter-chip" id="scholar-clear-category-filter" title="Clear category filter">
+                <span id="scholar-filter-chip-text">Exams</span>
+                <span class="chip-close" aria-hidden="true">&times;</span>
+              </button>
+            </div>
+
+            <!-- All Academic Tasks List Container -->
+            <div class="scholar-all-tasks-list" id="scholar-all-tasks-list" role="region" aria-label="All academic tasks list">
+              <!-- Populated dynamically by js/scholar.js -->
+            </div>
+          </section>
+        </section>
+
+        <!-- ---------------- View 3: Growth ---------------- -->
+        <section class="view-panel" id="view-growth" role="tabpanel" aria-labelledby="Growth View">
+          <header class="view-header">
+            <div class="view-header-main">
+              <div class="view-icon-badge growth">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/>
+                  <polyline points="16 7 22 7 22 13"/>
+                </svg>
+              </div>
+              <div>
+                <h1 class="view-title">Growth</h1>
+                <p class="view-subtitle">Productivity statistics and progress.</p>
+              </div>
+            </div>
+            <span class="badge badge-growth">Insights</span>
+          </header>
+
+          <div class="placeholder-grid">
+            <div class="placeholder-box">
+              <div class="placeholder-box-header">
+                <span class="placeholder-box-title">Task Completion Trends</span>
+                <span class="badge badge-growth">Upcoming Phase</span>
+              </div>
+              <p class="card-description">Clean visual overview of your weekly and monthly productivity consistency.</p>
+              <ul class="placeholder-list">
+                <li class="placeholder-item">
+                  <span class="placeholder-item-bullet"></span>
+                  <span>Weekly task completion ratios</span>
+                </li>
+                <li class="placeholder-item">
+                  <span class="placeholder-item-bullet"></span>
+                  <span>Focus consistency streaks</span>
+                </li>
+              </ul>
+            </div>
+
+            <div class="placeholder-box">
+              <div class="placeholder-box-header">
+                <span class="placeholder-box-title">Personal Momentum</span>
+                <span class="badge badge-growth">Upcoming Phase</span>
+              </div>
+              <p class="card-description">Understated metrics tracking habit adherence without stress or gamified clutter.</p>
+              <ul class="placeholder-list">
+                <li class="placeholder-item">
+                  <span class="placeholder-item-bullet"></span>
+                  <span>Habit check-in consistency</span>
+                </li>
+                <li class="placeholder-item">
+                  <span class="placeholder-item-bullet"></span>
+                  <span>Subject-by-subject study distribution</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <!-- ---------------- View 4: Reflect ---------------- -->
+        <section class="view-panel" id="view-reflect" role="tabpanel" aria-labelledby="Reflect View">
+          <header class="view-header">
+            <div class="view-header-main">
+              <div class="view-icon-badge reflect">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M13.4 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7.4"/>
+                  <path d="M2 6h4"/>
+                  <path d="M2 10h4"/>
+                  <path d="M2 14h4"/>
+                  <path d="M2 18h4"/>
+                  <path d="M18.4 2.6a2.12 2.12 0 1 1 3 3L14 13l-4 1 1-4z"/>
+                </svg>
+              </div>
+              <div>
+                <h1 class="view-title">Reflect</h1>
+                <p class="view-subtitle">Journal entries and mood tracking.</p>
+              </div>
+            </div>
+            <span class="badge badge-reflect">Mindfulness</span>
+          </header>
+
+          <div class="placeholder-grid">
+            <div class="placeholder-box">
+              <div class="placeholder-box-header">
+                <span class="placeholder-box-title">Daily Journal</span>
+                <span class="badge badge-reflect">Upcoming Phase</span>
+              </div>
+              <p class="card-description">A calm, private writing space for daily thoughts, reflections, and learnings.</p>
+              <ul class="placeholder-list">
+                <li class="placeholder-item">
+                  <span class="placeholder-item-bullet"></span>
+                  <span>Quick-prompt journaling or freeform writing</span>
+                </li>
+                <li class="placeholder-item">
+                  <span class="placeholder-item-bullet"></span>
+                  <span>Local client-side encrypted or stored entries</span>
+                </li>
+              </ul>
+            </div>
+
+            <div class="placeholder-box">
+              <div class="placeholder-box-header">
+                <span class="placeholder-box-title">Mood & Energy Log</span>
+                <span class="badge badge-reflect">Upcoming Phase</span>
+              </div>
+              <p class="card-description">Mindful check-in to observe mood trends and energy patterns throughout the week.</p>
+              <ul class="placeholder-list">
+                <li class="placeholder-item">
+                  <span class="placeholder-item-bullet"></span>
+                  <span>Minimalist mood scale (Calm, Focused, Tired, Energized)</span>
+                </li>
+                <li class="placeholder-item">
+                  <span class="placeholder-item-bullet"></span>
+                  <span>Daily reflection notes</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+      </main>
+    </div>
+
+    <!-- ---------------- Mobile Bottom Navigation Bar ---------------- -->
+    <nav class="mobile-nav" aria-label="Mobile Navigation" role="tablist">
+      <a href="#daily" class="mobile-nav-item active" data-section="daily" role="tab" aria-selected="true" aria-controls="view-daily">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"/>
+          <path d="m9 12 2 2 4-4"/>
+        </svg>
+        <span>Daily</span>
+      </a>
+
+      <a href="#scholar" class="mobile-nav-item" data-section="scholar" role="tab" aria-selected="false" aria-controls="view-scholar">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z"/>
+          <path d="M22 10v6"/>
+          <path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5"/>
+        </svg>
+        <span>Scholar</span>
+      </a>
+
+      <a href="#growth" class="mobile-nav-item" data-section="growth" role="tab" aria-selected="false" aria-controls="view-growth">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/>
+          <polyline points="16 7 22 7 22 13"/>
+        </svg>
+        <span>Growth</span>
+      </a>
+
+      <a href="#reflect" class="mobile-nav-item" data-section="reflect" role="tab" aria-selected="false" aria-controls="view-reflect">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M13.4 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7.4"/>
+          <path d="M2 6h4"/>
+          <path d="M2 10h4"/>
+          <path d="M2 14h4"/>
+          <path d="M2 18h4"/>
+          <path d="M18.4 2.6a2.12 2.12 0 1 1 3 3L14 13l-4 1 1-4z"/>
+        </svg>
+        <span>Reflect</span>
+      </a>
+    </nav>
+
+  </div>
+
+  <!-- JavaScript Modules -->
+  <script src="js/navigation.js"></script>
+  <script src="js/daily.js"></script>
+  <script src="js/scholar.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

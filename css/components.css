@@ -1389,3 +1389,234 @@
     align-items: stretch;
   }
 }
+
+
+/* ---------------- All Academic Tasks Section ---------------- */
+.scholar-all-tasks-section {
+  margin-top: var(--spacing-8);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+  animation: fadeIn var(--transition-normal);
+}
+
+.all-tasks-toolbar {
+  background-color: var(--color-bg-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-4) var(--spacing-5);
+  box-shadow: var(--shadow-xs);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--spacing-3);
+}
+
+.all-tasks-toolbar-left {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3);
+}
+
+.all-tasks-title-wrap {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  color: var(--color-text-primary);
+}
+
+.all-tasks-heading {
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+  margin: 0;
+}
+
+.all-tasks-toolbar-right {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3);
+  flex-wrap: wrap;
+}
+
+/* Status Filter Tabs (All, Upcoming, Completed, Overdue) */
+.scholar-status-filter-group {
+  display: inline-flex;
+  background-color: var(--color-bg-subtle);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 2px;
+  gap: 2px;
+}
+
+.scholar-status-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px var(--spacing-3);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  border-radius: var(--radius-sm);
+  color: var(--color-text-secondary);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.scholar-status-btn:hover {
+  color: var(--color-text-primary);
+}
+
+.scholar-status-btn.active {
+  background-color: var(--color-bg-surface);
+  color: var(--accent-scholar-text);
+  box-shadow: var(--shadow-xs);
+  font-weight: var(--font-weight-semibold);
+}
+
+.status-count {
+  font-size: 11px;
+  padding: 1px 6px;
+  border-radius: var(--radius-full);
+  background-color: rgba(0, 0, 0, 0.05);
+  color: inherit;
+  font-weight: var(--font-weight-medium);
+}
+
+.scholar-status-btn.active .status-count {
+  background-color: var(--accent-scholar-subtle);
+  color: var(--accent-scholar-text);
+  font-weight: var(--font-weight-semibold);
+}
+
+/* Category Filter Dropdown */
+.select-category-filter {
+  font-family: inherit;
+  font-size: var(--font-size-xs);
+  color: var(--color-text-primary);
+  background-color: var(--color-bg-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 6px var(--spacing-3);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.select-category-filter:focus {
+  outline: none;
+  border-color: var(--accent-scholar);
+  box-shadow: 0 0 0 2px var(--accent-scholar-subtle);
+}
+
+/* Active Category Hint & Clear Pill */
+.all-tasks-filter-chip-row {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+  padding: 0 var(--spacing-1);
+}
+
+.filter-chip-label {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+}
+
+.filter-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 10px;
+  background-color: var(--accent-scholar-subtle);
+  color: var(--accent-scholar-text);
+  border: 1px solid var(--accent-scholar-border);
+  border-radius: var(--radius-full);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.filter-chip:hover {
+  background-color: #ede9fe;
+}
+
+.chip-close {
+  font-size: 14px;
+  line-height: 1;
+  font-weight: bold;
+}
+
+/* All Academic Tasks List Container */
+.scholar-all-tasks-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-3);
+}
+
+/* Date Chip on All Tasks Cards */
+.scholar-task-date-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  border-radius: var(--radius-sm);
+  font-size: 11px;
+  font-weight: var(--font-weight-medium);
+  background-color: var(--color-bg-subtle);
+  color: var(--color-text-secondary);
+  border: 1px solid var(--color-border-subtle);
+}
+
+.scholar-task-date-chip.is-overdue {
+  background-color: var(--accent-danger-subtle);
+  color: var(--accent-danger-text);
+  border-color: var(--accent-danger-border);
+}
+
+/* Jump to Calendar Date Button */
+.btn-jump-calendar {
+  color: var(--color-text-muted);
+}
+
+.btn-jump-calendar:hover {
+  color: var(--accent-scholar);
+  background-color: var(--accent-scholar-subtle);
+}
+
+/* Responsive adjustments for All Tasks */
+@media (max-width: 768px) {
+  .all-tasks-toolbar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--spacing-3);
+  }
+
+  .all-tasks-toolbar-left {
+    justify-content: space-between;
+  }
+
+  .all-tasks-toolbar-right {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .scholar-status-filter-group {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    text-align: center;
+  }
+
+  .scholar-status-btn {
+    justify-content: center;
+    padding: 5px 4px;
+    font-size: 11px;
+  }
+
+  .select-category-filter {
+    width: 100%;
+  }
+}
