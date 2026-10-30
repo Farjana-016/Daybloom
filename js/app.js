@@ -22,7 +22,12 @@ document.addEventListener('DOMContentLoaded', () => {
     DaybloomScholar.init();
   }
 
-  // 5. Verify browser localStorage support
+  // 5. Initialize Growth productivity dashboard (Phase 4)
+  if (typeof DaybloomGrowth !== 'undefined') {
+    DaybloomGrowth.init();
+  }
+
+  // 6. Verify browser localStorage support
   checkStorageSupport();
 });
 

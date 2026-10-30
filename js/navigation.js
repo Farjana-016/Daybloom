@@ -52,6 +52,11 @@ const DaybloomNav = (() => {
       panel.classList.toggle('active', isTarget);
     });
 
+    // Notify Growth view to re-render fresh calculations when activated
+    if (sectionId === 'growth' && typeof DaybloomGrowth !== 'undefined' && DaybloomGrowth.render) {
+      DaybloomGrowth.render();
+    }
+
     // 4. Update the URL hash without triggering extra scroll jump
     if (window.location.hash.replace('#', '') !== sectionId) {
       history.replaceState(null, '', `#${sectionId}`);

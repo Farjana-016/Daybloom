@@ -371,10 +371,20 @@ const DaybloomDaily = (() => {
         const isCompleted = checkbox ? checkbox.classList.contains('checked') : false;
 
         if (text) {
+          // Preserve completion timestamp if item was already completed, or create timestamp if newly completed
+          let itemCompletedAt = null;
+          if (isCompleted) {
+            const existingItem = (activeEditingListId)
+              ? (lists.find(l => l.id === activeEditingListId)?.items?.find(i => i.text === text && i.completed))
+              : null;
+            itemCompletedAt = existingItem && existingItem.completedAt ? existingItem.completedAt : new Date().toISOString();
+          }
+
           items.push({
             id: 'item_' + Date.now() + '_' + index + '_' + Math.random().toString(36).substring(2, 5),
             text: text,
-            completed: isCompleted
+            completed: isCompleted,
+            completedAt: itemCompletedAt
           });
         }
       });
@@ -405,6 +415,9 @@ const DaybloomDaily = (() => {
     saveData();
     closeEditor();
     render();
+    if (typeof DaybloomGrowth !== 'undefined' && DaybloomGrowth.render) {
+      DaybloomGrowth.render();
+    }
     return { success: true };
   }
 
@@ -418,8 +431,12 @@ const DaybloomDaily = (() => {
     const item = list.items.find(i => i.id === itemId);
     if (item) {
       item.completed = !item.completed;
+      item.completedAt = item.completed ? new Date().toISOString() : null;
       saveData();
       render();
+      if (typeof DaybloomGrowth !== 'undefined' && DaybloomGrowth.render) {
+        DaybloomGrowth.render();
+      }
     }
   }
 
@@ -439,6 +456,9 @@ const DaybloomDaily = (() => {
     }
     saveData();
     render();
+    if (typeof DaybloomGrowth !== 'undefined' && DaybloomGrowth.render) {
+      DaybloomGrowth.render();
+    }
   }
 
   /**

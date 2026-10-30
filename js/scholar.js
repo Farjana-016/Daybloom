@@ -403,6 +403,9 @@ const DaybloomScholar = (() => {
     viewingDate = new Date(y, m - 1, 1);
 
     render();
+    if (typeof DaybloomGrowth !== 'undefined' && DaybloomGrowth.render) {
+      DaybloomGrowth.render();
+    }
   }
 
   /**
@@ -417,6 +420,9 @@ const DaybloomScholar = (() => {
 
     saveTasks();
     render();
+    if (typeof DaybloomGrowth !== 'undefined' && DaybloomGrowth.render) {
+      DaybloomGrowth.render();
+    }
   }
 
   /**
@@ -431,6 +437,9 @@ const DaybloomScholar = (() => {
       tasks = tasks.filter(t => t.id !== taskId);
       saveTasks();
       render();
+      if (typeof DaybloomGrowth !== 'undefined' && DaybloomGrowth.render) {
+        DaybloomGrowth.render();
+      }
     }
   }
 
