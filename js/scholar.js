@@ -756,9 +756,9 @@ const DaybloomScholar = (() => {
 
       card.innerHTML = `
         <div class="scholar-task-left">
-          <button type="button" class="task-checkbox ${task.completed ? 'checked' : ''}" aria-label="Mark task '${escapeHtml(task.title)}' as ${task.completed ? 'incomplete' : 'completed'}">
+          <button type="button" class="task-checkbox ${task.completed ? 'checked' : ''}" role="checkbox" aria-checked="${task.completed ? 'true' : 'false'}" aria-label="Mark task '${escapeHtml(task.title)}' as ${task.completed ? 'incomplete' : 'completed'}">
             ${task.completed ? `
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                 <polyline points="20 6 9 17 4 12"/>
               </svg>
             ` : ''}
@@ -812,7 +812,10 @@ const DaybloomScholar = (() => {
 
       // Checkbox event
       const chk = card.querySelector('.task-checkbox');
-      chk.addEventListener('click', () => toggleTaskComplete(task.id));
+      chk.addEventListener('click', (e) => {
+        e.stopPropagation();
+        toggleTaskComplete(task.id);
+      });
 
       // Edit event
       const editBtn = card.querySelector('.btn-edit-scholar-task');
@@ -939,9 +942,9 @@ const DaybloomScholar = (() => {
 
       card.innerHTML = `
         <div class="scholar-task-left">
-          <button type="button" class="task-checkbox ${task.completed ? 'checked' : ''}" aria-label="Mark task '${escapeHtml(task.title)}' as ${task.completed ? 'incomplete' : 'completed'}">
+          <button type="button" class="task-checkbox ${task.completed ? 'checked' : ''}" role="checkbox" aria-checked="${task.completed ? 'true' : 'false'}" aria-label="Mark task '${escapeHtml(task.title)}' as ${task.completed ? 'incomplete' : 'completed'}">
             ${task.completed ? `
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                 <polyline points="20 6 9 17 4 12"/>
               </svg>
             ` : ''}
@@ -1004,7 +1007,10 @@ const DaybloomScholar = (() => {
 
       // Checkbox event
       const chk = card.querySelector('.task-checkbox');
-      chk.addEventListener('click', () => toggleTaskComplete(task.id));
+      chk.addEventListener('click', (e) => {
+        e.stopPropagation();
+        toggleTaskComplete(task.id);
+      });
 
       // Jump to calendar event
       const jumpBtn = card.querySelector('.btn-jump-calendar');

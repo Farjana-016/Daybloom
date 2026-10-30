@@ -1260,6 +1260,43 @@
 
 .scholar-task-left {
   padding-top: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* Scholar Task Completion Checkbox */
+.task-checkbox {
+  width: 20px;
+  height: 20px;
+  border-radius: var(--radius-full);
+  border: 1.5px solid var(--color-border-hover);
+  background-color: var(--color-bg-surface);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: transparent;
+  flex-shrink: 0;
+  cursor: pointer;
+  padding: 0;
+  transition: all var(--transition-fast);
+}
+
+.task-checkbox:hover {
+  border-color: var(--accent-scholar);
+  background-color: var(--accent-scholar-subtle);
+}
+
+.task-checkbox:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--color-bg-surface), 0 0 0 4px var(--accent-scholar);
+}
+
+.task-checkbox.checked {
+  background-color: var(--accent-scholar);
+  border-color: var(--accent-scholar);
+  color: var(--color-text-inverse);
 }
 
 .scholar-task-center {
