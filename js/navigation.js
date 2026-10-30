@@ -52,6 +52,11 @@ const DaybloomNav = (() => {
       panel.classList.toggle('active', isTarget);
     });
 
+    // Notify Daily view to refresh personalized greeting when activated
+    if (sectionId === 'daily' && typeof DaybloomWelcome !== 'undefined' && DaybloomWelcome.updateDailyGreeting) {
+      DaybloomWelcome.updateDailyGreeting();
+    }
+
     // Notify Growth view to re-render fresh calculations when activated
     if (sectionId === 'growth' && typeof DaybloomGrowth !== 'undefined' && DaybloomGrowth.render) {
       DaybloomGrowth.render();
@@ -64,7 +69,12 @@ const DaybloomNav = (() => {
 
     // 4. Update the URL hash without triggering extra scroll jump
     if (window.location.hash.replace('#', '') !== sectionId) {
-      history.replaceState(null, '', `#${sectionId}`);
+      try {
+        history.replaceState(null, '', `#${sectionId}`);
+      } catch (err) {
+        // Safe fallback in restricted iframe/file environments
+        location.hash = sectionId;
+      }
     }
 
     // Scroll main content to top when switching

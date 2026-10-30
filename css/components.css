@@ -2480,3 +2480,223 @@
   background-color: #fee2e2;
   border-color: #fca5a5;
 }
+
+
+/* ==========================================================================
+   First-Time Welcome Screen (Strictly Black & White)
+   ========================================================================== */
+
+/* Zero-flicker routing: strictly scoped display rules */
+html.daybloom-user-new .app-shell {
+  display: none !important;
+}
+
+html.daybloom-user-returning #welcome-screen {
+  display: none !important;
+}
+
+/* Welcome Screen Container */
+.welcome-screen {
+  min-height: 100vh;
+  width: 100%;
+  background-color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  box-sizing: border-box;
+}
+
+/* Welcome Card */
+.welcome-card {
+  width: 100%;
+  max-width: 440px;
+  background-color: #ffffff;
+  border: 1px solid #000000;
+  border-radius: 12px;
+  padding: 40px 32px;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+/* Supplied Flower Logo */
+.welcome-logo-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.welcome-logo-img {
+  width: 88px;
+  height: 88px;
+  object-fit: contain;
+  display: block;
+}
+
+/* Headings and Typography */
+.welcome-title {
+  font-size: 1.625rem;
+  font-weight: 600;
+  color: #000000;
+  margin: 0 0 10px 0;
+  line-height: 1.25;
+  letter-spacing: -0.015em;
+}
+
+.welcome-subtitle {
+  font-size: 0.9375rem;
+  color: #444444;
+  margin: 0 0 28px 0;
+  line-height: 1.5;
+}
+
+/* Form Layout */
+.welcome-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  text-align: left;
+}
+
+.welcome-field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.welcome-label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #000000;
+}
+
+.welcome-input {
+  width: 100%;
+  height: 44px;
+  padding: 0 14px;
+  font-size: 0.9375rem;
+  color: #000000;
+  background-color: #ffffff;
+  border: 1.5px solid #000000;
+  border-radius: 8px;
+  box-sizing: border-box;
+  outline: none;
+  transition: box-shadow 0.15s ease;
+}
+
+.welcome-input::placeholder {
+  color: #888888;
+}
+
+.welcome-input:focus {
+  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.15);
+}
+
+.welcome-input[aria-invalid="true"] {
+  border-color: #000000;
+  box-shadow: 0 0 0 2px #000000;
+}
+
+.welcome-error-message {
+  font-size: 0.8125rem;
+  color: #000000;
+  font-weight: 500;
+  padding-top: 2px;
+}
+
+.welcome-error-message[hidden] {
+  display: none !important;
+}
+
+/* Storage Error / Notice */
+.welcome-storage-notice {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 10px 12px;
+  background-color: #ffffff;
+  border: 1px dashed #000000;
+  border-radius: 8px;
+  font-size: 0.8125rem;
+  color: #111111;
+  line-height: 1.4;
+}
+
+.welcome-storage-notice[hidden] {
+  display: none !important;
+}
+
+.welcome-notice-icon {
+  flex-shrink: 0;
+  margin-top: 1px;
+  stroke: #000000;
+}
+
+/* Action Button: White box with black text and clear black outline */
+.welcome-btn-primary {
+  width: 100%;
+  height: 44px;
+  background-color: #ffffff;
+  color: #000000;
+  border: 1.5px solid #000000;
+  border-radius: 8px;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 4px;
+}
+
+.welcome-btn-primary:hover {
+  background-color: #000000;
+  color: #ffffff;
+}
+
+.welcome-btn-primary:active {
+  background-color: #222222;
+  color: #ffffff;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 480px) {
+  .welcome-screen {
+    padding: 16px;
+  }
+
+  .welcome-card {
+    padding: 32px 20px;
+    border-radius: 10px;
+  }
+
+  .welcome-title {
+    font-size: 1.375rem;
+  }
+
+  .welcome-subtitle {
+    font-size: 0.875rem;
+    margin-bottom: 22px;
+  }
+}
+
+/* Sidebar and Header Official Daybloom Flower Logo */
+.brand-icon-wrapper {
+  background-color: transparent !important;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0;
+}
+
+.brand-logo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  mix-blend-mode: multiply;
+}

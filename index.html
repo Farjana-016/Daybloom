@@ -22,9 +22,66 @@
 
   <link rel="stylesheet" href="css/components.css">
 
+  <!-- Early Zero-Flicker State Probe -->
+  <script>
+    (function () {
+      try {
+        var name = localStorage.getItem('daybloom_user_name');
+        if (name && typeof name === 'string' && name.trim().length > 0) {
+          document.documentElement.classList.add('daybloom-user-returning');
+        } else {
+          document.documentElement.classList.add('daybloom-user-new');
+        }
+      } catch (err) {
+        document.documentElement.classList.add('daybloom-user-new');
+        document.documentElement.classList.add('daybloom-storage-error');
+      }
+    })();
+  </script>
 </head>
 
 <body>
+
+  <!-- ---------------- First-Time Welcome Screen (Strictly Black & White) ---------------- -->
+  <div id="welcome-screen" class="welcome-screen" role="region" aria-label="Welcome to Daybloom">
+    <div class="welcome-card">
+      <div class="welcome-logo-container">
+        <img src="assets/daybloom-flower-logo.png" alt="Daybloom logo" class="welcome-logo-img" width="76" height="76">
+      </div>
+      <h1 class="welcome-title">Welcome to Daybloom</h1>
+      <p class="welcome-subtitle">A little space to organize your day and grow at your own pace.</p>
+
+      <form id="welcome-form" class="welcome-form" novalidate>
+        <div class="welcome-field-group">
+          <label for="welcome-name-input" class="welcome-label">What should we call you?</label>
+          <input
+            type="text"
+            id="welcome-name-input"
+            class="welcome-input"
+            placeholder="Enter your name"
+            maxlength="50"
+            autocomplete="name"
+            spellcheck="false"
+            required
+          >
+          <div id="welcome-name-error" class="welcome-error-message" role="alert" aria-live="polite" hidden></div>
+        </div>
+
+        <div id="welcome-storage-notice" class="welcome-storage-notice" role="status" aria-live="polite" hidden>
+          <svg class="welcome-notice-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="10"/>
+            <line x1="12" y1="8" x2="12" y2="12"/>
+            <line x1="12" y1="16" x2="12.01" y2="16"/>
+          </svg>
+          <span id="welcome-storage-notice-text"></span>
+        </div>
+
+        <button type="submit" id="welcome-submit-btn" class="welcome-btn-primary">
+          Let's get started
+        </button>
+      </form>
+    </div>
+  </div>
 
 
 
@@ -40,29 +97,7 @@
 
         <div class="brand-icon-wrapper" aria-hidden="true">
 
-          <!-- Daybloom Minimalist Bloom Mark -->
-
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-
-            <path d="M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8z"/>
-
-            <path d="M12 2v2"/>
-
-            <path d="M12 20v2"/>
-
-            <path d="m4.93 4.93 1.41 1.41"/>
-
-            <path d="m17.66 17.66 1.41 1.41"/>
-
-            <path d="M2 12h2"/>
-
-            <path d="M20 12h2"/>
-
-            <path d="m6.34 17.66-1.41 1.41"/>
-
-            <path d="m19.07 4.93-1.41 1.41"/>
-
-          </svg>
+          <img src="assets/daybloom-flower-logo.png" alt="Daybloom logo" class="brand-logo-img">
 
         </div>
 
@@ -208,23 +243,7 @@
 
           <div class="brand-icon-wrapper" aria-hidden="true">
 
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-
-              <path d="M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8z"/>
-
-              <path d="M12 2v2"/>
-
-              <path d="M12 20v2"/>
-
-              <path d="m4.93 4.93 1.41 1.41"/>
-
-              <path d="m17.66 17.66 1.41 1.41"/>
-
-              <path d="M2 12h2"/>
-
-              <path d="M20 12h2"/>
-
-            </svg>
+            <img src="assets/daybloom-flower-logo.png" alt="Daybloom logo" class="brand-logo-img">
 
           </div>
 
@@ -313,11 +332,8 @@
           <div class="welcome-banner">
 
             <div class="welcome-text">
-
-              <h2>Welcome to Daybloom</h2>
-
-              <p>A minimal personal productivity workspace tailored for focused days. Browse the four pillars below or use the navigation to switch views.</p>
-
+              <h2 id="daily-welcome-title">Welcome to Daybloom</h2>
+              <p id="daily-welcome-subtitle">A minimal personal productivity workspace tailored for focused days. Browse the four pillars below or use the navigation to switch views.</p>
             </div>
 
           </div>
@@ -1550,6 +1566,7 @@
   <!-- JavaScript Modules -->
 
   <script src="js/navigation.js"></script>
+  <script src="js/welcome.js"></script>
 
   <script src="js/daily.js"></script>
 

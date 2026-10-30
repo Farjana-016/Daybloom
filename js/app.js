@@ -9,6 +9,11 @@ document.addEventListener('DOMContentLoaded', () => {
   // 1. Initialize real-time date display in header
   updateDateDisplays();
 
+  // 1b. Initialize Personalized Welcome Experience
+  if (typeof DaybloomWelcome !== 'undefined') {
+    DaybloomWelcome.init();
+  }
+
   // 2. Initialize the navigation system
   DaybloomNav.init();
 
