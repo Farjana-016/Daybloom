@@ -1136,6 +1136,7 @@
 
         <!-- ---------------- View 3: Growth ---------------- -->
         <section class="view-panel" id="view-growth" role="tabpanel" aria-labelledby="Growth View">
+          <!-- View Header -->
           <header class="view-header">
             <div class="view-header-main">
               <div class="view-icon-badge growth">
@@ -1146,206 +1147,112 @@
               </div>
               <div>
                 <h1 class="view-title">Growth</h1>
-                <p class="view-subtitle">Productivity statistics, completion trends, and upcoming milestones.</p>
+                <p class="view-subtitle">Your productivity overview and upcoming priorities.</p>
               </div>
             </div>
-            <span class="badge badge-growth">Productivity Hub</span>
+            <span class="badge badge-growth">Productivity</span>
           </header>
 
-          <!-- Top KPI Metrics Grid (4 Cards) -->
-          <div class="growth-kpi-grid">
-            <!-- 1. Daily Checklist Items -->
-            <div class="growth-kpi-card" id="kpi-daily-card">
-              <div class="kpi-card-header">
-                <span class="kpi-label">Daily Checklist</span>
-                <span class="kpi-pct-badge badge-daily" id="kpi-daily-pct">0%</span>
+          <!-- Storage Notice Banner (Hidden unless read error occurs) -->
+          <div class="growth-storage-notice" id="growth-storage-notice" role="alert" style="display: none;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <circle cx="12" cy="12" r="10"/>
+              <line x1="12" y1="8" x2="12" y2="12"/>
+              <line x1="12" y1="16" x2="12.01" y2="16"/>
+            </svg>
+            <span id="growth-storage-notice-text">Productivity data is currently unavailable. Your original data has been preserved.</span>
+          </div>
+
+          <!-- 1. YOUR PROGRESS SECTION -->
+          <div class="card growth-card growth-progress-card" id="growth-progress-card">
+            <div class="growth-card-header">
+              <div>
+                <h2 class="growth-card-title">Your Progress</h2>
+                <p class="growth-card-subtitle" id="growth-overall-counts">0 of 0 tasks completed</p>
               </div>
-              <div class="kpi-number-wrap">
-                <span class="kpi-number" id="kpi-daily-completed">0</span>
-                <span class="kpi-total" id="kpi-daily-total">/ 0 items</span>
-              </div>
-              <div class="growth-progress-track">
-                <div class="growth-progress-fill kpi-fill-daily" id="kpi-daily-bar" style="width: 0%;"></div>
-              </div>
-              <p class="kpi-hint" id="kpi-daily-hint">0 of 0 lists fully completed</p>
+              <span class="growth-hero-pct" id="growth-overall-pct">0%</span>
             </div>
 
-            <!-- 2. Scholar Academic Tasks -->
-            <div class="growth-kpi-card" id="kpi-scholar-card">
-              <div class="kpi-card-header">
-                <span class="kpi-label">Academic Tasks</span>
-                <span class="kpi-pct-badge badge-scholar" id="kpi-scholar-pct">0%</span>
-              </div>
-              <div class="kpi-number-wrap">
-                <span class="kpi-number" id="kpi-scholar-completed">0</span>
-                <span class="kpi-total" id="kpi-scholar-total">/ 0 tasks</span>
-              </div>
-              <div class="growth-progress-track">
-                <div class="growth-progress-fill kpi-fill-scholar" id="kpi-scholar-bar" style="width: 0%;"></div>
-              </div>
-              <p class="kpi-hint" id="kpi-scholar-hint">0 pending academic tasks</p>
+            <!-- Overall Progress Bar -->
+            <div class="growth-progress-track hero-track">
+              <div class="growth-progress-fill hero-fill" id="growth-overall-bar" style="width: 0%;"></div>
             </div>
 
-            <!-- 3. Combined Productivity Percentage (Units: Checklist items + Academic tasks) -->
-            <div class="growth-kpi-card" id="kpi-overall-card">
-              <div class="kpi-card-header">
-                <span class="kpi-label">Overall Completion</span>
-                <span class="kpi-pct-badge badge-growth" id="kpi-overall-pct">0%</span>
+            <!-- Daily and Scholar Summary Areas -->
+            <div class="growth-progress-summaries">
+              <div class="growth-summary-box">
+                <div class="summary-box-header">
+                  <span class="summary-bullet bullet-daily"></span>
+                  <span class="summary-box-label">Daily Checklist Items</span>
+                </div>
+                <span class="summary-box-ratio" id="growth-daily-ratio">0 / 0 completed</span>
               </div>
-              <div class="kpi-number-wrap">
-                <span class="kpi-number" id="kpi-overall-completed">0</span>
-                <span class="kpi-total" id="kpi-overall-total">/ 0 units</span>
-              </div>
-              <div class="growth-progress-track">
-                <div class="growth-progress-fill kpi-fill-overall" id="kpi-overall-bar" style="width: 0%;"></div>
-              </div>
-              <p class="kpi-hint" id="kpi-overall-hint">Units finished: Checklist items + Academic tasks</p>
-            </div>
 
-            <!-- 4. Action Needed (Overdue & Upcoming) -->
-            <div class="growth-kpi-card" id="kpi-overdue-card">
-              <div class="kpi-card-header">
-                <span class="kpi-label">Action Needed</span>
-                <span class="kpi-pct-badge badge-overdue-kpi">Urgent</span>
+              <div class="growth-summary-box">
+                <div class="summary-box-header">
+                  <span class="summary-bullet bullet-scholar"></span>
+                  <span class="summary-box-label">Academic Tasks</span>
+                </div>
+                <span class="summary-box-ratio" id="growth-scholar-ratio">0 / 0 completed</span>
               </div>
-              <div class="kpi-number-wrap">
-                <span class="kpi-number" id="kpi-overdue-count">0</span>
-                <span class="kpi-total">overdue</span>
-              </div>
-              <div class="growth-progress-track">
-                <div class="growth-progress-fill kpi-fill-overdue" style="width: 100%;"></div>
-              </div>
-              <p class="kpi-hint" id="kpi-overdue-hint">0 overdue requiring immediate attention</p>
             </div>
           </div>
 
-          <!-- Two-Column Analytics Workspace -->
-          <div class="growth-workspace-grid">
-            <!-- Left Pane: Weekly Completion Chart & Daily Health -->
-            <div class="growth-analytics-left">
-              <!-- Weekly Completion Chart (Sunday - Saturday) -->
-              <div class="growth-panel-card">
-                <div class="growth-panel-header">
-                  <div class="growth-panel-title-wrap">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                      <line x1="18" y1="20" x2="18" y2="10"/>
-                      <line x1="12" y1="20" x2="12" y2="4"/>
-                      <line x1="6" y1="20" x2="6" y2="14"/>
-                    </svg>
-                    <h3 class="growth-panel-title">Weekly Completion Trends</h3>
-                  </div>
-                  <span class="badge badge-growth" id="growth-week-total-badge">0 completed this week</span>
-                </div>
-                <p class="growth-panel-desc">Visualizes tasks and checklist items completed on each day of the current week (Sun–Sat).</p>
-
-                <div class="weekly-chart-box">
-                  <div class="weekly-chart-bars" id="growth-weekly-bars">
-                    <!-- Populated dynamically by js/growth.js -->
-                  </div>
-                </div>
-                <div class="weekly-chart-footer">
-                  <span class="chart-caption">• Height corresponds to genuine completion timestamps recorded this week.</span>
-                </div>
+          <!-- 2. WEEKLY ACTIVITY SECTION -->
+          <div class="card growth-card growth-weekly-card" id="growth-weekly-card">
+            <div class="growth-card-header">
+              <div>
+                <h2 class="growth-card-title">Weekly Activity</h2>
+                <p class="growth-card-subtitle">Tasks completed this week (Sunday–Saturday)</p>
               </div>
+              <span class="badge badge-growth" id="growth-week-total-badge">0 completed</span>
+            </div>
 
-              <!-- Daily Lists Health Overview -->
-              <div class="growth-panel-card">
-                <div class="growth-panel-header">
-                  <div class="growth-panel-title-wrap">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                      <rect width="18" height="18" x="3" y="3" rx="2" ry="2"/>
-                      <path d="m9 12 2 2 4-4"/>
-                    </svg>
-                    <h3 class="growth-panel-title">Daily To-Do Lists Health</h3>
-                  </div>
-                  <span class="badge badge-daily" id="growth-daily-list-pct">0%</span>
-                </div>
-                <p class="growth-panel-desc">A list is marked completed only when all its checklist items are finished.</p>
+            <div class="growth-weekly-chart-box">
+              <div class="growth-weekly-bars" id="growth-weekly-bars">
+                <!-- Rendered dynamically by js/growth.js -->
+              </div>
+            </div>
+          </div>
 
-                <div class="daily-health-metrics">
-                  <div class="health-metric-box">
-                    <span class="health-val" id="growth-daily-total-lists">0</span>
-                    <span class="health-lbl">Total Lists</span>
-                  </div>
-                  <div class="health-metric-box">
-                    <span class="health-val completed" id="growth-daily-completed-lists">0</span>
-                    <span class="health-lbl">100% Finished</span>
-                  </div>
-                  <div class="health-metric-box">
-                    <span class="health-val active" id="growth-daily-active-lists">0</span>
-                    <span class="health-lbl">In Progress</span>
-                  </div>
-                </div>
-                <div class="growth-progress-track" style="margin-top: var(--spacing-3);">
-                  <div class="growth-progress-fill kpi-fill-daily" id="growth-daily-list-bar" style="width: 0%;"></div>
-                </div>
+          <!-- 3. WHAT NEEDS YOUR ATTENTION? SECTION -->
+          <div class="card growth-card growth-attention-card" id="growth-attention-card">
+            <div class="growth-card-header">
+              <div>
+                <h2 class="growth-card-title">What Needs Your Attention?</h2>
+                <p class="growth-card-subtitle">Prioritized pending tasks and deadlines</p>
               </div>
             </div>
 
-            <!-- Right Pane: Academic Category Breakdown -->
-            <div class="growth-analytics-right">
-              <div class="growth-panel-card">
-                <div class="growth-panel-header">
-                  <div class="growth-panel-title-wrap">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                      <path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z"/>
-                      <path d="M22 10v6"/>
-                      <path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5"/>
-                    </svg>
-                    <h3 class="growth-panel-title">Coursework Category Breakdown</h3>
+            <div class="growth-attention-grid">
+              <!-- Group A: Overdue -->
+              <div class="growth-attention-group" id="growth-group-overdue">
+                <div class="group-header">
+                  <div class="group-header-left">
+                    <h3 class="group-title">Overdue</h3>
+                    <span class="badge badge-danger" id="growth-overdue-count-badge">0</span>
                   </div>
-                  <span class="badge badge-scholar">6 Categories</span>
                 </div>
-                <p class="growth-panel-desc">Progress distribution across all six academic categories.</p>
+                <div class="attention-list" id="growth-overdue-list">
+                  <!-- Populated dynamically by js/growth.js -->
+                </div>
+              </div>
 
-                <div class="growth-category-breakdown-list" id="growth-category-breakdown-list">
+              <!-- Group B: Upcoming -->
+              <div class="growth-attention-group" id="growth-group-upcoming">
+                <div class="group-header">
+                  <div class="group-header-left">
+                    <h3 class="group-title">Upcoming</h3>
+                    <span class="badge badge-neutral" id="growth-upcoming-count-badge">0</span>
+                  </div>
+                </div>
+                <div class="attention-list" id="growth-upcoming-list">
                   <!-- Populated dynamically by js/growth.js -->
                 </div>
               </div>
             </div>
           </div>
 
-          <!-- Bottom Section: Action Center (Upcoming & Overdue Milestones) -->
-          <section class="growth-milestones-section" aria-labelledby="growth-milestones-heading">
-            <div class="growth-milestones-toolbar">
-              <div class="growth-toolbar-left">
-                <div class="growth-toolbar-title-wrap">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                    <circle cx="12" cy="12" r="10"/>
-                    <polyline points="12 6 12 12 16 14"/>
-                  </svg>
-                  <h3 class="growth-toolbar-heading" id="growth-milestones-heading">Upcoming & Overdue Milestones</h3>
-                </div>
-                <span class="badge badge-growth" id="growth-milestones-total-badge">Action Center</span>
-              </div>
-
-              <div class="growth-toolbar-right">
-                <div class="growth-filter-group" id="growth-milestone-filters" role="tablist" aria-label="Filter milestones">
-                  <button type="button" class="growth-filter-btn active" data-filter="all" role="tab" aria-selected="true">
-                    <span>All</span>
-                    <span class="growth-pill-count" id="growth-count-all">0</span>
-                  </button>
-                  <button type="button" class="growth-filter-btn" data-filter="overdue" role="tab" aria-selected="false">
-                    <span>Overdue</span>
-                    <span class="growth-pill-count" id="growth-count-overdue">0</span>
-                  </button>
-                  <button type="button" class="growth-filter-btn" data-filter="upcoming" role="tab" aria-selected="false">
-                    <span>Upcoming</span>
-                    <span class="growth-pill-count" id="growth-count-upcoming">0</span>
-                  </button>
-                  <button type="button" class="growth-filter-btn" data-filter="completed" role="tab" aria-selected="false">
-                    <span>Completed</span>
-                    <span class="growth-pill-count" id="growth-count-completed">0</span>
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            <!-- Milestones List Container -->
-            <div class="growth-milestones-list" id="growth-milestones-list" role="region" aria-label="Milestones list">
-              <!-- Populated dynamically by js/growth.js -->
-            </div>
-          </section>
         </section>
 
         <!-- ---------------- View 4: Reflect ---------------- -->
