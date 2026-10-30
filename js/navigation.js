@@ -57,6 +57,11 @@ const DaybloomNav = (() => {
       DaybloomGrowth.render();
     }
 
+    // Notify Reflect view to refresh calendar & active states when activated
+    if (sectionId === 'reflect' && typeof DaybloomReflect !== 'undefined' && DaybloomReflect.render) {
+      DaybloomReflect.render();
+    }
+
     // 4. Update the URL hash without triggering extra scroll jump
     if (window.location.hash.replace('#', '') !== sectionId) {
       history.replaceState(null, '', `#${sectionId}`);

@@ -1380,90 +1380,170 @@
 
                 <h1 class="view-title">Reflect</h1>
 
-                <p class="view-subtitle">Journal entries and mood tracking.</p>
+                <p class="view-subtitle">Daily mood tracking, journaling, and reflection history.</p>
 
               </div>
 
             </div>
 
-            <span class="badge badge-reflect">Mindfulness</span>
+            <span class="badge badge-neutral" id="reflect-status-badge">Reflect</span>
 
           </header>
 
 
 
-          <div class="placeholder-grid">
+          <!-- Data Protection Alert Banner (Hidden unless malformed data detected) -->
+          <div class="reflect-storage-alert" id="reflect-storage-alert" role="alert" style="display: none;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+              <line x1="12" y1="9" x2="12" y2="13"/>
+              <line x1="12" y1="17" x2="12.01" y2="17"/>
+            </svg>
+            <div class="alert-content">
+              <strong>Data Protection Warning:</strong> Stored journal data contains malformed or invalid records. Saving is paused to prevent data loss.
+            </div>
+          </div>
 
-            <div class="placeholder-box">
-
-              <div class="placeholder-box-header">
-
-                <span class="placeholder-box-title">Daily Journal</span>
-
-                <span class="badge badge-reflect">Upcoming Phase</span>
-
+          <!-- Main Grid: Left Editor Studio, Right Rolling 30-Day Calendar & Inspector -->
+          <div class="reflect-main-grid">
+            
+            <!-- LEFT: Daily Reflection Studio Card -->
+            <div class="card reflect-editor-card">
+              
+              <!-- Past Edit Context Banner -->
+              <div class="reflect-past-banner" id="reflect-past-banner" style="display: none;" role="status">
+                <div class="past-banner-info">
+                  <span class="past-banner-tag">Past Entry</span>
+                  <span class="past-banner-text" id="reflect-past-banner-text">Editing entry</span>
+                </div>
+                <button type="button" class="btn btn-sm btn-subtle" id="reflect-btn-return-today">
+                  Cancel &amp; Return to Today
+                </button>
               </div>
 
-              <p class="card-description">A calm, private writing space for daily thoughts, reflections, and learnings.</p>
-
-              <ul class="placeholder-list">
-
-                <li class="placeholder-item">
-
-                  <span class="placeholder-item-bullet"></span>
-
-                  <span>Quick-prompt journaling or freeform writing</span>
-
-                </li>
-
-                <li class="placeholder-item">
-
-                  <span class="placeholder-item-bullet"></span>
-
-                  <span>Local client-side encrypted or stored entries</span>
-
-                </li>
-
-              </ul>
-
-            </div>
-
-
-
-            <div class="placeholder-box">
-
-              <div class="placeholder-box-header">
-
-                <span class="placeholder-box-title">Mood & Energy Log</span>
-
-                <span class="badge badge-reflect">Upcoming Phase</span>
-
+              <!-- Editor Header -->
+              <div class="reflect-card-header">
+                <div>
+                  <h2 class="card-title" id="reflect-editor-title">Today's Reflection</h2>
+                  <p class="card-description" id="reflect-editor-subtitle">Select your mood and write your thoughts.</p>
+                </div>
+                <span class="badge badge-subtle" id="reflect-editor-date-badge">Today</span>
               </div>
 
-              <p class="card-description">Mindful check-in to observe mood trends and energy patterns throughout the week.</p>
+              <!-- Validation Error Notice (Hidden by default) -->
+              <div class="reflect-validation-alert" id="reflect-validation-alert" style="display: none;" role="alert">
+                <span id="reflect-validation-message">Please select a mood and write your reflection.</span>
+              </div>
 
-              <ul class="placeholder-list">
+              <!-- Accessible Mood Radio Group (6 Moods) -->
+              <div class="reflect-field-section">
+                <label class="form-field-label" id="reflect-mood-label">How are you feeling today?</label>
+                <div role="radiogroup" aria-labelledby="reflect-mood-label" class="reflect-mood-radiogroup" id="reflect-mood-radiogroup">
+                  <button type="button" role="radio" class="reflect-mood-btn" data-mood="excited" aria-checked="false" tabindex="0" aria-label="Excited: high energy, enthusiastic">
+                    <span class="reflect-mood-emoji" aria-hidden="true">🤩</span>
+                    <span class="reflect-mood-label">Excited</span>
+                  </button>
+                  <button type="button" role="radio" class="reflect-mood-btn" data-mood="happy" aria-checked="false" tabindex="-1" aria-label="Happy: content, pleased">
+                    <span class="reflect-mood-emoji" aria-hidden="true">😊</span>
+                    <span class="reflect-mood-label">Happy</span>
+                  </button>
+                  <button type="button" role="radio" class="reflect-mood-btn" data-mood="calm" aria-checked="false" tabindex="-1" aria-label="Calm: grounded, peaceful">
+                    <span class="reflect-mood-emoji" aria-hidden="true">😌</span>
+                    <span class="reflect-mood-label">Calm</span>
+                  </button>
+                  <button type="button" role="radio" class="reflect-mood-btn" data-mood="neutral" aria-checked="false" tabindex="-1" aria-label="Neutral: steady, routine">
+                    <span class="reflect-mood-emoji" aria-hidden="true">😐</span>
+                    <span class="reflect-mood-label">Neutral</span>
+                  </button>
+                  <button type="button" role="radio" class="reflect-mood-btn" data-mood="low" aria-checked="false" tabindex="-1" aria-label="Low: depleted, quiet">
+                    <span class="reflect-mood-emoji" aria-hidden="true">😔</span>
+                    <span class="reflect-mood-label">Low</span>
+                  </button>
+                  <button type="button" role="radio" class="reflect-mood-btn" data-mood="tired" aria-checked="false" tabindex="-1" aria-label="Tired: weary, needing rest">
+                    <span class="reflect-mood-emoji" aria-hidden="true">🥱</span>
+                    <span class="reflect-mood-label">Tired</span>
+                  </button>
+                </div>
+              </div>
 
-                <li class="placeholder-item">
+              <!-- Journal Textarea -->
+              <div class="reflect-field-section">
+                <label class="form-field-label" for="reflect-journal-input">Daily Reflection:</label>
+                <textarea id="reflect-journal-input" 
+                          class="reflect-textarea" 
+                          placeholder="Write freely about your day, lessons learned, or feelings..." 
+                          aria-label="Daily reflection content" 
+                          rows="8"></textarea>
+              </div>
 
-                  <span class="placeholder-item-bullet"></span>
-
-                  <span>Minimalist mood scale (Calm, Focused, Tired, Energized)</span>
-
-                </li>
-
-                <li class="placeholder-item">
-
-                  <span class="placeholder-item-bullet"></span>
-
-                  <span>Daily reflection notes</span>
-
-                </li>
-
-              </ul>
-
+              <!-- Editor Actions -->
+              <div class="reflect-editor-actions">
+                <button type="button" class="btn btn-primary" id="reflect-btn-save">Save Entry</button>
+                <button type="button" class="btn btn-outline" id="reflect-btn-clear">Clear Form</button>
+              </div>
             </div>
 
+            <!-- RIGHT: Rolling 30-Day History & Selected Date Inspector -->
+            <div class="reflect-sidebar-stack">
+              
+              <!-- Rolling 30-Day Mood Calendar -->
+              <div class="card reflect-calendar-card">
+                <div class="calendar-header">
+                  <div>
+                    <h3 class="calendar-month-title">Rolling 30-Day Mood History</h3>
+                    <p class="card-description" id="reflect-rolling-subtitle">Past 30 calendar days ending today</p>
+                  </div>
+                  <button type="button" class="btn btn-sm btn-subtle" id="reflect-btn-select-today">Today</button>
+                </div>
+
+                <!-- Sunday–Saturday Day Names -->
+                <div class="reflect-calendar-weekdays" aria-hidden="true">
+                  <span class="reflect-weekday-col">Sun</span>
+                  <span class="reflect-weekday-col">Mon</span>
+                  <span class="reflect-weekday-col">Tue</span>
+                  <span class="reflect-weekday-col">Wed</span>
+                  <span class="reflect-weekday-col">Thu</span>
+                  <span class="reflect-weekday-col">Fri</span>
+                  <span class="reflect-weekday-col">Sat</span>
+                </div>
+
+                <!-- 30-Day Rolling Grid -->
+                <div class="reflect-calendar-grid" id="reflect-calendar-grid" role="region" aria-label="Rolling 30-day mood history"></div>
+              </div>
+
+              <!-- Selected Date Inspector Card -->
+              <div class="card reflect-inspector-card" id="reflect-inspector-card">
+                <div class="inspector-header">
+                  <div>
+                    <h3 class="card-title" id="reflect-inspector-date">October 30, 2026</h3>
+                    <span class="inspector-mood-pill text-muted" id="reflect-inspector-mood-pill">No entry</span>
+                  </div>
+                  <button type="button" class="btn btn-sm btn-outline" id="reflect-btn-edit-selected" style="display: none;">
+                    Edit Entry
+                  </button>
+                </div>
+                <!-- Safe DOM Text Injection Container -->
+                <div class="reflect-inspector-content" id="reflect-inspector-content">
+                  <p class="text-muted">No reflection entry recorded for this date.</p>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- BOTTOM: Full-Width Previous Journal Entries Archive -->
+          <div class="card reflect-archive-card">
+            <div class="archive-header">
+              <div>
+                <h2 class="card-title">Previous Journal Entries</h2>
+                <p class="card-description">All-time reflections sorted newest first. Read, edit, or delete any entry.</p>
+              </div>
+            </div>
+
+            <!-- Safe Archive Entries Container -->
+            <div class="reflect-archive-list" id="reflect-archive-list">
+              <!-- Populated dynamically with safe DOM nodes -->
+            </div>
           </div>
 
         </section>
@@ -1568,7 +1648,7 @@
 
   <script src="js/scholar.js"></script>
   <script src="js/growth.js"></script>
-
+  <script src="js/reflect.js"></script>
   <script src="js/app.js"></script>
 
 </body>

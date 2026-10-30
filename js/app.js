@@ -27,7 +27,12 @@ document.addEventListener('DOMContentLoaded', () => {
     DaybloomGrowth.init();
   }
 
-  // 6. Verify browser localStorage support
+  // 6. Initialize Reflect journaling manager (Phase 5)
+  if (typeof DaybloomReflect !== 'undefined') {
+    DaybloomReflect.init();
+  }
+
+  // 7. Verify browser localStorage support
   checkStorageSupport();
 });
 
