@@ -322,3 +322,7 @@ const DaybloomWelcome = (() => {
     isStorageAvailable: () => isStorageHealthy
   };
 })();
+
+if (typeof window !== 'undefined') {
+  window.DaybloomWelcome = DaybloomWelcome;
+}

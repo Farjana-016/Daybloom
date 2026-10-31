@@ -153,7 +153,9 @@ const DaybloomDaily = (() => {
     const yesterdayStr = `${yesterday.getFullYear()}-${String(yesterday.getMonth() + 1).padStart(2, '0')}-${String(yesterday.getDate()).padStart(2, '0')}`;
 
     let dateText = '';
-    if (dueDate === todayStr) {
+    if (typeof DaybloomSettings !== 'undefined' && DaybloomSettings.formatDate) {
+      dateText = DaybloomSettings.formatDate(dueDate);
+    } else if (dueDate === todayStr) {
       dateText = 'Today';
     } else if (dueDate === tomorrowStr) {
       dateText = 'Tomorrow';
@@ -164,10 +166,15 @@ const DaybloomDaily = (() => {
     }
 
     if (dueTime) {
-      const [hours, minutes] = dueTime.split(':').map(Number);
-      const tempDate = new Date();
-      tempDate.setHours(hours, minutes, 0, 0);
-      const timeText = tempDate.toLocaleTimeString(undefined, { hour: 'numeric', minute: '2-digit' });
+      let timeText;
+      if (typeof DaybloomSettings !== 'undefined' && DaybloomSettings.formatTime) {
+        timeText = DaybloomSettings.formatTime(dueTime);
+      } else {
+        const [hours, minutes] = dueTime.split(':').map(Number);
+        const tempDate = new Date();
+        tempDate.setHours(hours, minutes, 0, 0);
+        timeText = tempDate.toLocaleTimeString(undefined, { hour: 'numeric', minute: '2-digit' });
+      }
       return `${dateText}, ${timeText}`;
     }
 
@@ -447,8 +454,12 @@ const DaybloomDaily = (() => {
     const list = lists.find(l => l.id === listId);
     if (!list) return;
 
-    const confirmed = window.confirm(`Are you sure you want to delete the list "${list.title}" and all its checklist items?`);
-    if (!confirmed) return;
+    if (typeof DaybloomSettings !== 'undefined' && !DaybloomSettings.shouldConfirmDelete()) {
+      // User disabled delete confirmation
+    } else {
+      const confirmed = window.confirm(`Are you sure you want to delete the list "${list.title}" and all its checklist items?`);
+      if (!confirmed) return;
+    }
 
     lists = lists.filter(l => l.id !== listId);
     if (activeEditingListId === listId) {
@@ -716,6 +727,7 @@ const DaybloomDaily = (() => {
 
   return {
     init,
+    render: () => render(),
     openEditor,
     closeEditor,
     saveEditorList,
@@ -727,3 +739,7 @@ const DaybloomDaily = (() => {
     setLists: (newLists) => { lists = newLists; saveData(); render(); }
   };
 })();
+
+if (typeof window !== 'undefined') {
+  window.DaybloomDaily = DaybloomDaily;
+}

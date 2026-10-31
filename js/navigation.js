@@ -2,24 +2,33 @@
  * Daybloom Navigation Controller
  * --------------------------------------------------------------------------
  * Handles active section state switching across desktop sidebar, mobile bottom
- * navigation bar, and main content panels. Supports full browser history traversal
- * (Back and Forward buttons) using pushState, popstate, and hashchange.
+ * navigation bar, main content panels, and the top-level Settings panel.
+ * Supports full browser history traversal (Back and Forward buttons) using
+ * pushState, popstate, and hashchange.
  */
 
 const DaybloomNav = (() => {
-  // Valid application sections in strict order: Home -> Daily -> Scholar -> Growth -> Reflect
-  const SECTIONS = ['home', 'daily', 'scholar', 'growth', 'reflect'];
+  // Valid application sections in strict order: Home -> Daily -> Scholar -> Growth -> Reflect + Settings
+  const SECTIONS = ['home', 'daily', 'scholar', 'growth', 'reflect', 'settings'];
+  const VALID_DEFAULT_SECTIONS = ['home', 'daily', 'scholar', 'growth', 'reflect'];
   const DEFAULT_SECTION = 'home';
   let currentActiveSection = DEFAULT_SECTION;
 
   /**
    * Switches the active view across the UI.
-   * @param {string} sectionId - Target section: 'home' | 'daily' | 'scholar' | 'growth' | 'reflect'
+   * @param {string} sectionId - Target section: 'home' | 'daily' | 'scholar' | 'growth' | 'reflect' | 'settings'
    * @param {boolean} [shouldPushHistory=true] - True for user clicks; false for popstate/hashchange/init
    */
   function switchSection(sectionId, shouldPushHistory = true) {
     if (!SECTIONS.includes(sectionId)) {
-      sectionId = DEFAULT_SECTION;
+      sectionId = getDefaultOpeningSection();
+    }
+
+    // If entering settings, remember previous regular section
+    if (sectionId === 'settings' && VALID_DEFAULT_SECTIONS.includes(currentActiveSection)) {
+      if (typeof DaybloomSettings !== 'undefined' && DaybloomSettings.setPreviousSection) {
+        DaybloomSettings.setPreviousSection(currentActiveSection);
+      }
     }
 
     currentActiveSection = sectionId;
@@ -50,7 +59,15 @@ const DaybloomNav = (() => {
       }
     });
 
-    // 3. Update view panels in the main content area
+    // 3. Update Header Settings button state
+    const headerSettingsBtn = document.getElementById('header-settings-btn');
+    if (headerSettingsBtn) {
+      const isSettings = sectionId === 'settings';
+      headerSettingsBtn.classList.toggle('active', isSettings);
+      headerSettingsBtn.setAttribute('aria-pressed', isSettings ? 'true' : 'false');
+    }
+
+    // 4. Update view panels in the main content area
     const viewPanels = document.querySelectorAll('.view-panel');
     viewPanels.forEach((panel) => {
       const isTarget = panel.id === `view-${sectionId}`;
@@ -77,7 +94,12 @@ const DaybloomNav = (() => {
       DaybloomReflect.render();
     }
 
-    // 4. Update browser history without duplicate steps
+    // Notify Settings view when activated
+    if (sectionId === 'settings' && typeof DaybloomSettings !== 'undefined' && DaybloomSettings.render) {
+      DaybloomSettings.render();
+    }
+
+    // 5. Update browser history without duplicate steps
     const currentHash = window.location.hash.replace('#', '');
     if (currentHash !== sectionId) {
       try {
@@ -97,13 +119,28 @@ const DaybloomNav = (() => {
   }
 
   /**
+   * Resolves the configured default opening section from settings.
+   * Fallback is strictly 'home'. Settings can never be the default opening section.
+   * @returns {string}
+   */
+  function getDefaultOpeningSection() {
+    if (typeof DaybloomSettings !== 'undefined' && DaybloomSettings.get) {
+      const savedDefault = DaybloomSettings.get('defaultSection');
+      if (VALID_DEFAULT_SECTIONS.includes(savedDefault)) {
+        return savedDefault;
+      }
+    }
+    return DEFAULT_SECTION;
+  }
+
+  /**
    * Handles browser Back/Forward navigation (popstate) and hash changes.
    * The state guard (targetSection !== currentActiveSection) prevents duplicate
    * executions when browsers emit both popstate and hashchange in succession.
    */
   function handleHistoryTraversal() {
     const hash = window.location.hash.replace('#', '');
-    const targetSection = SECTIONS.includes(hash) ? hash : DEFAULT_SECTION;
+    const targetSection = SECTIONS.includes(hash) ? hash : getDefaultOpeningSection();
 
     if (targetSection !== currentActiveSection) {
       switchSection(targetSection, false);
@@ -131,6 +168,15 @@ const DaybloomNav = (() => {
       });
     });
 
+    // Header Settings button
+    const headerSettingsBtn = document.getElementById('header-settings-btn');
+    if (headerSettingsBtn) {
+      headerSettingsBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        switchSection('settings', true);
+      });
+    }
+
     // Browser Back and Forward navigation triggers popstate
     window.addEventListener('popstate', handleHistoryTraversal);
 
@@ -139,18 +185,33 @@ const DaybloomNav = (() => {
   }
 
   /**
-   * Initializes the navigation state from the URL hash or defaults to 'home'.
+   * Initializes navigation state.
+   * Distinguishes between direct valid hash link and clean launch without hash.
    */
   function init() {
     bindEvents();
     const hash = window.location.hash.replace('#', '');
-    const initialSection = SECTIONS.includes(hash) ? hash : DEFAULT_SECTION;
-    switchSection(initialSection, false);
+
+    // If valid hash is present in URL (deep link or bookmark), respect it
+    if (hash && SECTIONS.includes(hash)) {
+      switchSection(hash, false);
+    } else {
+      // Normal application launch: read saved default opening section
+      const defaultSec = getDefaultOpeningSection();
+      switchSection(defaultSec, false);
+    }
   }
 
   return {
     init,
     switchSection,
-    getActiveSection: () => currentActiveSection
+    navigateTo: switchSection,
+    getActiveSection: () => currentActiveSection,
+    getDefaultOpeningSection,
+    SECTIONS
   };
 })();
+
+if (typeof window !== 'undefined') {
+  window.DaybloomNav = DaybloomNav;
+}

@@ -286,9 +286,13 @@
 
 
         <div class="header-status-badge">
-
-          <span>Client-only</span>
-
+          <button id="header-settings-btn" class="header-settings-btn" aria-label="Settings" title="Settings" type="button">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="12" cy="12" r="3"/>
+              <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+            </svg>
+            <span class="header-settings-label">Settings</span>
+          </button>
         </div>
 
       </header>
@@ -429,7 +433,7 @@
 
           <section class="daily-lists-section" aria-labelledby="daily-lists-heading">
 
-            
+
 
             <!-- Toolbar: Header, Counters, Filter tabs & Create List Button -->
 
@@ -659,7 +663,7 @@
 
           <div class="scholar-workspace">
 
-            
+
 
             <!-- Left Pane: Monthly Calendar Grid -->
 
@@ -1310,10 +1314,10 @@
 
           <!-- Main Grid: Left Editor Studio, Right Rolling 30-Day Calendar & Inspector -->
           <div class="reflect-main-grid">
-            
+
             <!-- LEFT: Daily Reflection Studio Card -->
             <div class="card reflect-editor-card">
-              
+
               <!-- Past Edit Context Banner -->
               <div class="reflect-past-banner" id="reflect-past-banner" style="display: none;" role="status">
                 <div class="past-banner-info">
@@ -1373,10 +1377,10 @@
               <!-- Journal Textarea -->
               <div class="reflect-field-section">
                 <label class="form-field-label" for="reflect-journal-input">Daily Reflection:</label>
-                <textarea id="reflect-journal-input" 
-                          class="reflect-textarea" 
-                          placeholder="Write freely about your day, lessons learned, or feelings..." 
-                          aria-label="Daily reflection content" 
+                <textarea id="reflect-journal-input"
+                          class="reflect-textarea"
+                          placeholder="Write freely about your day, lessons learned, or feelings..."
+                          aria-label="Daily reflection content"
                           rows="8"></textarea>
               </div>
 
@@ -1389,7 +1393,7 @@
 
             <!-- RIGHT: Rolling 30-Day History & Selected Date Inspector -->
             <div class="reflect-sidebar-stack">
-              
+
               <!-- Rolling 30-Day Mood Calendar -->
               <div class="card reflect-calendar-card">
                 <div class="calendar-header">
@@ -1451,6 +1455,281 @@
           </div>
 
         </section>
+        <!-- ============================================================ -->
+        <!-- 6. Settings View Panel (Phase 9)                             -->
+        <!-- ============================================================ -->
+        <section class="view-panel" id="view-settings" role="tabpanel" aria-labelledby="settings-view-title">
+
+          <!-- View Header -->
+          <div class="view-header">
+            <div class="view-header-main">
+              <div class="view-icon-badge settings" aria-hidden="true">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="3"/>
+                  <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+                </svg>
+              </div>
+              <div>
+                <h1 id="settings-view-title" class="view-title">Settings</h1>
+                <p class="view-subtitle">Preferences, appearance, data management, and storage controls.</p>
+              </div>
+            </div>
+
+            <div class="view-header-actions">
+              <button id="settings-back-btn" class="btn btn-outline" type="button" aria-label="Return to previous section">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <line x1="19" y1="12" x2="5" y2="12"></line>
+                  <polyline points="12 19 5 12 12 5"></polyline>
+                </svg>
+                <span>Back</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Notification / Feedback Banner -->
+          <div id="settings-feedback-banner" class="settings-feedback-banner" role="status" aria-live="polite" hidden></div>
+
+          <div class="settings-grid">
+
+            <!-- Card 1: Category A - Personalisation -->
+            <div class="card settings-card">
+              <div class="settings-card-header">
+                <div class="settings-card-icon-wrapper" aria-hidden="true">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="12" cy="7" r="4"></circle>
+                  </svg>
+                </div>
+                <div>
+                  <h2 class="settings-card-title">Personalisation</h2>
+                  <p class="settings-card-subtitle">Update your name to customize greetings across Home and Daily.</p>
+                </div>
+              </div>
+
+              <div class="settings-field-group">
+                <label for="settings-name-input" class="settings-field-label">Preferred Name</label>
+                <div class="settings-input-action-row">
+                  <input
+                    type="text"
+                    id="settings-name-input"
+                    class="form-input"
+                    placeholder="Enter your name"
+                    maxlength="50"
+                    autocomplete="name"
+                  >
+                  <button id="settings-name-save-btn" class="btn btn-primary" type="button">Save Name</button>
+                </div>
+                <div id="settings-name-feedback" class="field-feedback" hidden></div>
+                <span class="settings-field-hint">Maximum 50 characters. Refreshes all greetings immediately.</span>
+              </div>
+            </div>
+
+            <!-- Card 2: Category B - Application Behaviour -->
+            <div class="card settings-card">
+              <div class="settings-card-header">
+                <div class="settings-card-icon-wrapper" aria-hidden="true">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon>
+                  </svg>
+                </div>
+                <div>
+                  <h2 class="settings-card-title">Application Behaviour</h2>
+                  <p class="settings-card-subtitle">Set your opening section and academic calendar layout.</p>
+                </div>
+              </div>
+
+              <div class="settings-field-group">
+                <label for="settings-default-section-select" class="settings-field-label">Default Opening Section</label>
+                <select id="settings-default-section-select" class="form-select">
+                  <option value="home">Home (Overview &amp; Shortcuts)</option>
+                  <option value="daily">Daily (Personal Checklist)</option>
+                  <option value="scholar">Scholar (Academic Manager)</option>
+                  <option value="growth">Growth (Productivity Stats)</option>
+                  <option value="reflect">Reflect (Mindful Journal)</option>
+                </select>
+                <span class="settings-field-hint">Choose which section opens when launching Daybloom directly.</span>
+              </div>
+
+              <div class="settings-field-group">
+                <label for="settings-week-start-select" class="settings-field-label">Scholar Calendar Week Starts On</label>
+                <select id="settings-week-start-select" class="form-select">
+                  <option value="sunday">Sunday (Sunday – Saturday)</option>
+                  <option value="monday">Monday (Monday – Sunday)</option>
+                </select>
+                <span class="settings-field-hint">Controls the weekday column ordering on the Scholar monthly calendar.</span>
+              </div>
+            </div>
+
+            <!-- Card 3: Category C - Display & Interaction Preferences -->
+            <div class="card settings-card">
+              <div class="settings-card-header">
+                <div class="settings-card-icon-wrapper" aria-hidden="true">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                    <line x1="16" y1="2" x2="16" y2="6"></line>
+                    <line x1="8" y1="2" x2="8" y2="6"></line>
+                    <line x1="3" y1="10" x2="21" y2="10"></line>
+                  </svg>
+                </div>
+                <div>
+                  <h2 class="settings-card-title">Display &amp; Interaction</h2>
+                  <p class="settings-card-subtitle">Customize date/time formats and deletion safeguards.</p>
+                </div>
+              </div>
+
+              <div class="settings-row-two-col">
+                <div class="settings-field-group">
+                  <label for="settings-date-format-select" class="settings-field-label">Date Format</label>
+                  <select id="settings-date-format-select" class="form-select">
+                    <option value="MMM D, YYYY">MMM D, YYYY (e.g. Oct 31, 2026)</option>
+                    <option value="D MMM YYYY">D MMM YYYY (e.g. 31 Oct 2026)</option>
+                    <option value="YYYY-MM-DD">YYYY-MM-DD (e.g. 2026-10-31)</option>
+                    <option value="MM/DD/YYYY">MM/DD/YYYY (e.g. 10/31/2026)</option>
+                    <option value="DD/MM/YYYY">DD/MM/YYYY (e.g. 31/10/2026)</option>
+                  </select>
+                </div>
+
+                <div class="settings-field-group">
+                  <label for="settings-time-format-select" class="settings-field-label">Time Format</label>
+                  <select id="settings-time-format-select" class="form-select">
+                    <option value="12h">12-Hour (AM/PM) (e.g. 4:00 PM)</option>
+                    <option value="24h">24-Hour (e.g. 16:00)</option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- Live Date/Time Preview Box -->
+              <div class="settings-preview-box">
+                <span class="settings-preview-label">Live Preview:</span>
+                <span id="settings-datetime-preview" class="settings-preview-value">--</span>
+              </div>
+
+              <div class="settings-field-group settings-checkbox-row">
+                <label class="custom-checkbox-container">
+                  <input type="checkbox" id="settings-confirm-delete-checkbox" checked>
+                  <span class="checkmark" aria-hidden="true"></span>
+                  <span class="checkbox-label">Ask for confirmation before deleting tasks, lists, or reflections</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Card 4: Category D - Data Management & Protection -->
+            <div class="card settings-card">
+              <div class="settings-card-header">
+                <div class="settings-card-icon-wrapper" aria-hidden="true">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                    <polyline points="7 10 12 15 17 10"></polyline>
+                    <line x1="12" y1="15" x2="12" y2="3"></line>
+                  </svg>
+                </div>
+                <div>
+                  <h2 class="settings-card-title">Data Management &amp; Backup</h2>
+                  <p class="settings-card-subtitle">Export your records for safekeeping, restore from backup, or clear storage.</p>
+                </div>
+              </div>
+
+              <div class="settings-data-actions-grid">
+                <!-- Export Backup -->
+                <div class="settings-data-action-item">
+                  <div class="settings-action-desc">
+                    <strong>Export Backup</strong>
+                    <p>Download a complete JSON snapshot of your tasks, reflections, and settings.</p>
+                  </div>
+                  <button id="settings-export-btn" class="btn btn-outline" type="button">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                      <polyline points="7 10 12 15 17 10"></polyline>
+                      <line x1="12" y1="15" x2="12" y2="3"></line>
+                    </svg>
+                    <span>Export JSON</span>
+                  </button>
+                </div>
+
+                <!-- Restore Backup -->
+                <div class="settings-data-action-item">
+                  <div class="settings-action-desc">
+                    <strong>Restore from Backup</strong>
+                    <p>Restore your data from a verified Daybloom JSON backup file. All records are validated before writing.</p>
+                  </div>
+                  <input
+                    type="file"
+                    id="settings-restore-file-input"
+                    accept=".json,application/json"
+                    aria-label="Select Daybloom JSON backup file"
+                    style="position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;"
+                    tabindex="-1"
+                  >
+                  <button
+                    id="settings-restore-btn"
+                    class="btn btn-outline"
+                    type="button"
+                  >
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                      <polyline points="17 8 12 3 7 8"></polyline>
+                      <line x1="12" y1="3" x2="12" y2="15"></line>
+                    </svg>
+                    <span>Choose File...</span>
+                  </button>
+                  <div id="settings-restore-inline-status" class="settings-restore-inline-status" role="status" aria-live="polite" style="display: none; width: 100%; margin-top: var(--spacing-2); font-size: var(--font-size-sm); font-weight: var(--font-weight-medium);"></div>
+                </div>
+              </div>
+
+              <!-- Danger Zone: Clear Storage -->
+              <div class="settings-danger-zone">
+                <div class="settings-danger-info">
+                  <strong>Clear All Daybloom Data</strong>
+                  <p>Permanently removes all your local lists, academic tasks, journal reflections, and settings from this browser. This cannot be undone.</p>
+                </div>
+                <button id="settings-clear-all-btn" class="btn btn-danger-subtle" type="button">Clear All Data</button>
+              </div>
+            </div>
+
+            <!-- Card 5: Category E - About & Storage Facts -->
+            <div class="card settings-card">
+              <div class="settings-card-header">
+                <div class="settings-card-icon-wrapper" aria-hidden="true">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <line x1="12" y1="16" x2="12" y2="12"></line>
+                    <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                  </svg>
+                </div>
+                <div>
+                  <h2 class="settings-card-title">About Daybloom</h2>
+                  <p class="settings-card-subtitle">Application architecture and local storage details.</p>
+                </div>
+              </div>
+
+              <div class="about-info-grid">
+                <div class="about-info-row">
+                  <span class="about-info-label">Architecture</span>
+                  <span class="about-info-value">Client-Side (Vanilla HTML5, CSS3, &amp; JavaScript)</span>
+                </div>
+                <div class="about-info-row">
+                  <span class="about-info-label">Account Requirement</span>
+                  <span class="about-info-value">None (No sign-in or account registration required)</span>
+                </div>
+                <div class="about-info-row">
+                  <span class="about-info-label">Storage Location</span>
+                  <span class="about-info-value">Browser Local Storage (localStorage)</span>
+                </div>
+                <div class="about-info-row">
+                  <span class="about-info-label">Storage Space Used</span>
+                  <span id="settings-storage-usage-text" class="about-info-value">Calculating...</span>
+                </div>
+              </div>
+
+              <p class="settings-storage-note">
+                <strong>Storage Notice:</strong> Your data is stored locally in this browser. Daybloom does not provide cloud synchronization between devices. Clearing your browser site data or cookies for this origin will erase stored records. Use the <strong>Export Backup</strong> feature to save or transfer your data.
+              </p>
+            </div>
+
+          </div>
+        </section>
+
 
 
 
@@ -1459,6 +1738,60 @@
     </div>
 
 
+
+
+  <!-- ---------------- Clear All Data Confirmation Modal ---------------- -->
+  <div id="clear-data-modal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="clear-modal-title">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h2 id="clear-modal-title" class="modal-title" style="color: var(--color-danger, #ef4444);">Clear All Daybloom Data?</h2>
+      </div>
+      <div class="modal-body">
+        <p style="margin-bottom: var(--spacing-4); color: var(--color-text-secondary);">
+          This action will <strong>permanently delete</strong> all your Daybloom records from this browser, including your to-do lists, academic tasks, journal reflections, and personal preferences.
+        </p>
+        <p style="margin-bottom: var(--spacing-4); color: var(--color-text-secondary);">
+          If you want to keep your data, please click Cancel and export a JSON backup first.
+        </p>
+        <label class="custom-checkbox-container" style="margin-top: var(--spacing-2);">
+          <input type="checkbox" id="clear-data-confirm-checkbox">
+          <span class="checkmark" aria-hidden="true"></span>
+          <span class="checkbox-label" style="font-weight: var(--font-weight-medium); color: var(--color-text-primary);">
+            I understand that this will erase all my Daybloom data permanently.
+          </span>
+        </label>
+      </div>
+      <div class="modal-actions">
+        <button id="clear-data-cancel-btn" class="btn btn-outline" type="button">Cancel</button>
+        <button id="clear-data-confirm-btn" class="btn btn-danger" type="button" disabled>Clear Everything</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ---------------- Emergency Recovery Modal (Double-Fault Safeguard) ---------------- -->
+  <div id="emergency-recovery-modal" class="modal-backdrop emergency-modal" role="alertdialog" aria-modal="true" aria-labelledby="emergency-modal-title">
+    <div class="modal-card emergency-card">
+      <div class="modal-header">
+        <h2 id="emergency-modal-title" class="modal-title" style="color: var(--color-danger, #ef4444);">Emergency Recovery Interface</h2>
+      </div>
+      <div class="modal-body">
+        <p id="emergency-recovery-desc" style="margin-bottom: var(--spacing-4); font-weight: var(--font-weight-medium); color: var(--color-text-primary);">
+          A storage failure occurred. Your data is preserved in memory.
+        </p>
+        <div class="alert-box alert-warning" style="margin-bottom: var(--spacing-4); padding: var(--spacing-3); background-color: rgba(245, 158, 11, 0.1); border: 1px solid var(--accent-growth-border); border-radius: var(--radius-md); font-size: var(--font-size-xs); color: var(--color-text-primary);">
+          <strong>Do not close or reload this browser tab!</strong> If you close the tab, the in-memory recovery copy will be lost. Please download your emergency snapshot file now.
+        </div>
+        <div style="margin-bottom: var(--spacing-4);">
+          <label for="emergency-recovery-json" style="display: block; font-size: var(--font-size-xs); font-weight: var(--font-weight-semibold); margin-bottom: var(--spacing-1); color: var(--color-text-secondary);">Preserved In-Memory Data (JSON):</label>
+          <textarea id="emergency-recovery-json" readonly style="width: 100%; height: 160px; font-family: monospace; font-size: 11px; padding: var(--spacing-2); border: 1px solid var(--color-border); border-radius: var(--radius-md); background: var(--color-bg-subtle); color: var(--color-text-primary); resize: vertical;"></textarea>
+        </div>
+        <div class="emergency-action-buttons" style="display: flex; gap: var(--spacing-2); flex-wrap: wrap;">
+          <button id="emergency-recovery-download-btn" class="btn btn-primary" type="button">Download Emergency Backup (.json)</button>
+          <button id="emergency-recovery-close-btn" class="btn btn-outline" type="button">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
     <!-- ---------------- Mobile Bottom Navigation Bar ---------------- -->
 
@@ -1556,6 +1889,7 @@
 
   <!-- JavaScript Modules -->
 
+  <script src="js/settings.js"></script>
   <script src="js/navigation.js"></script>
   <script src="js/welcome.js"></script>
 

@@ -2880,3 +2880,405 @@ html.daybloom-user-returning #welcome-screen {
     height: 36px;
   }
 }
+
+
+/* ==========================================================================
+   Phase 9: Settings, Data Backup & Restore
+   ========================================================================== */
+
+/* Settings View Icon Badge */
+.view-icon-badge.settings {
+  background-color: var(--color-bg-subtle);
+  color: var(--color-text-secondary);
+  border: 1px solid var(--color-border);
+}
+
+/* Settings Feedback Banner */
+.settings-feedback-banner {
+  padding: var(--spacing-3) var(--spacing-4);
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  margin-bottom: var(--spacing-6);
+  border: 1px solid transparent;
+  display: block;
+  animation: fadeIn 150ms ease-out forwards;
+}
+
+.settings-feedback-banner.success {
+  background-color: #ecfdf5;
+  border-color: #a7f3d0;
+  color: #047857;
+}
+
+.settings-feedback-banner.error {
+  background-color: #fef2f2;
+  border-color: #fecaca;
+  color: #b91c1c;
+}
+
+.settings-feedback-banner.info {
+  background-color: #eff6ff;
+  border-color: #bfdbfe;
+  color: #1d4ed8;
+}
+
+.settings-feedback-banner[hidden] {
+  display: none !important;
+}
+
+/* Settings Grid & Cards */
+.settings-grid {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-6);
+  max-width: 840px;
+}
+
+.settings-card {
+  padding: var(--spacing-6);
+  background-color: var(--color-bg-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-xs);
+}
+
+.settings-card-header {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-4);
+  padding-bottom: var(--spacing-4);
+  border-bottom: 1px solid var(--color-border-subtle);
+  margin-bottom: var(--spacing-5);
+}
+
+.settings-card-icon-wrapper {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-md);
+  background-color: var(--color-bg-subtle);
+  color: var(--color-text-secondary);
+  border: 1px solid var(--color-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.settings-card-title {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+  margin: 0 0 2px 0;
+  line-height: 1.3;
+}
+
+.settings-card-subtitle {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* Form Fields in Settings */
+.settings-field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: var(--spacing-5);
+}
+
+.settings-field-group:last-child {
+  margin-bottom: 0;
+}
+
+.settings-field-label {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-primary);
+}
+
+.settings-field-hint {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+  line-height: 1.4;
+}
+
+.settings-input-action-row {
+  display: flex;
+  gap: var(--spacing-3);
+  align-items: center;
+}
+
+.settings-input-action-row .form-input {
+  flex: 1;
+}
+
+.settings-row-two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-4);
+}
+
+/* Live Preview Box */
+.settings-preview-box {
+  background-color: var(--color-bg-subtle);
+  border: 1px dashed var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-3) var(--spacing-4);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3);
+  margin-bottom: var(--spacing-5);
+}
+
+.settings-preview-label {
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.settings-preview-value {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-primary);
+}
+
+/* Checkbox Row */
+.settings-checkbox-row {
+  margin-top: var(--spacing-2);
+}
+
+/* Data Management Action Items */
+.settings-data-actions-grid {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+  margin-bottom: var(--spacing-6);
+}
+
+.settings-data-action-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-4);
+  padding: var(--spacing-4);
+  background-color: var(--color-bg-subtle);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-lg);
+}
+
+.settings-action-desc strong {
+  display: block;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-primary);
+  margin-bottom: 2px;
+}
+
+.settings-action-desc p {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* Danger Zone */
+.settings-danger-zone {
+  border: 1px solid #fecaca;
+  background-color: #fffafb;
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-4) var(--spacing-5);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-4);
+}
+
+.settings-danger-info strong {
+  display: block;
+  font-size: var(--font-size-sm);
+  color: #dc2626;
+  margin-bottom: 2px;
+}
+
+.settings-danger-info p {
+  font-size: var(--font-size-xs);
+  color: #991b1b;
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* About Grid */
+.about-info-grid {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  margin-bottom: var(--spacing-4);
+}
+
+.about-info-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--spacing-3) var(--spacing-4);
+  background-color: var(--color-bg-surface);
+  border-bottom: 1px solid var(--color-border-subtle);
+  font-size: var(--font-size-sm);
+  gap: var(--spacing-3);
+}
+
+.about-info-row:last-child {
+  border-bottom: none;
+}
+
+.about-info-row:nth-child(even) {
+  background-color: var(--color-bg-subtle);
+}
+
+.about-info-label {
+  color: var(--color-text-secondary);
+  font-weight: var(--font-weight-medium);
+  flex-shrink: 0;
+}
+
+.about-info-value {
+  color: var(--color-text-primary);
+  font-weight: var(--font-weight-medium);
+  text-align: right;
+  word-break: break-word;
+}
+
+.settings-storage-note {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* Modal Backdrops & Cards */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(15, 23, 42, 0.45);
+  backdrop-filter: blur(2px);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: var(--spacing-4);
+  animation: fadeIn 150ms ease-out forwards;
+}
+
+.modal-backdrop.active,
+.modal-backdrop.open {
+  display: flex !important;
+}
+
+.modal-card {
+  background-color: var(--color-bg-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-lg);
+  max-width: 480px;
+  width: 100%;
+  padding: var(--spacing-6);
+  box-sizing: border-box;
+}
+
+.modal-header {
+  margin-bottom: var(--spacing-4);
+}
+
+.modal-title {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+  margin: 0;
+}
+
+.modal-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--spacing-3);
+  margin-top: var(--spacing-6);
+}
+
+/* Emergency Recovery Modal */
+.emergency-card {
+  max-width: 540px;
+  border-color: #fca5a5;
+}
+
+.emergency-action-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-3);
+  margin-top: var(--spacing-5);
+}
+
+.alert-box {
+  padding: var(--spacing-3) var(--spacing-4);
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-sm);
+  line-height: 1.4;
+}
+
+.alert-warning {
+  background-color: #fffbeb;
+  border: 1px solid #fde68a;
+  color: #92400e;
+}
+
+/* Responsive adjustments for Settings */
+@media (max-width: 640px) {
+  .settings-row-two-col {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-4);
+  }
+
+  .settings-data-action-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .settings-data-action-item .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .settings-danger-zone {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .settings-danger-zone .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .about-info-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+
+  .about-info-value {
+    text-align: left;
+  }
+
+  .settings-input-action-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .settings-input-action-row .btn {
+    width: 100%;
+    justify-content: center;
+  }
+}

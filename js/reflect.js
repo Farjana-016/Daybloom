@@ -42,7 +42,7 @@ const DaybloomReflect = (() => {
 
   let selectedDateStr = null; // Active date inspected in rolling 30-day view ("YYYY-MM-DD")
   let selectedMood = null;    // Active mood key in studio ('excited' | 'happy' | ... | null)
-  
+
   let editorState = {
     isEditingPast: false,     // true when editing a date other than today
     targetDate: null,         // "YYYY-MM-DD"
@@ -65,6 +65,9 @@ const DaybloomReflect = (() => {
    */
   function formatFriendlyDate(dateKey) {
     if (!dateKey) return '';
+    if (typeof DaybloomSettings !== 'undefined' && DaybloomSettings.formatDate) {
+      return DaybloomSettings.formatDate(dateKey);
+    }
     const [year, month, day] = dateKey.split('-').map(Number);
     const dateObj = new Date(year, month - 1, day);
     return dateObj.toLocaleDateString(undefined, {
@@ -81,6 +84,9 @@ const DaybloomReflect = (() => {
    */
   function formatShortDate(dateKey) {
     if (!dateKey) return '';
+    if (typeof DaybloomSettings !== 'undefined' && DaybloomSettings.formatDate) {
+      return DaybloomSettings.formatDate(dateKey);
+    }
     const [year, month, day] = dateKey.split('-').map(Number);
     const dateObj = new Date(year, month - 1, day);
     return dateObj.toLocaleDateString(undefined, {
@@ -752,9 +758,13 @@ const DaybloomReflect = (() => {
       deleteBtn.className = 'btn btn-sm btn-danger-subtle btn-delete-archive';
       deleteBtn.textContent = 'Delete';
       deleteBtn.addEventListener('click', () => {
-        const confirmed = window.confirm(`Are you sure you want to delete your reflection for ${formatFriendlyDate(entry.dateKey)}?`);
-        if (confirmed) {
+        if (typeof DaybloomSettings !== 'undefined' && !DaybloomSettings.shouldConfirmDelete()) {
           deleteEntry(entry.id);
+        } else {
+          const confirmed = window.confirm(`Are you sure you want to delete your reflection for ${formatFriendlyDate(entry.dateKey)}?`);
+          if (confirmed) {
+            deleteEntry(entry.id);
+          }
         }
       });
       actionsRow.appendChild(deleteBtn);
@@ -808,3 +818,7 @@ const DaybloomReflect = (() => {
     isStorageCorrupted: () => isStorageCorrupted
   };
 })();
+
+if (typeof window !== 'undefined') {
+  window.DaybloomReflect = DaybloomReflect;
+}

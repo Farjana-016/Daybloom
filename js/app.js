@@ -2,10 +2,15 @@
  * Daybloom Application Entry Point
  * --------------------------------------------------------------------------
  * Initializes app state, updates real-time date headers, and sets up
- * client-side navigation and the Daily task manager.
+ * client-side navigation and modular feature managers.
  */
 
 document.addEventListener('DOMContentLoaded', () => {
+  // 0. Initialize Settings & Preferences (Phase 9)
+  if (typeof DaybloomSettings !== 'undefined') {
+    DaybloomSettings.init();
+  }
+
   // 1. Initialize real-time date display in header
   updateDateDisplays();
 
@@ -43,19 +48,27 @@ document.addEventListener('DOMContentLoaded', () => {
 
 /**
  * Formats and injects the current date into designated header badges.
- * Example format: "Thursday, Oct 29"
  */
 function updateDateDisplays() {
   const dateElements = document.querySelectorAll('.current-date-text');
   const now = new Date();
 
-  const options = {
-    weekday: 'short',
-    month: 'short',
-    day: 'numeric'
-  };
+  let formattedDate;
+  if (typeof DaybloomSettings !== 'undefined' && DaybloomSettings.get) {
+    const format = DaybloomSettings.get('dateFormat');
+    if (format && format !== 'system') {
+      formattedDate = DaybloomSettings.formatDate(now);
+    }
+  }
 
-  const formattedDate = now.toLocaleDateString(undefined, options);
+  if (!formattedDate) {
+    const options = {
+      weekday: 'short',
+      month: 'short',
+      day: 'numeric'
+    };
+    formattedDate = now.toLocaleDateString(undefined, options);
+  }
 
   dateElements.forEach((el) => {
     el.textContent = formattedDate;

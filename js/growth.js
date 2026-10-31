@@ -613,3 +613,7 @@ const DaybloomGrowth = (() => {
     jumpToTask
   };
 })();
+
+if (typeof window !== 'undefined') {
+  window.DaybloomGrowth = DaybloomGrowth;
+}

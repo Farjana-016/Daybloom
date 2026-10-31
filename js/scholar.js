@@ -138,7 +138,9 @@ const DaybloomScholar = (() => {
     const yesterdayStr = formatDateKey(yesterday);
 
     let dateText = '';
-    if (dueDate === todayStr) {
+    if (typeof DaybloomSettings !== 'undefined' && DaybloomSettings.formatDate) {
+      dateText = DaybloomSettings.formatDate(dueDate);
+    } else if (dueDate === todayStr) {
       dateText = 'Today';
     } else if (dueDate === tomorrowStr) {
       dateText = 'Tomorrow';
@@ -150,10 +152,14 @@ const DaybloomScholar = (() => {
 
     let timeText = '';
     if (dueTime) {
-      const [h, m] = dueTime.split(':').map(Number);
-      const tempDate = new Date();
-      tempDate.setHours(h, m, 0, 0);
-      timeText = tempDate.toLocaleTimeString(undefined, { hour: 'numeric', minute: '2-digit' });
+      if (typeof DaybloomSettings !== 'undefined' && DaybloomSettings.formatTime) {
+        timeText = DaybloomSettings.formatTime(dueTime);
+      } else {
+        const [h, m] = dueTime.split(':').map(Number);
+        const tempDate = new Date();
+        tempDate.setHours(h, m, 0, 0);
+        timeText = tempDate.toLocaleTimeString(undefined, { hour: 'numeric', minute: '2-digit' });
+      }
     }
 
     const prefix = dateType === 'event' ? 'Event: ' : 'Due: ';
@@ -182,7 +188,9 @@ const DaybloomScholar = (() => {
     const yesterdayStr = formatDateKey(yesterday);
 
     let dateText = '';
-    if (dueDate === todayStr) {
+    if (typeof DaybloomSettings !== 'undefined' && DaybloomSettings.formatDate) {
+      dateText = DaybloomSettings.formatDate(dueDate);
+    } else if (dueDate === todayStr) {
       dateText = 'Today';
     } else if (dueDate === tomorrowStr) {
       dateText = 'Tomorrow';
@@ -199,10 +207,14 @@ const DaybloomScholar = (() => {
 
     let timeText = '';
     if (dueTime) {
-      const [h, m] = dueTime.split(':').map(Number);
-      const tempDate = new Date();
-      tempDate.setHours(h, m, 0, 0);
-      timeText = tempDate.toLocaleTimeString(undefined, { hour: 'numeric', minute: '2-digit' });
+      if (typeof DaybloomSettings !== 'undefined' && DaybloomSettings.formatTime) {
+        timeText = DaybloomSettings.formatTime(dueTime);
+      } else {
+        const [h, m] = dueTime.split(':').map(Number);
+        const tempDate = new Date();
+        tempDate.setHours(h, m, 0, 0);
+        timeText = tempDate.toLocaleTimeString(undefined, { hour: 'numeric', minute: '2-digit' });
+      }
     }
 
     const prefix = dateType === 'event' ? 'Event: ' : 'Due: ';
@@ -432,14 +444,18 @@ const DaybloomScholar = (() => {
     const task = tasks.find(t => t.id === taskId);
     if (!task) return;
 
-    const confirmMsg = `Are you sure you want to delete "${task.title}"?`;
-    if (window.confirm(confirmMsg)) {
-      tasks = tasks.filter(t => t.id !== taskId);
-      saveTasks();
-      render();
-      if (typeof DaybloomGrowth !== 'undefined' && DaybloomGrowth.render) {
-        DaybloomGrowth.render();
-      }
+    if (typeof DaybloomSettings !== 'undefined' && !DaybloomSettings.shouldConfirmDelete()) {
+      // User disabled delete confirmation
+    } else {
+      const confirmMsg = `Are you sure you want to delete "${task.title}"?`;
+      if (!window.confirm(confirmMsg)) return;
+    }
+
+    tasks = tasks.filter(t => t.id !== taskId);
+    saveTasks();
+    render();
+    if (typeof DaybloomGrowth !== 'undefined' && DaybloomGrowth.render) {
+      DaybloomGrowth.render();
     }
   }
 
@@ -598,9 +614,17 @@ const DaybloomScholar = (() => {
       monthTitle.textContent = `${monthNames[month]} ${year}`;
     }
 
-    // 2. Compute calendar math (Sunday-Saturday order)
+    // 2. Compute calendar math (Sunday-Saturday or Monday-Sunday order)
+    const isMondayStart = typeof DaybloomSettings !== 'undefined' &&
+      (DaybloomSettings.getWeekStartsOn ? DaybloomSettings.getWeekStartsOn() === 'monday' : DaybloomSettings.getWeekStartDay() === 'monday');
+    const activeWeekdays = isMondayStart
+      ? ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+      : WEEKDAYS;
+
     const firstDay = new Date(year, month, 1);
-    const leadingEmptySlots = firstDay.getDay(); // 0 for Sunday, 1 for Monday, etc.
+    const leadingEmptySlots = isMondayStart
+      ? (firstDay.getDay() + 6) % 7
+      : firstDay.getDay();
     const daysInMonth = new Date(year, month + 1, 0).getDate();
     const daysInPrevMonth = new Date(year, month, 0).getDate();
 
@@ -611,7 +635,7 @@ const DaybloomScholar = (() => {
     // Render Weekday Column Headers
     const headerRow = document.createElement('div');
     headerRow.className = 'calendar-weekdays-row';
-    WEEKDAYS.forEach(dayName => {
+    activeWeekdays.forEach(dayName => {
       const col = document.createElement('div');
       col.className = 'calendar-weekday-col';
       col.textContent = dayName;
@@ -1079,6 +1103,7 @@ const DaybloomScholar = (() => {
 
   return {
     init,
+    render: () => render(),
     openTaskEditor,
     closeTaskEditor,
     saveTaskFromEditor,
@@ -1096,3 +1121,7 @@ const DaybloomScholar = (() => {
     setCategoryFilter: (cat) => { activeCategoryFilter = cat; render(); }
   };
 })();
+
+if (typeof window !== 'undefined') {
+  window.DaybloomScholar = DaybloomScholar;
+}

@@ -205,8 +205,48 @@
   display: inline-flex;
   align-items: center;
   gap: var(--spacing-2);
+}
+
+.header-settings-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  padding: 5px 12px;
+  background-color: var(--color-bg-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-full);
   font-size: var(--font-size-xs);
-  color: var(--color-text-muted);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.header-settings-btn:hover {
+  background-color: var(--color-bg-surface-hover);
+  border-color: var(--color-border-hover);
+  color: var(--color-text-primary);
+}
+
+.header-settings-btn.active {
+  background-color: var(--color-bg-surface-hover);
+  border-color: var(--color-text-primary);
+  color: var(--color-text-primary);
+  font-weight: var(--font-weight-semibold);
+}
+
+.header-settings-btn:focus-visible {
+  outline: 2px solid var(--accent-brand);
+  outline-offset: 2px;
+}
+
+@media (max-width: 480px) {
+  .header-settings-btn {
+    padding: 6px;
+  }
+  .header-settings-label {
+    display: none;
+  }
 }
 
 /* Content Container */
@@ -305,6 +345,10 @@
 
   .header-brand-mobile {
     display: flex;
+  }
+
+  .header-date-badge {
+    display: none;
   }
 
   .app-header {
