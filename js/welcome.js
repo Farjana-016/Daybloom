@@ -3,7 +3,7 @@
  * --------------------------------------------------------------------------
  * Handles first-time user onboarding, name validation, error handling,
  * localStorage persistence with in-memory session fallback, zero-flicker state
- * management, and deterministic, time-based Daily homepage greetings.
+ * management, and deterministic, time-based Home greetings.
  */
 
 const DaybloomWelcome = (() => {
@@ -122,24 +122,18 @@ const DaybloomWelcome = (() => {
   }
 
   /**
-   * Safely updates the Daily homepage banner using textContent.
+   * Safely updates the Home personalized greeting using textContent.
    * @param {number|Date} [referenceTime] - Optional reference time for testing
    */
-  function updateDailyGreeting(referenceTime) {
+  function updateGreeting(referenceTime) {
     const name = getUserName();
-    const titleEl = document.getElementById('daily-welcome-title');
-    const subtitleEl = document.getElementById('daily-welcome-subtitle');
 
-    if (!titleEl || !subtitleEl) {
-      return;
-    }
-
-    if (name) {
-      titleEl.textContent = getGreetingText(name, referenceTime);
-      subtitleEl.textContent = "Let's make today count.";
-    } else {
-      titleEl.textContent = 'Welcome to Daybloom';
-      subtitleEl.textContent = 'A minimal personal productivity workspace tailored for focused days. Browse the four pillars below or use the navigation to switch views.';
+    // Update Home section greeting
+    const homeTitleEl = document.getElementById('home-greeting-title');
+    if (homeTitleEl) {
+      homeTitleEl.textContent = name
+        ? getGreetingText(name, referenceTime)
+        : 'Welcome to Daybloom';
     }
   }
 
@@ -196,15 +190,15 @@ const DaybloomWelcome = (() => {
     document.documentElement.classList.remove('daybloom-user-new');
     document.documentElement.classList.add('daybloom-user-returning');
 
-    // Update Daily greeting safely
-    updateDailyGreeting();
+    // Update greeting safely
+    updateGreeting();
 
-    // Ensure Daily navigation is in sync
+    // Ensure navigation is in sync defaulting to Home
     if (typeof DaybloomNav !== 'undefined' && DaybloomNav.switchSection) {
       const hash = window.location.hash.replace('#', '');
-      const validSections = ['daily', 'scholar', 'growth', 'reflect'];
-      const target = validSections.includes(hash) ? hash : 'daily';
-      DaybloomNav.switchSection(target);
+      const validSections = ['home', 'daily', 'scholar', 'growth', 'reflect'];
+      const target = validSections.includes(hash) ? hash : 'home';
+      DaybloomNav.switchSection(target, false);
     }
   }
 
@@ -265,9 +259,9 @@ const DaybloomWelcome = (() => {
       });
     }
 
-    // Refresh Daily greeting when the browser tab/window regains focus
+    // Refresh greeting when the browser tab/window regains focus
     window.addEventListener('focus', () => {
-      updateDailyGreeting();
+      updateGreeting();
     });
   }
 
@@ -290,7 +284,7 @@ const DaybloomWelcome = (() => {
         // Returning user with valid name: skip welcome screen immediately
         document.documentElement.classList.remove('daybloom-user-new');
         document.documentElement.classList.add('daybloom-user-returning');
-        updateDailyGreeting();
+        updateGreeting();
       } else {
         // First-time visitor or invalid/empty stored name: show welcome screen
         document.documentElement.classList.remove('daybloom-user-returning');
@@ -322,7 +316,8 @@ const DaybloomWelcome = (() => {
     readStoredName,
     persistName,
     getGreetingText,
-    updateDailyGreeting,
+    updateGreeting,
+    updateDailyGreeting: updateGreeting,
     handleFormSubmit,
     isStorageAvailable: () => isStorageHealthy
   };

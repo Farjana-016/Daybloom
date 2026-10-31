@@ -2,22 +2,27 @@
  * Daybloom Navigation Controller
  * --------------------------------------------------------------------------
  * Handles active section state switching across desktop sidebar, mobile bottom
- * navigation bar, and main content panels. Supports URL hash routing.
+ * navigation bar, and main content panels. Supports full browser history traversal
+ * (Back and Forward buttons) using pushState, popstate, and hashchange.
  */
 
 const DaybloomNav = (() => {
-  // Valid application sections
-  const SECTIONS = ['daily', 'scholar', 'growth', 'reflect'];
-  const DEFAULT_SECTION = 'daily';
+  // Valid application sections in strict order: Home -> Daily -> Scholar -> Growth -> Reflect
+  const SECTIONS = ['home', 'daily', 'scholar', 'growth', 'reflect'];
+  const DEFAULT_SECTION = 'home';
+  let currentActiveSection = DEFAULT_SECTION;
 
   /**
    * Switches the active view across the UI.
-   * @param {string} sectionId - Target section: 'daily' | 'scholar' | 'growth' | 'reflect'
+   * @param {string} sectionId - Target section: 'home' | 'daily' | 'scholar' | 'growth' | 'reflect'
+   * @param {boolean} [shouldPushHistory=true] - True for user clicks; false for popstate/hashchange/init
    */
-  function switchSection(sectionId) {
+  function switchSection(sectionId, shouldPushHistory = true) {
     if (!SECTIONS.includes(sectionId)) {
       sectionId = DEFAULT_SECTION;
     }
+
+    currentActiveSection = sectionId;
 
     // 1. Update desktop sidebar nav links
     const sidebarLinks = document.querySelectorAll('.sidebar-nav .nav-link');
@@ -52,7 +57,12 @@ const DaybloomNav = (() => {
       panel.classList.toggle('active', isTarget);
     });
 
-    // Notify Daily view to refresh personalized greeting when activated
+    // Notify Home view to refresh personalized greeting when activated
+    if (sectionId === 'home' && typeof DaybloomWelcome !== 'undefined' && DaybloomWelcome.updateGreeting) {
+      DaybloomWelcome.updateGreeting();
+    }
+
+    // Also notify Daily view if active
     if (sectionId === 'daily' && typeof DaybloomWelcome !== 'undefined' && DaybloomWelcome.updateDailyGreeting) {
       DaybloomWelcome.updateDailyGreeting();
     }
@@ -67,10 +77,15 @@ const DaybloomNav = (() => {
       DaybloomReflect.render();
     }
 
-    // 4. Update the URL hash without triggering extra scroll jump
-    if (window.location.hash.replace('#', '') !== sectionId) {
+    // 4. Update browser history without duplicate steps
+    const currentHash = window.location.hash.replace('#', '');
+    if (currentHash !== sectionId) {
       try {
-        history.replaceState(null, '', `#${sectionId}`);
+        if (shouldPushHistory) {
+          history.pushState({ section: sectionId }, '', `#${sectionId}`);
+        } else {
+          history.replaceState({ section: sectionId }, '', `#${sectionId}`);
+        }
       } catch (err) {
         // Safe fallback in restricted iframe/file environments
         location.hash = sectionId;
@@ -82,47 +97,60 @@ const DaybloomNav = (() => {
   }
 
   /**
+   * Handles browser Back/Forward navigation (popstate) and hash changes.
+   * The state guard (targetSection !== currentActiveSection) prevents duplicate
+   * executions when browsers emit both popstate and hashchange in succession.
+   */
+  function handleHistoryTraversal() {
+    const hash = window.location.hash.replace('#', '');
+    const targetSection = SECTIONS.includes(hash) ? hash : DEFAULT_SECTION;
+
+    if (targetSection !== currentActiveSection) {
+      switchSection(targetSection, false);
+    }
+  }
+
+  /**
    * Attaches click event listeners to all navigation triggers in the document.
    */
   function bindEvents() {
-    // Desktop and Mobile navigation links
+    // Desktop and Mobile navigation links (data-section)
     document.querySelectorAll('[data-section]').forEach((element) => {
       element.addEventListener('click', (event) => {
         event.preventDefault();
         const targetSection = element.getAttribute('data-section');
-        switchSection(targetSection);
+        switchSection(targetSection, true);
       });
     });
 
-    // Pillar quick-links on the welcome card
+    // Home shortcut cards (data-target only — prevents duplicate listeners)
     document.querySelectorAll('[data-target]').forEach((card) => {
       card.addEventListener('click', () => {
         const targetSection = card.getAttribute('data-target');
-        switchSection(targetSection);
+        switchSection(targetSection, true);
       });
     });
 
-    // Handle browser back/forward or hash changes
-    window.addEventListener('hashchange', () => {
-      const hashSection = window.location.hash.replace('#', '');
-      if (SECTIONS.includes(hashSection)) {
-        switchSection(hashSection);
-      }
-    });
+    // Browser Back and Forward navigation triggers popstate
+    window.addEventListener('popstate', handleHistoryTraversal);
+
+    // Direct URL hash changes trigger hashchange
+    window.addEventListener('hashchange', handleHistoryTraversal);
   }
 
   /**
-   * Initializes the navigation state from the URL hash or defaults to 'daily'.
+   * Initializes the navigation state from the URL hash or defaults to 'home'.
    */
   function init() {
     bindEvents();
     const hash = window.location.hash.replace('#', '');
     const initialSection = SECTIONS.includes(hash) ? hash : DEFAULT_SECTION;
-    switchSection(initialSection);
+    switchSection(initialSection, false);
   }
 
   return {
     init,
-    switchSection
+    switchSection,
+    getActiveSection: () => currentActiveSection
   };
 })();

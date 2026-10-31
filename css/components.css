@@ -2700,3 +2700,176 @@ html.daybloom-user-returning #welcome-screen {
   display: block;
   mix-blend-mode: multiply;
 }
+
+/* ==========================================================================
+   Home Section (Phase 8)
+   ========================================================================== */
+
+.home-header {
+  margin-bottom: var(--spacing-8);
+}
+
+.home-greeting-title {
+  font-size: var(--font-size-3xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+  margin-bottom: 0;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+.home-shortcuts-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--spacing-4);
+  max-width: 1080px;
+}
+
+.home-shortcut-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--spacing-3);
+  background-color: var(--color-bg-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  padding: var(--spacing-5);
+  text-align: left;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  box-shadow: var(--shadow-xs);
+  font-family: inherit;
+  width: 100%;
+}
+
+.home-shortcut-card:hover {
+  background-color: var(--color-bg-surface-hover);
+  border-color: var(--color-border-hover);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
+}
+
+.home-shortcut-icon-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-lg);
+  flex-shrink: 0;
+}
+
+.shortcut-icon-daily {
+  background-color: var(--accent-daily-subtle);
+  color: var(--accent-daily);
+  border: 1px solid var(--accent-daily-border);
+}
+
+.shortcut-icon-scholar {
+  background-color: var(--accent-scholar-subtle);
+  color: var(--accent-scholar);
+  border: 1px solid var(--accent-scholar-border);
+}
+
+.shortcut-icon-growth {
+  background-color: var(--accent-growth-subtle);
+  color: var(--accent-growth);
+  border: 1px solid var(--accent-growth-border);
+}
+
+.shortcut-icon-reflect {
+  background-color: var(--accent-reflect-subtle);
+  color: var(--accent-reflect);
+  border: 1px solid var(--accent-reflect-border);
+}
+
+.home-shortcut-content {
+  width: 100%;
+  min-width: 0;
+}
+
+.home-shortcut-title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--spacing-1);
+}
+
+.home-shortcut-title {
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+  margin: 0;
+}
+
+.home-shortcut-arrow {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+  transition: transform var(--transition-fast);
+}
+
+.home-shortcut-card:hover .home-shortcut-arrow {
+  transform: translateX(3px);
+  color: var(--color-text-primary);
+}
+
+.home-shortcut-desc {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* Active navigation state for Home */
+.sidebar-nav .nav-link[data-section="home"].active,
+.mobile-nav .mobile-nav-item[data-section="home"].active {
+  color: var(--color-text-primary);
+  background-color: var(--color-bg-surface-hover);
+}
+
+/* Mobile & Small Screen Responsiveness */
+@media (max-width: 768px) {
+  .home-shortcuts-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--spacing-3);
+  }
+  .home-shortcut-card {
+    padding: var(--spacing-4);
+  }
+}
+
+@media (max-width: 680px) {
+  .home-shortcuts-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-3);
+  }
+}
+
+@media (max-width: 480px) {
+  .home-shortcuts-grid {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-3);
+  }
+  .home-greeting-title {
+    font-size: var(--font-size-2xl);
+  }
+}
+
+@media (max-width: 360px) {
+  .mobile-nav-item {
+    padding: 4px 2px;
+    gap: 2px;
+  }
+  .mobile-nav-item .nav-icon {
+    width: 18px;
+    height: 18px;
+  }
+  .mobile-nav-item span {
+    font-size: 9px;
+    letter-spacing: -0.02em;
+  }
+  .home-shortcut-icon-box {
+    width: 36px;
+    height: 36px;
+  }
+}
